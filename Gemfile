@@ -14,6 +14,7 @@ group :development, :test do
   gem 'spork', '0.9.2'
   gem 'guard-spork'
   gem 'interactive_editor'
+  gem 'debugger'
 end
 
 group :test do
@@ -28,7 +29,9 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'compass-rails', '1.0.3'
+  gem 'zurb-foundation', '3.2.5'
+  #gem 'therubyracer', :platforms => :ruby
 end
 
 gem 'jquery-rails'
@@ -46,4 +49,3 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
