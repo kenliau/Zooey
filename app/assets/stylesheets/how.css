@@ -1,0 +1,45 @@
+div.diagram {
+  width: 1000px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+
+.full-circle {
+  margin: 20px auto;
+  height: 150px;
+  -moz-border-radius:75px;
+  -webkit-border-radius: 75px;
+  width: 150px;
+}
+
+.full-circle.active {
+  border: 9px solid #333;
+}
+
+.full-circle.upload:hover {
+  background-color: #ff4d94; /* lighter red */
+  cursor: pointer;
+}
+.full-circle.convert:hover {
+  background-color: #1aff8c; /* lighter green */
+  cursor: pointer;
+}
+.full-circle.view:hover {
+  background-color: #80bfff; /* lighter blue */
+  cursor: pointer;
+}
+
+.red {
+  background-color: #FF0066;
+}
+
+.green {
+  background-color: #00CC66;
+}
+
+.blue {
+  background-color: #3399FF;
+}
+
+
