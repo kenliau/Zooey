@@ -29,7 +29,7 @@ Jobs
 * updated\_at
 * finished\_at
 
-Statuses
+Histories
 --------
 * id
 * job\_id
