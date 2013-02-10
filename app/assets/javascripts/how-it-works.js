@@ -8,8 +8,8 @@ var HowItWorks = {
       $('.nav-bar a.' + tab).bind('click', function(e) {
         HowItWorks.activateTab(tab);
         e.preventDefault();
-      })
-    })  
+      });
+    });
   },
 
   activate : function(tabClass) { 
@@ -32,15 +32,15 @@ var HowItWorks = {
     }); 
 
     /* Show text of newTab */
-    HowItWorks.showDescription(newTab)
+    HowItWorks.showDescription(newTab);
   },
 
   showDescription : function(newTab) {
     if(!$('.description.' + newTab).is(':visible')) {
       $('.description:visible').fadeOut(200, function() {
-        $('.description.' + newTab).fadeIn(200)
-      })
-    } 
+        $('.description.' + newTab).fadeIn(200);
+      });
+    }
   },
 
   setImageListeners : function() {
@@ -48,7 +48,7 @@ var HowItWorks = {
       var tabClass = this.id.replace('image-', '');
       HowItWorks.activateTab(tabClass);
       return false;
-    })
+    });
   }
 }
 
