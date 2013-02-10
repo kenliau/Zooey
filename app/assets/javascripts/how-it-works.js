@@ -50,7 +50,7 @@ var HowItWorks = {
       return false;
     });
   }
-}
+};
 
 $(function() { 
     HowItWorks.setTabListeners();
