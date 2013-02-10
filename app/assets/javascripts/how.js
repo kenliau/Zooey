@@ -1,4 +1,4 @@
-var How = {
+var HowItWorks = {
 
   tabs : ['upload', 'convert', 'view'],
   activeTab : null,
@@ -6,20 +6,10 @@ var How = {
   setTabListeners : function() {
     $.each(this.tabs, function(i, tab) {
       $('.nav-bar a.' + tab).bind('click', function(e) {
-        How.clickTab(tab);
+        HowItWorks.activateTab(tab);
         e.preventDefault();
       })
     })  
-  },
-
-  clickTab : function(tab) {
-    console.log('clicked ' + tab);
-    this.activateTab(tab);
-/*    var newUrl = document.location.pathname.replace(/\/(how.*)/, '/how/' + tab)
-    if (document.location.pathname != newUrl) {
-      document.location.href = document.location.href.replace(/\/(how.*)/, '/how/' + tab);
-    }
-*/
   },
 
   activate : function(tabClass) { 
@@ -38,11 +28,11 @@ var How = {
     }
     /* Make newTab active and remove active class from all the others tabs */
     $.each(this.tabs, function(i, tab) {
-      (tab === newTab) ? How.activate('.' + newTab) : How.deactivate('.' + tab);
+      (tab === newTab) ? HowItWorks.activate('.' + newTab) : HowItWorks.deactivate('.' + tab);
     }); 
 
     /* Show text of newTab */
-    How.showDescription(newTab)
+    HowItWorks.showDescription(newTab)
   },
 
   showDescription : function(newTab) {
@@ -54,20 +44,16 @@ var How = {
   },
 
   setImageListeners : function() {
-
-
-
+    $('.d-image').click(function(e) {
+      var tabClass = this.id.replace('image-', '');
+      HowItWorks.activateTab(tabClass);
+      return false;
+    })
   }
- 
 }
 
-
-
-
-
-
 $(function() { 
-    How.setTabListeners();
-    How.setImageListeners();
+    HowItWorks.setTabListeners();
+    HowItWorks.setImageListeners();
 });
 

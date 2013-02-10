@@ -4,8 +4,7 @@ div.diagram {
   margin: 0 auto;
 }
 
-
-.full-circle {
+.circle {
   margin: 20px auto;
   height: 150px;
   -moz-border-radius:75px;
@@ -13,19 +12,19 @@ div.diagram {
   width: 150px;
 }
 
-.full-circle.active {
+.circle.active {
   border: 9px solid #333;
 }
 
-.full-circle.upload:hover {
+.circle.upload:hover {
   background-color: #ff4d94; /* lighter red */
   cursor: pointer;
 }
-.full-circle.convert:hover {
+.circle.convert:hover {
   background-color: #1aff8c; /* lighter green */
   cursor: pointer;
 }
-.full-circle.view:hover {
+.circle.view:hover {
   background-color: #80bfff; /* lighter blue */
   cursor: pointer;
 }
@@ -42,4 +41,6 @@ div.diagram {
   background-color: #3399FF;
 }
 
-
+ul.nav-bar a.active {
+  color: #2795b6;
+}
