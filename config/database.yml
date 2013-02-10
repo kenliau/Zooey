@@ -6,6 +6,7 @@ development:
   database: zipreel
   pool: 5
   username: zipreel
+  host: localhost
 
 
 # Warning: The database defined as "test" will be erased and
@@ -17,6 +18,7 @@ test:
   database: ziptest
   pool: 5
   username: ziptest
+  host: localhost
 
 
 production:
