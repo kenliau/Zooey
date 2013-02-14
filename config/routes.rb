@@ -1,4 +1,9 @@
 Zipreel::Application.routes.draw do
+  resources :documentations
+
+
+  get "static/index"
+
   root :to => 'static#index'
   match ':action' => 'static#:action'
 
