@@ -21,6 +21,12 @@ class DocumentationsController < ApplicationController
     end
   end
 
+  # GET /guide/getting-started
+  def show_by_permalink
+    @documentation = Documentation.where(permalink: params[:permalink]).first
+    render :show
+  end
+
   # GET /documentations/new
   # GET /documentations/new.json
   def new

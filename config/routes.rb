@@ -1,6 +1,6 @@
 Zipreel::Application.routes.draw do
-  resources :documentations
-
+  resources 'documentations', path: 'docs'
+  get 'guide/:permalink' => 'documentations#show_by_permalink'
 
   get "static/index"
 
