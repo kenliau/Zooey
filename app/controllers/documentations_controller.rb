@@ -14,6 +14,7 @@ class DocumentationsController < ApplicationController
   # GET /documentations/1.json
   def show
     @documentation = Documentation.find(params[:id])
+    @documents = Documentation.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,6 +25,8 @@ class DocumentationsController < ApplicationController
   # GET /guide/getting-started
   def show_by_permalink
     @documentation = Documentation.where(permalink: params[:permalink]).first
+    @documents = Documentation.all
+    
     render :show
   end
 
