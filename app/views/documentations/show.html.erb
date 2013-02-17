@@ -1,32 +1,92 @@
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-<div id="header" class="row">
-	<h1>ZipReel Documentation</h1>
-	<h4 class="subheader">Everything you need to know</h4>
-</div>
+  <!-- Header and Nav -->
 
-<div class="row">
-	<div class="three columns panel">
-		<ul class="side-nav">
-			<% @documents.each do |document| %>
-				<% if document == @documentation %>
-					<li><%= link_to(document.title, documentation_permalink(document)) %></li>
-				<% else %>
-					<li class="active"><%= link_to(document.title, documentation_permalink(document)) %></li>
-				<% end %>
+  <div class="row">
+    <div class="seven columns">
+      <h1>ZipReel Documentation</h1>
+    </div>
+    <div class="five columns">
+      <ul class="inline-list right">
+        <li><a href="/how-it-works">How We Do It</a></li>
+        <li><a href="#">Section 2</a></li>
+        <li><a href="#">Section 3</a></li>
+        <li><a href="#">Section 4</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="twelve columns">
+      <h4 class="subheader"> Everything you need to know </h4>
+    </div>
+  </div>
+
+  <!-- End Header and Nav -->
+
+
+  <div class="row">
+
+    <!-- Main Content Section -->
+    <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
+    <div class="nine columns push-three">
+
+      <h3>Section Name <small> <%= @documentation.title %> </small></h3>
+
+      <p> <%= @documentation.content %> </p>
+
+      <p>Ground round pastrami pork loin tenderloin jerky. Jerky spare ribs biltong, ham hock ham capicola pork. Jerky turducken pork, meatloaf sausage capicola swine corned beef turkey short loin. Tongue prosciutto pork loin, ground round spare ribs venison kielbasa strip steak.</p>
+
+      <p>Hamburger bresaola turkey t-bone, leberkas salami pork chop ham hock beef ribs. Rump biltong meatball venison, short ribs pork loin shank shankle corned beef beef. Cow salami jowl short loin hamburger fatback. Short ribs pork belly shoulder pastrami drumstick salami corned beef ham hock bresaola. Swine filet mignon cow sausage ball tip. Cow ribeye ground round, sausage pork loin pig beef ball tip turkey boudin.</p>
+
+      <p>Prosciutto ball tip filet mignon andouille frankfurter chicken rump sausage meatball. Filet mignon meatloaf ground round andouille ham hock pork. Bresaola short loin meatball chuck hamburger pig. Turkey venison chuck, tongue fatback tail swine jerky corned beef shank kielbasa prosciutto ribeye ham tri-tip. Rump bacon pork belly meatloaf shoulder short loin meatball kielbasa pork loin tongue bresaola brisket corned beef jowl prosciutto. Beef ribs shankle short ribs pork belly corned beef fatback pork chop tongue biltong boudin strip steak sirloin meatloaf pancetta.</p>
+
+      <%= link_to 'Edit', edit_documentation_path(@documentation) %> |
+		  <%= link_to 'Back', documentations_path %>
+
+
+    </div>
+
+
+    <!-- Nav Sidebar -->
+    <!-- This is source ordered to be pulled to the left on larger screens -->
+    <div class="three columns pull-nine panel">
+
+      <ul class="side-nav">
+        <% @documents.each do |document| %>
+				  <% if document == @documentation %>
+					  <li><%= link_to(document.title, documentation_permalink(document)) %></li>
+				  <% else %>
+					  <li><%= link_to(document.title, documentation_permalink(document)) %></li>
+				  <% end %>
 			<% end %>
-		</ul>
-	</div>
 
-	<div class="nine columns">
-		<h2><%= @documentation.title %></h2>
-
-		<p>
-		<%= @documentation.content %>
-		</p>
+      </ul>
 
 
-		<%= link_to 'Edit', edit_documentation_path(@documentation) %> |
-		<%= link_to 'Back', documentations_path %>
-	</div>
-</div>
+    </div>
+
+  </div>
+
+
+  <!-- Footer -->
+
+  <footer class="row">
+    <div class="twelve columns">
+      <hr />
+      <div class="row">
+        <div class="six columns">
+          <p>&copy; Copyright 2013 ZipReel</p>
+        </div>
+        <div class="six columns">
+          <ul class="inline-list right">
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Section 3</a></li>
+            <li><a href="#">Section 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+

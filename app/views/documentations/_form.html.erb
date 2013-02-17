@@ -1,29 +1,47 @@
-<%= form_for(@documentation) do |f| %>
-  <% if @documentation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@documentation.errors.count, "error") %> prohibited this documentation from being saved:</h2>
+  <div class="row">
 
-      <ul>
-      <% @documentation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="twelve columns">
+      <h3>New documentation</h3>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <hr>
+
+    <div class="row">
+      <%= form_for(@documentation) do |f| %>
+        <% if @documentation.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@documentation.errors.count, "error") %> prohibited this documentation from being saved:</h2>
+
+            <ul>
+              <% @documentation.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :title %><br />
+          <%= f.text_field :title %>
+        </div>
+        <div class="field">
+          <%= f.label :content %><br />
+          <%= f.text_field :content %>
+        </div>
+        <div class="field">
+          <%= f.label :permalink %><br />
+          <%= f.text_field :permalink %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
+    </div>
+
+    <hr>
+
+
   </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="field">
-    <%= f.label :permalink %><br />
-    <%= f.text_field :permalink %>
-  </div>
-<div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+
+
+
