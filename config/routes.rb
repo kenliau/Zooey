@@ -6,6 +6,7 @@ Zipreel::Application.routes.draw do
 
   root :to => 'static#index'
   match ':action' => 'static#:action'
+  match '/how_it_works', to: 'static#how_it_works'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
