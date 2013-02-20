@@ -1,0 +1,180 @@
+  <!-- Top Bar -->
+
+  <nav class="top-bar">
+    <ul>
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#">
+            ZipReel
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar"><a href="#"></a></li>
+    </ul>
+
+    <section>
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#">Main Item 1</a>
+          <ul class="dropdown">
+            <li><label>Section Name</label></li>
+            <li class="has-dropdown">
+              <a href="#" class="">Has Dropdown, Level 1</a>
+              <ul class="dropdown">
+                <li><a href="#">Dropdown Options</a></li>
+                <li><a href="#">Dropdown Options</a></li>
+                <li><a href="#">Level 2</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><label>Section Name</label></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><a href="#">See all &rarr;</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li><a href="#">Main Item 2</a></li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#">Main Item 3</a>
+          <ul class="dropdown">
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><a href="#">See all &rarr;</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav>
+
+  <!-- End Top Bar -->
+
+
+  <!-- Main Page Content and Sidebar -->
+
+  <div class="row">
+
+    <!-- Contact Details -->
+    <div class="nine columns">
+
+      <h3>Upload Video</h3>
+      <p>Time to upload your video to us. After that, <b>we'll take care of the rest. </b></p>
+
+      <dl class="contained tabs">
+        <dd class="active"><a href="#manualForm">Manual Upload Form</a></dd>
+        <dd><a href="#fileForm">Configuration File Upload Form</a></dd>
+      </dl>
+
+      <ul class="tabs-content contained">
+        <li id="manualFormTab" class="active">
+          <%= form_tag({:action => :manual_upload}, :multipart => true) do %>
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Video Label", :class => "inline") %></div>
+              <div class="nine columns"><input type="text" id="video_label" placeholder="Video Label" /> </div>
+            </div>
+
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Output Resolution", :class => "inline") %></div>
+              <div class="three columns"><%= select_tag(:output_resolution, options_for_select([['720p (1280 × 720)', "720p"], ['1080p (1920 × 1080)', "1080p"]])) %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+             <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Video", :class => "inline") %></div>
+              <div class="three columns"><%= file_field_tag 'video_file' %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+            <div class="row collapse">
+              <div class="three columns"> <button type="submit" class="radius button">Submit</button> </div>
+            </div>
+
+          <% end %>
+        </li>
+
+        <li id="fileFormTab">
+          <%= form_tag({:action => :conf_file_upload}, :multipart => true) do %>
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Configuration File", :class => "inline") %></div>
+              <div class="three columns"><%= file_field_tag 'conf_file' %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Video", :class => "inline") %></div>
+              <div class="three columns"><%= file_field_tag 'video_file' %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+           <div class="row collapse">
+              <div class="three columns"> <button type="submit" class="radius button">Submit</button> </div>
+            </div>
+
+          <% end %>
+ 
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- End Contact Details -->
+
+
+    <!-- Sidebar -->
+
+    <div class="three columns">
+
+      <h5>Title</h5>
+
+      <p>
+        <a href="" data-reveal-id="mapModal"><img src="http://placehold.it/400x280" /></a><br />
+      </p>
+
+      <p>
+        What to put here?!!!
+      </p>
+
+    </div>
+
+    <!-- End Sidebar -->
+  </div>
+
+  <!-- End Main Content and Sidebar -->
+
+
+  <!-- Footer -->
+
+  <footer class="row">
+    <div class="twelve columns">
+      <hr />
+      <div class="row">
+        <div class="six columns">
+          <p>&copy; Copyright 2013 ZipReel</p>
+        </div>
+        <div class="six columns">
+          <ul class="inline-list right">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
