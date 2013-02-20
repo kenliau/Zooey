@@ -1,10 +1,11 @@
 Zipreel::Application.routes.draw do
+  resources :admin
   resources 'documentations', path: 'docs'
+
   get 'guide/:permalink' => 'documentations#show_by_permalink'
 
-  get "static/index"
-
   root :to => 'static#index'
+
   match ':action' => 'static#:action'
 
   # The priority is based upon order of creation:
