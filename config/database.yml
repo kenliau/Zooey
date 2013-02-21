@@ -5,7 +5,6 @@ development:
   encoding: unicode
   database: zipreel
   pool: 5
-  username: zipreel
   host: localhost
 
 
@@ -17,7 +16,6 @@ test:
   encoding: unicode
   database: ziptest
   pool: 5
-  username: ziptest
   host: localhost
 
 
