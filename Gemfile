@@ -45,5 +45,11 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # Use unicorn as the app server
 gem 'unicorn'
 
+# The best debugging tool ever
+gem 'pry'
+
+# For authentication and users
+gem 'devise'
+
 # Deploy with Capistrano
 # gem 'capistrano'
