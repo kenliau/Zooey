@@ -24,6 +24,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <% if notice %>
+  <div class="row alert-box"><%= notice %></div>
+  <% end %>
+  
+  <% if alert %>
+  <div class="row alert-box alert"><%= alert %></div>
+  <% end %>
+  
   <%= yield %>
+
 </body>
 </html>
