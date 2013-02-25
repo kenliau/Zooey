@@ -72,6 +72,11 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     ffi (1.4.0)
     fssm (0.2.10)
     growl (1.0.3)
@@ -214,6 +219,7 @@ DEPENDENCIES
   compass-rails (= 1.0.3)
   debugger
   devise
+  factory_girl_rails
   growl (= 1.0.3)
   guard-rspec (= 1.2.1)
   guard-spork
