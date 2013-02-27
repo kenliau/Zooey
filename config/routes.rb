@@ -1,4 +1,6 @@
 Zipreel::Application.routes.draw do
+  devise_for :users
+
   resources 'documentations', path: 'docs'
   get 'guide/:permalink' => 'documentations#show_by_permalink'
 
@@ -6,6 +8,8 @@ Zipreel::Application.routes.draw do
 
   root :to => 'static#index'
   match ':action' => 'static#:action'
+  match '/upload', to: 'static#upload'
+  match '/how_it_works', to: 'static#how_it_works'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

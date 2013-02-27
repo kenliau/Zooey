@@ -22,8 +22,23 @@
 	<%= javascript_include_tag "application" %>
 
   <%= csrf_meta_tags %>
+
+
 </head>
 <body>
+  
+  <%= render 'layouts/header' %>
+
+  <% if notice %>
+  <div class="row alert-box"><%= notice %></div>
+  <% end %>
+  
+  <% if alert %>
+  <div class="row alert-box alert"><%= alert %></div>
+  <% end %>
+  
   <%= yield %>
+
+  <%= render 'layouts/footer' %>
 </body>
 </html>

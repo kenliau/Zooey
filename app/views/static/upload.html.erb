@@ -1,0 +1,94 @@
+
+  <!-- Main Page Content and Sidebar -->
+
+  <div class="row">
+
+    <!-- Contact Details -->
+    <div class="nine columns">
+
+      <h3>Upload Video</h3>
+      <p>Time to upload your video to us. After that, <b>we'll take care of the rest. </b></p>
+
+      <dl class="contained tabs">
+        <dd class="active"><a href="#manualForm">Manual Upload Form</a></dd>
+        <dd><a href="#fileForm">Configuration File Upload Form</a></dd>
+      </dl>
+
+      <ul class="tabs-content contained">
+        <li id="manualFormTab" class="active">
+          <%= form_tag({:action => :manual_upload}, :multipart => true) do %>
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Video Label", :class => "inline") %></div>
+              <div class="nine columns"><input type="text" id="video_label" placeholder="Video Label" /> </div>
+            </div>
+
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Output Resolution", :class => "inline") %></div>
+              <div class="three columns"><%= select_tag(:output_resolution, options_for_select([['720p (1280 × 720)', "720p"], ['1080p (1920 × 1080)', "1080p"]])) %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+             <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Video", :class => "inline") %></div>
+              <div class="three columns"><%= file_field_tag 'video_file' %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+            <div class="row collapse">
+              <div class="three columns"> <button type="submit" class="radius button">Submit</button> </div>
+            </div>
+
+          <% end %>
+        </li>
+
+        <li id="fileFormTab">
+          <%= form_tag({:action => :conf_file_upload}, :multipart => true) do %>
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Configuration File", :class => "inline") %></div>
+              <div class="three columns"><%= file_field_tag 'conf_file' %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:q, "Video", :class => "inline") %></div>
+              <div class="three columns"><%= file_field_tag 'video_file' %> </div>
+              <div class="six columns"> </div>
+            </div>
+
+           <div class="row collapse">
+              <div class="three columns"> <button type="submit" class="radius button">Submit</button> </div>
+            </div>
+
+          <% end %>
+ 
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- End Contact Details -->
+
+
+    <!-- Sidebar -->
+
+    <div class="three columns">
+
+      <h5>Title</h5>
+
+      <p>
+        <a href="" data-reveal-id="mapModal"><img src="http://placehold.it/400x280" /></a><br />
+      </p>
+
+      <p>
+        What to put here?!!!
+      </p>
+
+    </div>
+
+    <!-- End Sidebar -->
+  </div>
+
+  <!-- End Main Content and Sidebar -->
+
+
+ 
