@@ -18,6 +18,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'factory_girl_rails'
   gem 'capybara', '1.1.2'
   gem 'rb-fsevent', '0.9.1', :require => false
   gem 'growl', '1.0.3'
@@ -44,6 +45,12 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 gem 'unicorn'
+
+# The best debugging tool ever
+gem 'pry'
+
+# For authentication and users
+gem 'devise'
 
 # Deploy with Capistrano
 # gem 'capistrano'
