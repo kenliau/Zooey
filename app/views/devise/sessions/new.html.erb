@@ -2,16 +2,15 @@
   <div class="three columns">
   </div>
   <div class="five columns">
-    <h2>Sign in</h2>
+    <h2>Sign In</h2>
     <hr />
   </div>
   <div class="four columns">
   </div>
 </div>
 
-
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-<div class="row">
+  <div class="row">
     <div class="three columns">
     </div>
     <div class="one columns">
@@ -22,9 +21,9 @@
     </div>
     <div class="five columns">
     </div>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
     <div class="three columns">
     </div>
     <div class="one columns">
@@ -35,41 +34,53 @@
     </div>
     <div class="five columns">
     </div>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
     <div class="three columns">
     </div>
-    <div class="four columns">
+    <div class="one columns">
+      <%= f.submit "Sign in", :class => "small radius button"%>
+    </div>
+    <div class="three columns">
       <% if devise_mapping.rememberable? -%>
-        <%= f.label :remember_me, :class => "inline"%>
         <%= f.check_box :remember_me %> 
-      <% end -%>
-      <%= f.submit "Sign in", :class => "small radius button", :style => "float: right" %>
-    </div>
-    <div class="five columns">
-    </div>
-</div>
-
-<br />
-
-<div class="row">
-    <div class="three columns">
-      
-    </div>
-    <div class="four columns">
-      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-        <%= link_to "Sign up", new_registration_path(resource_name), :class => "small radius button"  %>
-      <% end -%>
-      <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-        <%= link_to "Forgot your password?", new_password_path(resource_name), :class => "small radius button alert", :style => "float: right" %>
+        <%= f.label :remember_me, :class => "inline"%>
       <% end -%>
     </div>
     <div class="five columns">
     </div>
-</div>
-
+  </div>
 
 <% end %>
 
-<%= render "devise/shared/links" %>
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="five columns">
+    <hr />
+  </div>
+  <div class="four columns">
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="two mobile-two columns ">
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <%= link_to "Sign up", new_registration_path(resource_name), :style => "float: left" %>
+    <% end -%>
+  </div>
+  <div class="three mobile-two columns">
+    <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), :style => "float: right" %>
+    <% end -%>
+  </div>
+  <div class="four columns">
+  </div>
+</div>
+
+
+

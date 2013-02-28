@@ -1,12 +1,42 @@
-<h2>Forgot your password?</h2>
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="five columns">
+    <h2>Forgot My Password</h2>
+    <hr />
+  </div>
+  <div class="four columns">
+  </div>
+</div>
+
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :email %></div>
+    </div>
+    <div class="three columns">
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <br />
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+    </div>
+    <div class="three columns">
+      <%= f.submit "Reset my password", :class => "small radius button", :style => "float: right" %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
