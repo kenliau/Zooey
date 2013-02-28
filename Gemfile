@@ -2,11 +2,10 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 gem 'pg', '0.12.2'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-#gem 'sqlite3'
+gem 'validates_timeliness', '~> 3.0'
+gem 'jquery-rails'
+gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
@@ -15,6 +14,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'interactive_editor'
   gem 'debugger'
+  gem 'pry'
 end
 
 group :test do
@@ -35,22 +35,11 @@ group :assets do
   #gem 'therubyracer', :platforms => :ruby
 end
 
-gem 'jquery-rails'
-
-# To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
-
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
-
-# The best debugging tool ever
-gem 'pry'
-
-# For authentication and users
-gem 'devise'
+# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
