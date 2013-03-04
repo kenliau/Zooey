@@ -53,7 +53,7 @@ var HowItWorks = {
 };
 
 $(function() { 
-    HowItWorks.setTabListeners();
-    HowItWorks.setImageListeners();
+  HowItWorks.setTabListeners();
+  HowItWorks.setImageListeners();
 });
 
