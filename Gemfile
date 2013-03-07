@@ -7,7 +7,8 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'devise', '2.2.3'
 gem 'redis', '2.1.1'
-gem 'resque' 
+gem 'redis-rails'
+gem 'resque'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'

@@ -153,6 +153,7 @@ GEM
     redis (2.1.1)
     redis-namespace (1.1.0)
       redis (< 3.0.0)
+    redis-rails (0.0.0)
     resque (1.23.0)
       multi_json (~> 1.0)
       redis-namespace (~> 1.0)
@@ -243,6 +244,7 @@ DEPENDENCIES
   rails (= 3.2.12)
   rb-fsevent (= 0.9.1)
   redis (= 2.1.1)
+  redis-rails
   resque
   rspec-rails (= 2.11.0)
   sass-rails (~> 3.2.3)
