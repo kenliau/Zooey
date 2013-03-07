@@ -10,7 +10,12 @@ var jobStatus = {
   stages_id : ['pull', 'tcoder', 'chunker', 'merger'],  
   
   getStatus : function() {
-    // set the stages
+    // AJAX CALL
+/*    $.getJSON('/path_to_your_controller', function(data) {
+      //set the stages
+      console.log(data);
+    });
+*/
     this.redraw();
   },
 
