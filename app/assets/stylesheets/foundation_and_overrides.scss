@@ -244,3 +244,13 @@
 // http://www.modularscale.com by Tim Brown
 // https://github.com/scottkellum/modular-scale by scottkellum
 @import 'foundation';
+
+div.custom-alert-box {
+  @extend .alert-box;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  margin-bottom: 0px;
+}

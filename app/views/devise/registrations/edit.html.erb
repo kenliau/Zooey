@@ -1,29 +1,111 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="five columns">
+    <h2>Edit <%= resource_name.to_s.humanize %> Account</h2>
+    <hr />
+  </div>
+  <div class="four columns">
+  </div>
+</div>
+
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :email %></div>
+    </div>
+    <div class="three columns">
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+    <div class="four columns">
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+      <% end %>
+    </div>
+  </div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :password %></div>
+    </div>
+    <div class="three columns">
+      <%= f.password_field :password, :autocomplete => "off"  %>
+    </div>
+    <div class="four columns">
+      <em>Please leave blank if you don't want to change your password.</em>
+    </div>
+  </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :password_confirmation %></div>
+    </div>
+    <div class="three columns">
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :current_password %></div>
+    </div>
+    <div class="three columns">
+      <%= f.password_field :current_password %>
+    </div>
+    <div class="four columns">
+      <em>Please enter your current password to confirm your changes.</em>
+    </div>
+  </div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+    </div>
+    <div class="three columns">
+      <%= f.submit "Update", :class => " radius button", :style => "float: right" %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Update" %></div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="five columns">
+    <h5>Cancel This Account</h5>
+    <hr />
+  </div>
+  <div class="four columns">
+  </div>
+</div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="five mobile-two columns" style="text-align: center">
+    <p> Not satisfied with our services? </p>
+    <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure you want to cancel this account?         (This action can't be undone)" }, :method => :delete, :class => "small radius button alert" %>
+  </div>
+  <div class="three columns">
+  </div>
+</div>
+
+
 
 <%= link_to "Back", :back %>

@@ -1,48 +1,122 @@
-<h2>Sign up</h2>
+<%= devise_error_messages! %>
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="five columns">
+    <h2>Sign Up</h2>
+    <hr />
+  </div>
+  <div class="four columns">
+  </div>
+</div>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-	<%= devise_error_messages! %>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :email %></div>
+    </div>
+    <div class="three columns">
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-	<div>
-		<%= f.label :email %>
-		<br />
-		<%= f.email_field :email, :autofocus => true %>
-	</div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :first_name %></div>
+    </div>
+    <div class="three columns">
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-	<div>
-		<%= f.label :first_name %>
-		<br />
-		<%= f.text_field :first_name %>
-	</div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :last_name %></div>
+    </div>
+    <div class="three columns">
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-	<div>
-		<%= f.label :last_name %>
-		<br />
-		<%= f.text_field :last_name %>
-	</div>
 
-	<div>
-		<%= f.label :membership %>
-		<span class="subheader">must be 0, 1, or 2</span>
-		<br />
-		<%= f.text_field :membership %>
-	</div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :password %></div>
+    </div>
+    <div class="three columns">
+      <%= f.password_field :password %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-	<div>
-		<%= f.label :password %>
-		<br />
-		<%= f.password_field :password %>
-	</div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :password_confirmation %></div>
+    </div>
+    <div class="three columns">
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-	<div>
-		<%= f.label :password_confirmation %>
-		<br />
-		<%= f.password_field :password_confirmation %>
-	</div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+      <div><%= f.label :membership %></div>
+      <span class="subheader">must be 0, 1, or 2</span>
+    </div>
+    <div class="three columns">
+      <%= f.select :membership, options_for_select([['Membership 0', 0], ['Membership 1', 1], ['MembershHJKip 2', 2]]) %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
 
-	<div>
-		<%= f.submit "Sign up" %>
-	</div>
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="two columns">
+    </div>
+    <div class="three columns">
+      <%= f.submit "Sign Up", :class => " radius button", :style => "float: right" %>
+    </div>
+    <div class="four columns">
+    </div>
+  </div>
+
 <% end %>
+
+<div class="row">
+  <div class="three columns">
+  </div>
+  <div class="five columns" style="text-align: center">
+    <hr />
+    <%- if controller_name != 'sessions' %>
+      <%= link_to "Already have an account?", new_session_path(resource_name) %>
+
+    <% end -%>
+  </div>
+  <div class="three columns">
+  </div>
+</div>
 
 <%= render "devise/shared/links" %>

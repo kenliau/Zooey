@@ -26,17 +26,17 @@
 
 </head>
 <body>
-  
+  <% if notice %>
+  <div class="custom-alert-box"><%= notice %></div>
+  <% end %>
+  <% if alert %>
+  <div class="custom-alert-box alert"><%= alert %></div>
+  <% end %>
+
   <%= render 'layouts/header' %>
 
-  <% if notice %>
-  <div class="row alert-box"><%= notice %></div>
-  <% end %>
-  
-  <% if alert %>
-  <div class="row alert-box alert"><%= alert %></div>
-  <% end %>
-  
+    
+    
   <%= yield %>
 
   <%= render 'layouts/footer' %>
