@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :membership, :password,
     :presence => { message: "is a required field" }
 
-  validates :membership, 
+  validates :membership,
     :numericality => {
       :only_integer => true,
       :less_than => 3,
@@ -33,5 +33,9 @@ class User < ActiveRecord::Base
     self.is_admin ||= false;
     # BEFORE_CREATES CAN NEVER RETURN FALSE
     true
+  end
+
+  def admin?
+    self.is_admin
   end
 end
