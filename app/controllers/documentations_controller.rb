@@ -26,7 +26,7 @@ class DocumentationsController < ApplicationController
   def show_by_permalink
     @documentation = Documentation.where(permalink: params[:permalink]).first
     @documents = Documentation.all
-    
+
     render :show
   end
 
