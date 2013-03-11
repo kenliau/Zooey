@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225032428) do
+ActiveRecord::Schema.define(:version => 20130311231910) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,42 @@ ActiveRecord::Schema.define(:version => 20130225032428) do
     t.datetime "updated_at", :null => false
     t.string   "permalink"
   end
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "video_id"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "h264_profile"
+    t.string   "h264_quality"
+    t.string   "audio_codec"
+    t.integer  "audio_bitrate"
+    t.integer  "audio_volume"
+    t.integer  "mux_rate"
+    t.datetime "finished_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "jobs", ["video_id"], :name => "index_jobs_on_video_id"
+
+  create_table "progressions", :force => true do |t|
+    t.integer  "job_id"
+    t.integer  "chunks"
+    t.datetime "pull_start_time"
+    t.datetime "pull_finish_time"
+    t.datetime "chunker_start_time"
+    t.datetime "chunker_finish_time"
+    t.datetime "tcoder_start_time"
+    t.datetime "tcoder_finish_time"
+    t.datetime "merger_start_time"
+    t.datetime "merger_finish_time"
+    t.time     "chunk_tcode_time"
+    t.integer  "chunks_tcoded_so_far"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "progressions", ["job_id"], :name => "index_progressions_on_job_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -42,5 +78,19 @@ ActiveRecord::Schema.define(:version => 20130225032428) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "videos", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "filename"
+    t.string   "location"
+    t.float    "size"
+    t.time     "duration"
+    t.integer  "frame_distance"
+    t.integer  "gop_length"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
 
 end
