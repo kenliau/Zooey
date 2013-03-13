@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :videos
+
   # devise :validatable handles password length and regex
   # configurable in config/initializers/devise.rb
   devise :database_authenticatable, :registerable,
