@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="twelve columns">
+    <h2>Listing Jobs</h2>
+    <hr />
+  </div>
+</div>
+
+
+<div class="row">
+
+<table>
+  <tr>
+    <th>Video Filename</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th></th>
+  </tr>
+
+<% @jobs.each do |job| %>
+  <tr>
+    <% @video = Video.find(job.video_id) %>
+    <td><%= @video.filename %></td>
+    <td><%= job.width %></td>
+    <td><%= job.height %></td>
+    <td><%= link_to 'Show', job %></td>
+    <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Video', new_video_path %>
+
+</div>
