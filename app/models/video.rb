@@ -3,7 +3,6 @@ class Video < ActiveRecord::Base
   has_many :jobs
   attr_accessible :duration, :filename, :frame_distance, :gop_length, :location, :size
 
-
   validates :filename,
     :presence => {
       message: "is a required field"
