@@ -47,7 +47,14 @@
         </li>
         <li class="divider"></li>
         <% if user_signed_in? -%>
-          <li><%= link_to "Upload a Video", upload_path %></li>
+          <li class="has-dropdown">
+            <%= link_to "Videos", videos_path %> 
+              <ul class="dropdown">
+                <li><%= link_to "Upload a Video", new_video_path %></li>
+                <li><%= link_to "See all my videos", videos_path %></li>
+                <li><%= link_to "See all the jobs", jobs_path %></li>
+              </ul>
+          </li>
           <li class="divider"></li>
           <li><%= link_to "Edit My Account", edit_user_registration_path %></li>
           <li class="divider"></li>
