@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="twelve columns">
+    <h2>Listing Videos</h2>
+    <hr />
+  </div>
+</div>
+
+
+<div class="row">
+
+<table>
+  <tr>
+    <th>Filename</th>
+    <th>Size</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @videos.each do |video| %>
+  <tr>
+    <td><%= video.filename %></td>
+    <td><%= video.size %></td>
+    <td><%= link_to 'Show', video %></td>
+    <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sureyou want to destroy this video? All jobs associated with this video will be deleted as well.' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Video', new_video_path %>
+
+</div>

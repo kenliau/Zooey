@@ -2,6 +2,8 @@ Zipreel::Application.routes.draw do
   devise_for :users
 
   resources 'documentations', path: 'docs'
+  resources 'videos', path: 'videos'
+  resources 'jobs', path: 'jobs'
 
   get 'admin/users' => 'admin#users'
   get 'admin/videos' => 'admin#videos'
