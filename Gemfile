@@ -10,6 +10,9 @@ gem 'redis', '2.2.0'
 gem 'redis-rails', '~> 3.2.0'
 gem 'resque'
 gem 'backbone-on-rails'
+gem 'redcarpet'
+gem 'albino'
+gem 'pygmentize'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
