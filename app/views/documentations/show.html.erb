@@ -19,7 +19,7 @@
     <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
     <div class="nine columns push-three">
 
-      <h3>Section Name <small> <%= @documentation.title %> </small></h3>
+      <h3><%= @documentation.title %></h3>
 
       <p> <%= @documentation.rendered_content.html_safe %> </p>
 
