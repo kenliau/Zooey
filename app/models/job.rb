@@ -19,10 +19,15 @@ class Job < ActiveRecord::Base
   # temporarily this only starts the mock backend
   def transcode
     if Rails.env.production?
-      HTTParty.post('http://safe-fortress-3978/transcode', body: {id: self.id})
+      HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode', body: {id: self.id})
     end
   end
 
+  def percent_complete
+    percent = (self.progression.chunks_tcoded_so_far.to_i / self.video.size) * 100
+    percent > 100 ? 100 : percent
+  end
+  
   def self.where_user(user_id)
     self.joins(:video).where(:videos => {:user_id => user_id})
   end

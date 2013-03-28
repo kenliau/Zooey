@@ -1,72 +1,55 @@
-  <!-- Top Bar -->
+<!-- Top Bar -->
 
 <div class="fixed contain-to-grid">
-  <nav class="top-bar">
-    <ul>
-      <!-- Title Area -->
-      <li class="name">
-        <h1>
-          <a href="/">
-            ZipReel
-          </a>
-        </h1>
-      </li>
-      <li class="toggle-topbar"><a href="#"></a></li>
-    </ul>
+	<nav class="top-bar">
+	<ul>
+		<!-- Title Area -->
+		<li class="name">
+		<h1>
+			<a href="/">
+				ZipReel
+			</a>
+		</h1>
+		</li>
+		<li class="toggle-topbar"><a href="#"></a></li>
+	</ul>
 
-    <section>
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="divider"></li>
-        <li> <%= link_to "How We Do It", how_it_works_path %> </li>
-        <li class="divider"></li>
-        <li class="has-dropdown">
-          <%= link_to "Documentation", documentations_path %>
-          <ul class="dropdown">
-            <li><label>Section Name</label></li>
-            <li class="has-dropdown">
-              <a href="#" class="">Has Dropdown, Level 1</a>
-              <ul class="dropdown">
-                <li><a href="#">Dropdown Options</a></li>
-                <li><a href="#">Dropdown Options</a></li>
-                <li><a href="#">Level 2</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li class="divider"></li>
-            <li><label>Section Name</label></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li class="divider"></li>
-            <li><a href="#">See all &rarr;</a></li>
-          </ul>
-        </li>
-        <li class="divider"></li>
-        <% if user_signed_in? -%>
-          <li class="has-dropdown">
-            <%= link_to "Videos", videos_path %> 
-              <ul class="dropdown">
-                <li><%= link_to "Upload a Video", new_video_path %></li>
-                <li><%= link_to "See all my videos", videos_path %></li>
-                <li><%= link_to "See all the jobs", jobs_path %></li>
-              </ul>
-          </li>
-          <li class="divider"></li>
-          <li><%= link_to "Edit My Account", edit_user_registration_path %></li>
-          <li class="divider"></li>
-          <li> <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %> </li>
-        <% else -%>
-          <li> <%= link_to "Sign In", new_user_session_path  %> </li>
-        <% end -%>
-      </ul>
-    </section>
-  </nav>
+	<section>
+	<!-- Right Nav Section -->
+	<ul class="right">
+		<li class="divider"></li>
+		<li> <%= link_to "How We Do It", how_it_works_path %> </li>
+		<li class="divider"></li>
+		<li><%= link_to "Documentation", documentations_path %></li>
+		<li class="divider"></li>
+		<% if user_signed_in? -%>
+			<li class="has-dropdown">
+			<%= link_to "Videos", videos_path %> 
+			<ul class="dropdown">
+				<li><%= link_to "Upload a Video", new_video_path %></li>
+				<li><%= link_to "See all my videos", videos_path %></li>
+				<li><%= link_to "See all the jobs", jobs_path %></li>
+			</ul>
+			</li>
+			<li class="divider"></li>
+
+			<li class="has-dropdown">
+			<%= link_to "My Account", "#" %>
+			<ul class="dropdown">
+				<li><%= link_to "Edit My Account", edit_user_registration_path %></li>
+				<li> <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %> </li>
+			</ul>
+			</li>
+
+
+
+		<% else -%>
+			<li> <%= link_to "Sign In", new_user_session_path  %> </li>
+		<% end -%>
+	</ul>
+	</section>
+	</nav>
 </div>
 
-  <!-- End Top Bar -->
+<!-- End Top Bar -->
 
