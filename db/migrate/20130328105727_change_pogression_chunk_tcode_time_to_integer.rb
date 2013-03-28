@@ -7,7 +7,7 @@ class ChangePogressionChunkTcodeTimeToInteger < ActiveRecord::Migration
   end
 
   def down
-    change_table :videos do |t|
+    change_table :progressions do |t|
       t.remove :chunk_tcode_time
       t.column :chunk_tcode_time, :time
     end
