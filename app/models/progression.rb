@@ -7,10 +7,7 @@ class Progression < ActiveRecord::Base
   before_destroy :delete_in_redis
  
   def set_in_redis
-    status = {
-      size: self.job.video.size, 
-      processed: self.chunks_tcoded_so_far || 0
-    }.to_json.to_s
+    status = self.status_hash.to_json.to_s
     $redis.set(Progression.redis_key(self.job.id), status)
   end
 
@@ -19,6 +16,12 @@ class Progression < ActiveRecord::Base
     true
   end
 
+  def status_hash
+    {
+      size: self.job.video.size, 
+      processed: self.chunks_tcoded_so_far || 0
+    }
+  end
   
   def self.status_by_job_id(job_id)
     status = $redis.get(self.redis_key(job_id))
@@ -26,12 +29,7 @@ class Progression < ActiveRecord::Base
       JSON.parse(status) 
     else
       progression = Progression.where(:job_id => job_id).first
-      unless progression.nil?
-        { 
-          size: progression.job.video.size, 
-          processed: progression.chunks_tcoded_so_far
-        }
-      end
+      progression.status_hash unless progression.nil?
     end
   end
 
