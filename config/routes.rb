@@ -18,10 +18,5 @@ Zipreel::Application.routes.draw do
   match '/upload', to: 'static#upload'
   match '/how_it_works', to: 'static#how_it_works'
 
-  # job progressions cache for status updater
-  #post '/job/status' => 'tracker#create'
-  #get '/job/status/:id' => 'tracker#show'
-  #put '/job/status/:id' => 'tracker#edit'
-  #delete '/job/status/:id' => 'tracker#delete'
-
+  get 'jobs/progression/:job_id' => 'jobs#job_progression'
 end
