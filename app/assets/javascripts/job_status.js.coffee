@@ -6,7 +6,7 @@ $ ->
   meter.on 'update', (e, width) ->
     width = 100 if width >= 100
     percentage = width + '%'
-    $(this).css 'width', percentage
+    $(this).animate width: percentage
 
   poll = () ->
     $.ajax
