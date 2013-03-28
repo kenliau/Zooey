@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20130311231910) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
-    t.text     "content"
+    t.string   "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "permalink"
