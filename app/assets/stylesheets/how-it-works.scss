@@ -20,12 +20,16 @@ div.diagram {
   background-color: #ff4d94; /* lighter red */
   cursor: pointer;
 }
-.circle.convert:hover {
+.circle.initialization:hover {
   background-color: #1aff8c; /* lighter green */
   cursor: pointer;
 }
-.circle.view:hover {
+.circle.conversion:hover {
   background-color: #80bfff; /* lighter blue */
+  cursor: pointer;
+}
+.circle.output:hover {
+  background-color: #FAFAD2; /* lighter yellow */
   cursor: pointer;
 }
 
@@ -39,6 +43,10 @@ div.diagram {
 
 .blue {
   background-color: #3399FF;
+}
+
+.yellow {
+  background-color: yellow;
 }
 
 ul.nav-bar a.active {

@@ -13,4 +13,9 @@ class Job < ActiveRecord::Base
       :only_integer => true,
       :greater_than_or_equal_to => 0
     }
+
+  def find_by_user
+    
+
+  end
 end

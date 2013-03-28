@@ -1,5 +1,5 @@
 HowItWorks =
-  tabs: ["upload", "convert", "view"]
+  tabs: ["upload", "initialization", "conversion", "output"]
 
   activeTab: null
 
