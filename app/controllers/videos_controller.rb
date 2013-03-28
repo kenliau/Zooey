@@ -42,6 +42,7 @@ class VideosController < ApplicationController
       frame_distance: frame_distance,
       size: size
     })
+    @video.save
 
     resolution = params[:output_resolution].to_s
     x_index = resolution.index('x')
@@ -58,6 +59,7 @@ class VideosController < ApplicationController
       audio_bitrate: params[:audio_bitrate],
       audio_volume: params[:audio_volume]
     })
+    @job.save
 
     @progression = @job.create_progression()
 
