@@ -8,22 +8,79 @@
 
   <!-- end header and nav -->
 
-  <div class="row">
 
+  <div class="row">
+    <noscript>
+      <div class="alert-box">
+        Please enable Javascript for this application to function properly. 
+      </div>
+    </noscript>
+  </div>
+
+<!-- Header and Nav -->
+  <br />  
+  <br />  
+  <br />  
+  <br />  
+  <br />  
+
+  <div class="row">
+    <div class="twelve columns">
+      <div class="three mobile-one columns">
+        <h5 class="center" > Pull </h5>
+      </div>
+      <div class="three mobile-one columns">
+        <h5 class="center" > TCoder </h5>
+      </div>
+     <div class="three mobile-one columns">
+        <h5 class="center" > Chunker </h5>
+      </div>
+     <div class="three mobile-one columns">
+        <h5 class="center" > Merger </h5>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="twelve columns">
+      <div id="pull" class="three mobile-one columns">
+      </div>
+      <div id="tcoder" class="three mobile-one columns">
+      </div>
+     <div id="chunker" class="three mobile-one columns">
+      </div>
+     <div id="merger" class="three mobile-one columns">
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="twelve columns">
+    </div>
+  </div>
+  <br />  
+
+  <div class="row">
     <!-- main content section -->
     <!-- this has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
     <div class="nine columns">
-
       <% @video = Video.find(@job.video_id) %>
-      <h3> <small> <%= @video.filename %> </small></h3>
-      <p> <%= @video.size %> </p>
-      <p> <%= @job.width %> </p>
-      <p> <%= @job.height %> </p>
-
+      <h3> <small> Video Filename: <%= @video.filename %> </small></h3>
+      <p>Video Size: <%= @video.size %> </p>
+      <p>Output Video Width: <%= @job.width %> </p>
+      <p>Output Video Height: <%= @job.height %> </p>
+      <p>H264 Profile: <%= @job.h264_profile %> </p>
+      <p>H264 Quality: <%= @job.h264_quality %> </p>
+      <p>Audio Codec: <%= @job.audio_codec %> </p>
+      <p>Audio Bitrate: <%= @job.audio_bitrate %> </p>
+      <p>Audio Volume: <%= @job.audio_volume %> </p>
+      <p>Mux Rate: <%= @job.mux_rate %> </p>
+      <p>Created At: <%= @job.created_at %> </p>
+      <p>Updated At: <%= @job.updated_at %> </p>
+      <p>Finished At: <%= @job.finished_at %> </p>
     </div>
-
-
-
   </div>
 
 

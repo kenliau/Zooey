@@ -15,7 +15,11 @@
     <div class="nine columns">
 
       <h3> <small> <%= @video.filename %> </small></h3>
-      <p> <%= @video.size %> </p>
+      <p> Size: <%= @video.size %> </p>
+      <p> Duration: <%= @video.duration %> </p>
+      <p> Frame Distance: <%= @video.frame_distance %> </p>
+      <p> GOP Length: <%= @video.gop_length %> </p>
+      <p> Created At: <%= @video.created_at %> </p>
 
     </div>
 

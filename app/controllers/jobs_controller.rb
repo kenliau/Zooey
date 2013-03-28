@@ -1,11 +1,14 @@
 class JobsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :owns_job_or_admin
+
+  # Requires current user to own job or be admin
+  def owns_job_or_admin 
+  end
 
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
-
+    @jobs = Job.joins(:video).where(:videos => {:user_id => current_user})
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs }

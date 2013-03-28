@@ -1,10 +1,14 @@
 class VideosController < ApplicationController
   before_filter :authenticate_user!
 
+  # Requires current user to own video or be admin
+  def owns_video_or_admin 
+  end
+
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.all
+    @videos = Video.where(user_id: current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -73,6 +77,7 @@ class VideosController < ApplicationController
   # GET /videos/1
   # GET /videos/1.json
   def show
+
     @video = Video.find(params[:id])
 
     respond_to do |format|
