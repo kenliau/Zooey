@@ -5,6 +5,7 @@ $ ->
 
   meter.on 'update', (e, width) ->
     debugger
+    width = 100 if width >= 100
     percentage = width + '%'
     $(this).css 'width', percentage
 
