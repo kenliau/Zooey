@@ -23,6 +23,11 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def percent_complete
+    percent = (self.progression.chunks_tcoded_so_far.to_i / self.video.size) * 100
+    percent > 100 ? 100 : percent
+  end
+  
   def self.where_user(user_id)
     self.joins(:video).where(:videos => {:user_id => user_id})
   end

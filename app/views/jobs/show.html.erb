@@ -27,7 +27,7 @@
   <span id="job-data" data-job-id="<%= @job.id %>"></span>
 
   <div class="row">
-    <div class="nice round progress twelve"><span style="width: 0;" class="meter"></span></div>
+	  <div class="nice round progress twelve"><span style="width: <%= @job.percent_complete %>%;" class="meter"></span></div>
   </div>
 
   <%#<div class="row">%>

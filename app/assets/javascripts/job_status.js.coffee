@@ -16,4 +16,4 @@ $ ->
         width = if response.processed == 0 then 0 else (response.processed / response.size)*100
         meter.trigger 'update', width
 
-  setInterval(poll, 5000)
+  setInterval(poll, 2000)
