@@ -17,7 +17,6 @@ test:
   database: ziptest
   pool: 5
   host: localhost
-  username: devon
 
 
 production:

@@ -8,7 +8,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.joins(:video).where(:videos => {:user_id => current_user})
+    @jobs = Job.where_user(current_user)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs }

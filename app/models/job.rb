@@ -12,5 +12,9 @@ class Job < ActiveRecord::Base
     :numericality => {
       :only_integer => true,
       :greater_than_or_equal_to => 0
-  }
+    }
+
+  def self.where_user user_id
+    self.joins(:video).where(:videos => {:user_id => user_id})
+  end
 end
