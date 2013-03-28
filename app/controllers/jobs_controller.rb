@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   # Requires current user to own job or be admin
-  before_filter :authenticate_user!, :except => [:job_progression]
+  before_filter :authenticate_user!
   before_filter :load_job, :only => [:show, :destroy]
   before_filter :owns_job_or_admin, :only => [:show, :destroy]
 
@@ -26,18 +26,6 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs }
-    end
-  end
-
-  # GET /jobs/progression/:job_id
-  def job_progression
-    progression = Progression.status_by_job_id(params[:job_id])
-    respond_to do |format|
-      unless progression.blank?
-        format.json { render json: progression }
-      else
-        format.json { render json: progression, status: 404 }
-      end
     end
   end
 

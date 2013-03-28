@@ -18,5 +18,5 @@ Zipreel::Application.routes.draw do
   match '/upload', to: 'static#upload'
   match '/how_it_works', to: 'static#how_it_works'
 
-  get 'jobs/progression/:job_id' => 'jobs#job_progression'
+  get 'jobs/progression/:job_id' => 'progressions#show_by_job_id'
 end
