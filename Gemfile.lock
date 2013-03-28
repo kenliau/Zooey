@@ -106,6 +106,9 @@ GEM
       guard (>= 1.1)
       spork (>= 0.8.4)
     hike (1.2.1)
+    httparty (0.10.2)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.4)
     interactive_editor (0.0.10)
       spoon (>= 0.0.1)
@@ -127,6 +130,7 @@ GEM
       sass (>= 3.2.0)
       sassy-math (>= 1.5)
     multi_json (1.7.2)
+    multi_xml (0.5.3)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
     pg (0.12.2)
@@ -269,6 +273,7 @@ DEPENDENCIES
   growl (= 1.0.3)
   guard-rspec (= 1.2.1)
   guard-spork
+  httparty
   interactive_editor
   jquery-rails
   pg (= 0.12.2)

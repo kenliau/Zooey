@@ -14,6 +14,15 @@ class Job < ActiveRecord::Base
       :greater_than_or_equal_to => 0
     }
 
+  after_create :transcode
+
+  # temporarily this only starts the mock backend
+  def transcode
+    if Rails.env.production?
+      HTTParty.post('http://safe-fortress-3978/transcode', body: {id: self.id})
+    end
+  end
+
   def self.where_user(user_id)
     self.joins(:video).where(:videos => {:user_id => user_id})
   end

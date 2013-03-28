@@ -13,6 +13,7 @@ gem 'backbone-on-rails'
 gem 'redcarpet'
 gem 'albino'
 gem 'pygmentize'
+gem 'httparty'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
