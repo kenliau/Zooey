@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :progression do
     chunks 5
     chunks_tcoded_so_far 5
-    pull_start_time Time.now - 7.minutes
     pull_start_time Time.now - 6.minutes
     chunker_start_time Time.now - 5.minutes
     chunker_finish_time Time.now - 4.minutes
