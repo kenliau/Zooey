@@ -19,7 +19,7 @@ class Job < ActiveRecord::Base
   # temporarily this only starts the mock backend
   def transcode
     if Rails.env.production?
-      HTTParty.post('http://safe-fortress-3978/transcode', body: {id: self.id})
+      HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode', body: {id: self.id})
     end
   end
 
