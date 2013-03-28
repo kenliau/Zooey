@@ -14,8 +14,10 @@ class ProgressionsController < ApplicationController
 
   # PUT /jobs/progression/:job_id
   def update_by_job_id
-    @progression = Progression.where('job_id' => params[:job_id])
-    @progression.update_attributes(params[:progression])
+    @progression = Progression.where('job_id' => params[:job_id]).first
+    unless @progression.blank?
+      @progression.update_attributes(params[:progression])
+    end
   end
 
 end

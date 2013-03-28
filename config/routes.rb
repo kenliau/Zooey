@@ -19,4 +19,5 @@ Zipreel::Application.routes.draw do
   match '/how_it_works', to: 'static#how_it_works'
 
   get 'jobs/progression/:job_id' => 'progressions#show_by_job_id'
+  put 'jobs/progression/:job_id' => 'progressions#update_by_job_id'
 end
