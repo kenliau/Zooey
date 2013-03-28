@@ -22,7 +22,17 @@ class Progression < ActiveRecord::Base
   
   def self.status_by_job_id(job_id)
     status = $redis.get(self.redis_key(job_id))
-    JSON.parse(status) unless status.nil?
+    unless status.nil?
+      JSON.parse(status) 
+    else
+      progression = Progression.where(:job_id => job_id).first
+      unless progression.nil?
+        { 
+          size: progression.job.video.size, 
+          processed: progression.chunks_tcoded_so_far
+        }
+      end
+    end
   end
 
   def self.redis_key(job_id)
