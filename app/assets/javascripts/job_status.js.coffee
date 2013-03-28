@@ -1,26 +1,19 @@
 $ ->
-  # Tracker segments
-  pull = $('.tracker-pull')
-  tcoder = $('.tracker-tcoder')
-  chunker = $('.tracker-chunker')
-  merger = $('.tracker-merger')
+  meter = $('.progress.meter')
+  job = $('#job-data')
+  job_id = parseInt(job.data('job-id'), 10)
 
-  #$.ajax
-    #type: 'GET'
-    #url: 'jobs/status/1'
-    #success: (response) ->
-      #console.log response
-    #error: (response) ->
-      #console.log response
+  meter.on 'progress_update', (width) ->
+    percentage = width + '%'
+    this.css 'width', percentage
 
-  pulse = (segment) ->
-    setInterval ->
-      segment.toggleClass 'complete'
-    , 400
+  poll = () ->
+    $.ajax 
+      url: '/jobs/progressions/' + job_id,
+      type: 'GET',
+      success: (response) ->
+        console.log response
+        width = processed / size
+        meter.trigger 'progress_update', width
 
-
-  interval_id = pulse(pull)
-
-  setTimeout ->
-    clearInterval interval_id
-  , 4001
+  setInterval(poll, 10000)
