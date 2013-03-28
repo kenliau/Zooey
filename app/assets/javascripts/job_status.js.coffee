@@ -9,11 +9,10 @@ $ ->
 
   poll = () ->
     $.ajax 
-      url: '/jobs/progressions/' + job_id,
+      url: '/jobs/progression/' + job_id,
       type: 'GET',
       success: (response) ->
-        console.log response
-        width = processed / size
+        width = if response.processed == 0 then 0 else response.processed / response.size
         meter.trigger 'progress_update', width
 
-  setInterval(poll, 10000)
+  setInterval(poll, 5000)
