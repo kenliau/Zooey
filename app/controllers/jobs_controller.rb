@@ -2,7 +2,7 @@ class JobsController < ApplicationController
   before_filter :authenticate_user!, :owns_job_or_admin
 
   # Requires current user to own job or be admin
-  def owns_job_or_admin 
+  def owns_job_or_admin
   end
 
   # GET /jobs
@@ -12,6 +12,13 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs }
+    end
+  end
+
+  # GET /jobs/progression/:job_id
+  def job_progression
+    respond_to do |format|
+      format.json { render json: Progression.status_by_job_id }
     end
   end
 
