@@ -19,22 +19,22 @@
           <%= form_for(@video, :multipart => true) do |f| %>
             <% if @video.errors.any? %>
               <div id="error_explanation">
-                <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being uploaded:</h2>
-                <ul>
-                  <% @video.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                  <% end %>
-                </ul>
+                <% @video.errors.full_messages.each do |msg| %>
+                  <div class="alert alert-box">
+                    <%= msg %>
+                    <a href="" class="close">&times;</a>
+                  </div>
+                <% end %>
               </div>
             <% end %>
             <% if ! @job.nil? and @job.errors.any? %>
               <div id="error_explanation">
-                <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being processed:</h2>
-                <ul>
-                  <% @job.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                  <% end %>
-                </ul>
+                <% @job.errors.full_messages.each do |msg| %>
+                  <div class="alert alert-box">
+                    <%= msg %>
+                    <a href="" class="close">&times;</a>
+                  </div>
+                <% end %>
               </div>
             <% end %>
 
