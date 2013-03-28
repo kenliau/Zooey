@@ -24,9 +24,6 @@ class Documentation < ActiveRecord::Base
     self.permalink = ret
   end
 
-  def to_slug
-  end
-
   def render_content
     require 'redcarpet'
     renderer = PygmentizeHTML.new({ filter_html: true, hard_wrap: true, with_toc_data: true })
