@@ -66,7 +66,7 @@ class VideosController < ApplicationController
     respond_to do |format|
       if @video.save and @job.save  
 
-        format.html { redirect_to @video, notice: 'Video was successfully uploaded.' }
+        format.html { redirect_to @job, notice: 'Video was successfully submitted for processing' }
         format.json { render json: @video, status: :created, location: @video }
 
       else
