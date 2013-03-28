@@ -24,4 +24,3 @@ production:
   encoding: unicode
   database: zipreel
   pool: 5
-  username: zipreel

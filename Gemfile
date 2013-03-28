@@ -6,8 +6,13 @@ gem 'validates_timeliness', '~> 3.0'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'devise', '2.2.3'
-gem 'redis', '2.1.1'
-gem 'resque' 
+gem 'redis', '2.2.0'
+gem 'redis-rails', '~> 3.2.0'
+gem 'resque'
+gem 'backbone-on-rails'
+gem 'redcarpet'
+gem 'albino'
+gem 'pygmentize'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
@@ -30,7 +35,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails', '1.0.3'
   gem 'zurb-foundation', '3.2.5'

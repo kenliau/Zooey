@@ -14,8 +14,7 @@ class Job < ActiveRecord::Base
       :greater_than_or_equal_to => 0
     }
 
-  def find_by_user
-    
-
+  def self.where_user(user_id)
+    self.joins(:video).where(:videos => {:user_id => user_id})
   end
 end

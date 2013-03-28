@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311231910) do
+ActiveRecord::Schema.define(:version => 20130328105727) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "permalink"
+    t.text     "rendered_content"
   end
 
   create_table "jobs", :force => true do |t|
@@ -49,10 +50,10 @@ ActiveRecord::Schema.define(:version => 20130311231910) do
     t.datetime "tcoder_finish_time"
     t.datetime "merger_start_time"
     t.datetime "merger_finish_time"
-    t.time     "chunk_tcode_time"
     t.integer  "chunks_tcoded_so_far"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "chunk_tcode_time",     :default => 0
   end
 
   add_index "progressions", ["job_id"], :name => "index_progressions_on_job_id"
@@ -84,11 +85,11 @@ ActiveRecord::Schema.define(:version => 20130311231910) do
     t.string   "filename"
     t.string   "location"
     t.float    "size"
-    t.time     "duration"
     t.integer  "frame_distance"
     t.integer  "gop_length"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "duration",       :default => 0
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"

@@ -1,34 +1,36 @@
-#job_status_bar {
-  
-  height: 100%;
+$light_blue: #2BA6CB;
+$gray: #A9A9A9;
+
+.job_status_bar {
+  min-height: 60px;
   padding: 30px;
-  background: #A9A9A9;
+  background: $gray;
   border: 1px dashed black;
 
 }
 
-#pull {
-  @extend #job_status_bar;
+.tracker-pull {
+  @extend .job_status_bar;
   -moz-border-radius-topleft: 15px;
   -webkit-border-top-left-radius: 15px;
   border-top-left-radius: 15px;
   -moz-border-radius-bottomleft: 15px;
   -webkit-border-bottom-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  
-} 
-
-#tcoder {
-  @extend #job_status_bar;
 
 }
 
-#chunker {
-  @extend #job_status_bar;
+.tracker-tcoder {
+  @extend .job_status_bar;
+
 }
 
-#merger {
-  @extend #job_status_bar;
+.tracker-chunker {
+  @extend .job_status_bar;
+}
+
+.tracker-merger {
+  @extend .job_status_bar;
  -moz-border-radius-topright: 15px;
   -webkit-border-top-right-radius: 15px;
   border-top-right-radius: 15px;
@@ -40,4 +42,8 @@
 
 .center {
   text-align: center;
+}
+
+.complete {
+  background-color: $light_blue;
 }
