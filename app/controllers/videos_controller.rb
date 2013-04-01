@@ -9,6 +9,7 @@ class VideosController < ApplicationController
   # GET /videos.json
   def index
     @videos = Video.where(user_id: current_user.id)
+    @jobs = Job.where_user(current_user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,9 +32,9 @@ class VideosController < ApplicationController
 
     filename = params[:video_file].to_s
     duration = Time.now #temp value
-    gop_length = 10 #temp value
-    frame_distance = 10 #temp value
-    size = 10 #temp value
+    gop_length = rand(1..20) #temp value
+    frame_distance = rand(1..30) #temp value
+    size = rand(1..999999999) #temp value
     
     @video = @user.videos.new({
       filename: filename,

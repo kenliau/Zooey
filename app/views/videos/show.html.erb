@@ -20,7 +20,7 @@
       <tbody>
         <tr>
           <td>Size :</td>
-          <td><%= @video.size %></td>
+          <td><%= number_to_human_size(@video.size) %></td>
         </tr>
         <tr>
           <td>Duration :</td>

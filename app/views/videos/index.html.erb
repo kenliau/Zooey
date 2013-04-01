@@ -8,6 +8,44 @@
 
 <div class="row">
   <div class="twelve columns">
+    <ul class="accordion">
+      <% @videos.each do |video| %>
+        <li>
+          <div class="title">
+            <div class="row">
+              <div class="three columns">
+                <%= link_to video.filename, video %>
+              </div>
+              <div class="three columns">
+                <%= video.created_at %>
+              </div>
+               <div class="three columns">
+                <%= number_to_human_size(video.size) %>
+              </div>
+              <div class="three columns">
+                <%= link_to image_tag("trash.png"), video, method: :delete, data: { confirm: 'Are you sureyou want to destroy this video? All jobs associated with this video will be deleted as well.' } %>
+              </div>
+            </div>
+
+          </div>
+          <div class="content">
+            <h6>All Jobs for <%= video.filename %> : </h6>
+            <ul class="block-grid three-up mobile-five-up">
+              <% @jobs.each do |job| %>
+                <% if job.video_id == video.id %>
+                  <li> <%= link_to "Job \##{job.id}", job %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
     <table>
       <tr>
         <th>Preview</th>

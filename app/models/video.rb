@@ -1,4 +1,5 @@
 class Video < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
   belongs_to :user
   has_many :jobs
   attr_accessible :duration, :filename, :frame_distance, :gop_length, :location, :size
