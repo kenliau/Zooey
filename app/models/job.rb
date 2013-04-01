@@ -20,6 +20,8 @@ class Job < ActiveRecord::Base
   def transcode
     if Rails.env.production?
       HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode', body: {id: self.id})
+    elsif Rails.env.development?
+      HTTParty.post('http://localhost:4000/transcode', body: {id: self.id})
     end
   end
 
