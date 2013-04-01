@@ -17,10 +17,10 @@
                 <%= link_to video.filename, video %>
               </div>
               <div class="three columns">
-                <%= video.created_at %>
+                <%= number_to_human_size(video.size) %>
               </div>
                <div class="three columns">
-                <%= number_to_human_size(video.size) %>
+                <%= video.created_at %>
               </div>
               <div class="three columns">
                 <%= link_to image_tag("trash.png"), video, method: :delete, data: { confirm: 'Are you sureyou want to destroy this video? All jobs associated with this video will be deleted as well.' } %>
@@ -44,29 +44,6 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="twelve columns">
-    <table>
-      <tr>
-        <th>Preview</th>
-        <th>Filename</th>
-        <th>Size</th>
-        <th>Created At</th>
-        <th></th>
-      </tr>
-
-    <% @videos.each do |video| %>
-      <tr>
-        <td><%= image_tag("rails.png") %> </td>
-        <td><%= link_to video.filename, video %></td>
-        <td><%= video.size %></td>
-        <td><%= video.created_at %></td>
-        <td><%= link_to image_tag("trash.png"), video, method: :delete, data: { confirm: 'Are you sureyou want to destroy this video? All jobs associated with this video will be deleted as well.' } %></td>
-      </tr>
-    <% end %>
-    </table>
-  </div>
-</div>
 
 <div class="row">
   <div class="twelve columns">
