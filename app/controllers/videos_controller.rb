@@ -1,8 +1,22 @@
 class VideosController < ApplicationController
+  # Requires current user to own video or be admin
   before_filter :authenticate_user!
+  before_filter :load_video, :only => [:show, :destroy]
+  before_filter :owns_video_or_admin, :only => [:show, :destroy]
+
+  # Sets instance variable for video and checks if it's blank
+  def load_video
+    @video = Video.find(params[:id])
+    if @video.blank?
+      return redirect_to '/videos'
+    end
+  end
 
   # Requires current user to own video or be admin
   def owns_video_or_admin 
+    unless @video.user == current_user or current_user.is_admin
+      return redirect_to '/videos'
+    end
   end
 
   # GET /videos
@@ -34,7 +48,7 @@ class VideosController < ApplicationController
     duration = Time.now #temp value
     gop_length = rand(1..20) #temp value
     frame_distance = rand(1..30) #temp value
-    size = rand(1..999999999) #temp value
+    size = rand(1..20) #temp value
     
     @video = @user.videos.new({
       filename: filename,
