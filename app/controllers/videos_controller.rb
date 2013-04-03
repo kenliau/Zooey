@@ -22,8 +22,8 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.where(user_id: current_user.id)
-    @jobs = Job.where_user(current_user)
+    @videos = Video.by_user(current_user)
+    @jobs = Job.by_user(current_user)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -20,9 +20,8 @@ class Video < ActiveRecord::Base
       :greater_than => 0
     }
 
-  def self.where_user(user_id)
-    self.where(user_id: user_id)
-  end
+  scope :by_user, lambda{ |uid| where(user_id: uid)}
+
 
 
 end
