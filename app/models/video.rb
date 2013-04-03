@@ -2,9 +2,9 @@ class Video < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
   belongs_to :user
   has_many :jobs
-  attr_accessible :duration, :filename, :frame_distance, :gop_length, :location, :size
+  attr_accessible :duration, :video_name, :filename, :frame_distance, :gop_length, :location, :size
 
-  validates :filename,
+  validates :filename, :video_name,
     :presence => {
       message: "is a required field"
     }

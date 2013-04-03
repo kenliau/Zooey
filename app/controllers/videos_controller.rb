@@ -44,6 +44,7 @@ class VideosController < ApplicationController
   def create
     @user = User.find(current_user.id)
 
+    video_name = params[:video_name]
     filename = params[:video_file].to_s
     duration = Time.now #temp value
     gop_length = rand(1..20) #temp value
@@ -51,6 +52,7 @@ class VideosController < ApplicationController
     size = rand(1..20) #temp value
     
     @video = @user.videos.new({
+      video_name: video_name,
       filename: filename,
       duration: duration,
       gop_length: gop_length,
@@ -74,12 +76,11 @@ class VideosController < ApplicationController
       audio_bitrate: params[:audio_bitrate],
       audio_volume: params[:audio_volume]
     })
-    @job.save
 
-    @progression = @job.create_progression()
 
     respond_to do |format|
       if @video.save and @job.save  
+        @progression = @job.create_progression()
 
         format.html { redirect_to @job, notice: 'Video was successfully submitted for processing' }
         format.json { render json: @video, status: :created, location: @video }

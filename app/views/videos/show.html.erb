@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="seven columns">
-      <h1><%= @video.filename %></h1>
+      <h1><%= @video.video_name %></h1>
     </div>
   </div>
   <!-- end header -->
@@ -13,11 +13,12 @@
         <iframe width="420" height="315" src="http://www.youtube.com/embed/kQxl8fuwrgs" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
-  </div>
-
-  <div class="row">
     <table id="video-table" class="six columns">
       <tbody>
+        <tr>
+          <td>Filename :</td>
+          <td><%= @video.filename %></td>
+        </tr>
         <tr>
           <td>Size :</td>
           <td><%= number_to_human_size(@video.size) %></td>
@@ -45,6 +46,10 @@
 
       </tbody>
     </table>
+
+  </div>
+
+  <div class="row">
   </div>
 
 

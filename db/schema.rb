@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328110655) do
+ActiveRecord::Schema.define(:version => 20130402212040) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20130328110655) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.integer  "duration",       :default => 0
+    t.string   "video_name"
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
