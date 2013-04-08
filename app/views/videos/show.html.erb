@@ -8,45 +8,50 @@
   <!-- end header -->
 
   <div class="row">
-    <div class="six columns">
-      <div class="flex-video">
-        <iframe width="420" height="315" src="http://www.youtube.com/embed/kQxl8fuwrgs" frameborder="0" allowfullscreen></iframe>
-      </div>
+    <div class="twelve columns">
+      <ul class="block-grid two-up mobile-one-up">
+        <li>
+          <div class="flex-video">
+            <iframe width="420" height="315" src="http://www.youtube.com/embed/kQxl8fuwrgs" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </li>
+        <li>
+          <table id="video-table" class="twelve columns">
+            <tbody>
+              <tr>
+                <td>Filename :</td>
+                <td><%= @video.filename %></td>
+              </tr>
+              <tr>
+                <td>Size :</td>
+                <td><%= number_to_human_size(@video.size) %></td>
+              </tr>
+              <tr>
+                <td>Duration :</td>
+                <td><%= @video.duration %></td>
+              </tr>
+              <tr>
+                <td>Location :</td>
+                <td><%= @video.location %></td>
+              </tr>
+              <tr>
+                <td>Frame Distance :</td>
+                <td><%= @video.frame_distance %></td>
+              </tr>
+              <tr>
+                <td>GOP Length :</td>
+                <td><%= @video.gop_length %></td>
+              </tr>
+              <tr>
+                <td>Created At :</td>
+                <td><%= @video.created_at %></td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ul>
     </div>
-    <table id="video-table" class="six columns">
-      <tbody>
-        <tr>
-          <td>Filename :</td>
-          <td><%= @video.filename %></td>
-        </tr>
-        <tr>
-          <td>Size :</td>
-          <td><%= number_to_human_size(@video.size) %></td>
-        </tr>
-        <tr>
-          <td>Duration :</td>
-          <td><%= @video.duration %></td>
-        </tr>
-        <tr>
-          <td>Location :</td>
-          <td><%= @video.location %></td>
-        </tr>
-        <tr>
-          <td>Frame Distance :</td>
-          <td><%= @video.frame_distance %></td>
-        </tr>
-        <tr>
-          <td>GOP Length :</td>
-          <td><%= @video.gop_length %></td>
-        </tr>
-        <tr>
-          <td>Created At :</td>
-          <td><%= @video.created_at %></td>
-        </tr>
-
-      </tbody>
-    </table>
-
+    
   </div>
 
   <div class="row">
