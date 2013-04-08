@@ -9,8 +9,9 @@ Zipreel::Application.routes.draw do
   get 'admin/videos' => 'admin#videos'
   get 'admin/jobs' => 'admin#jobs'
   resources :admin
-
+  
   get 'guide/:permalink' => 'documentations#show_by_permalink'
+  get 'guide' => redirect('/docs/1')
 
   root :to => 'static#index'
 
