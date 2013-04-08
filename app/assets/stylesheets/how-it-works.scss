@@ -33,6 +33,54 @@ div.diagram {
   cursor: pointer;
 }
 
+.nav-how-ul {
+  background: none;
+  margin: 70px 0px 70px 40px;
+}
+
+#nav-how-li {
+  background: #4d4d4d;
+  float: left;
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0 100px 30px 0;
+  border: 1px solid #333333;
+  border-right: none;
+  line-height: 38px;
+  -webkit-box-shadow: 1px 0 0 rgba(255, 255, 255, 0.2) inset;
+  -moz-box-shadow: 1px 0 0 rgba(255, 255, 255, 0.2) inset;
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.2) inset;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+
+}
+
+
+.nav-arrow:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: none;
+  border: 30px solid transparent;
+  border-left-color: #4d4d4d;
+  left: 95%;
+  top: -28%;
+}
+
+.nav-arrow:hover:after {
+  border-left-color: #333333;
+}
+
+#nav-how-li:hover {
+  background: #333333;
+}
+
+
 .red {
   background-color: #FF0066;
 }
