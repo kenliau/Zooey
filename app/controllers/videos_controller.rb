@@ -1,14 +1,29 @@
 class VideosController < ApplicationController
+  # Requires current user to own video or be admin
   before_filter :authenticate_user!
+  before_filter :load_video, :only => [:show, :destroy]
+  before_filter :owns_video_or_admin, :only => [:show, :destroy]
+
+  # Sets instance variable for video and checks if it's blank
+  def load_video
+    @video = Video.find(params[:id])
+    if @video.blank?
+      return redirect_to '/videos'
+    end
+  end
 
   # Requires current user to own video or be admin
   def owns_video_or_admin 
+    unless @video.user == current_user or current_user.is_admin
+      return redirect_to '/videos'
+    end
   end
 
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.where(user_id: current_user.id)
+    @videos = Video.by_user(current_user)
+    @jobs = Job.by_user(current_user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,13 +44,15 @@ class VideosController < ApplicationController
   def create
     @user = User.find(current_user.id)
 
+    video_name = params[:video_name]
     filename = params[:video_file].to_s
     duration = Time.now #temp value
-    gop_length = 10 #temp value
-    frame_distance = 10 #temp value
-    size = 10 #temp value
+    gop_length = rand(1..20) #temp value
+    frame_distance = rand(1..30) #temp value
+    size = rand(1..20) #temp value
     
     @video = @user.videos.new({
+      video_name: video_name,
       filename: filename,
       duration: duration,
       gop_length: gop_length,
@@ -59,12 +76,11 @@ class VideosController < ApplicationController
       audio_bitrate: params[:audio_bitrate],
       audio_volume: params[:audio_volume]
     })
-    @job.save
 
-    @progression = @job.create_progression()
 
     respond_to do |format|
       if @video.save and @job.save  
+        @progression = @job.create_progression()
 
         format.html { redirect_to @job, notice: 'Video was successfully submitted for processing' }
         format.json { render json: @video, status: :created, location: @video }

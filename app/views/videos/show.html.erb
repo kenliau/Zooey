@@ -1,30 +1,55 @@
-  <!-- header and nav -->
+  <!-- header -->
 
   <div class="row">
     <div class="seven columns">
-      <h1><%= @video.filename %></h1>
+      <h1><%= @video.video_name %></h1>
     </div>
   </div>
-
-  <!-- end header and nav -->
+  <!-- end header -->
 
   <div class="row">
-
-    <!-- main content section -->
-    <!-- this has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
-    <div class="nine columns">
-
-      <h3> <small> <%= @video.filename %> </small></h3>
-      <p> Size: <%= @video.size %> </p>
-      <p> Duration: <%= @video.duration %> </p>
-      <p> Frame Distance: <%= @video.frame_distance %> </p>
-      <p> GOP Length: <%= @video.gop_length %> </p>
-      <p> Created At: <%= @video.created_at %> </p>
-
+    <div class="six columns">
+      <div class="flex-video">
+        <iframe width="420" height="315" src="http://www.youtube.com/embed/kQxl8fuwrgs" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
+    <table id="video-table" class="six columns">
+      <tbody>
+        <tr>
+          <td>Filename :</td>
+          <td><%= @video.filename %></td>
+        </tr>
+        <tr>
+          <td>Size :</td>
+          <td><%= number_to_human_size(@video.size) %></td>
+        </tr>
+        <tr>
+          <td>Duration :</td>
+          <td><%= @video.duration %></td>
+        </tr>
+        <tr>
+          <td>Location :</td>
+          <td><%= @video.location %></td>
+        </tr>
+        <tr>
+          <td>Frame Distance :</td>
+          <td><%= @video.frame_distance %></td>
+        </tr>
+        <tr>
+          <td>GOP Length :</td>
+          <td><%= @video.gop_length %></td>
+        </tr>
+        <tr>
+          <td>Created At :</td>
+          <td><%= @video.created_at %></td>
+        </tr>
 
+      </tbody>
+    </table>
 
+  </div>
 
+  <div class="row">
   </div>
 
 

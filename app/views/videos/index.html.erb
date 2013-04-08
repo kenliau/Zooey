@@ -1,33 +1,55 @@
 <div class="row">
   <div class="twelve columns">
-    <h2>Listing Videos</h2>
+    <h2>All My Videos</h2>
     <hr />
   </div>
 </div>
 
 
 <div class="row">
+  <div class="twelve columns">
+    <ul class="accordion">
+      <% @videos.each do |video| %>
+        <li>
+          <div class="title">
+            <div class="row">
+              <div class="three columns">
+                <%= link_to video.filename, video %>
+              </div>
+              <div class="three columns">
+                <%= number_to_human_size(video.size) %>
+              </div>
+               <div class="three columns">
+                <%= video.created_at %>
+              </div>
+              <div class="three columns">
+                <%= link_to image_tag("trash.png"), video, method: :delete, data: { confirm: 'Are you sureyou want to destroy this video? All jobs associated with this video will be deleted as well.' } %>
+              </div>
+            </div>
 
-<table>
-  <tr>
-    <th>Filename</th>
-    <th>Size</th>
-    <th></th>
-    <th></th>
-  </tr>
+          </div>
+          <div class="content">
+            <h6>All Jobs for <%= video.filename %> : </h6>
+            <ul class="block-grid three-up mobile-five-up">
+              <% @jobs.each do |job| %>
+                <% if job.video_id == video.id %>
+                  <li> <%= link_to "Job \##{job.id}", job %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<% @videos.each do |video| %>
-  <tr>
-    <td><%= video.filename %></td>
-    <td><%= video.size %></td>
-    <td><%= link_to 'Show', video %></td>
-    <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sureyou want to destroy this video? All jobs associated with this video will be deleted as well.' } %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
+<div class="row">
+  <div class="twelve columns">
+    <%= link_to 'Upload New Video', new_video_path, :class => "small radius button" %>
+  </div>
+<div>
 
-<%= link_to 'New Video', new_video_path %>
 
 </div>

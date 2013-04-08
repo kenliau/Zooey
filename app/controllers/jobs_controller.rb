@@ -22,7 +22,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.where_user(current_user)
+    @jobs = Job.by_user(current_user)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs }

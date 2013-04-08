@@ -30,7 +30,6 @@ class Job < ActiveRecord::Base
     percent > 100 ? 100 : percent
   end
   
-  def self.where_user(user_id)
-    self.joins(:video).where(:videos => {:user_id => user_id})
-  end
+  scope :by_user, lambda{ |uid| joins(:video).where(:videos => {:user_id => uid} ) }
+
 end
