@@ -7,11 +7,14 @@ if onJobShow() then $ ->
 
   class JobView extends Backbone.View
     initialize: ->
-      @listenTo(@model, 'change', @render)
+      @listenTo(@model, 'change', @show)
       return
     template: template('job-template')
+    show: =>
+      job = @model.toJSON()
+      if (job.finished_at?) then vent.trigger('job:finish')
+      @render
     render: =>
-      vent.trigger('job:finish')
       console.log(@model.toJSON())
       return this
 
