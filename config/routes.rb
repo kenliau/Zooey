@@ -3,6 +3,9 @@ Zipreel::Application.routes.draw do
 
   resources 'documentations', path: 'docs'
   resources 'videos', path: 'videos'
+
+  get 'jobs/progressions/' => 'progressions#index'
+
   resources 'jobs', path: 'jobs'
 
   get 'admin/users' => 'admin#users'

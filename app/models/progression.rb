@@ -36,4 +36,8 @@ class Progression < ActiveRecord::Base
   def self.redis_key(job_id)
     "progression_status:#{job_id}"
   end
+
+  scope :by_user, lambda{ |uid| joins(:job => :video ).where(:videos => {:user_id => uid}) }
+
+
 end

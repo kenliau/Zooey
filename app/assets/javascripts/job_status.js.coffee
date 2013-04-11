@@ -8,7 +8,7 @@ $ ->
     percentage = width + '%'
     $(this).animate width: percentage
 
-  poll = () ->
+  poll = ->
     $.ajax
       url: '/jobs/progression/' + job_id,
       type: 'GET',
@@ -16,17 +16,17 @@ $ ->
         width = if response.processed == 0 then 0 else (response.processed / response.size)*100
         meter.trigger 'update', width
 
-  setInterval(poll, 2000)
+  setInterval(poll, 3000)
 
 
   # Backbone
-  ProgressBar = Backbone.model.extend()
+  #ProgressBar = Backbone.Model.extend()
 
-  ProgressBarCollection = Backbone.Collection.extend(
-    model: ProgressBar
-  )
+  #ProgressBarCollection = Backbone.Collection.extend(
+    #model: ProgressBar
+  #)
 
-  #ProgressBarView = Backbone.View.extend(
+  #ProgressBarView = Backbone.View.extend
     #el: $('.progress-bar')
     #template: _.template( $('#progress-bar-template').html() )
     #initialize: ->
@@ -34,7 +34,6 @@ $ ->
       #this.listenTo(@collection, 'add', @render)
       #@render()
     #render: ->
-      #$(@el).html(@template(
+      #$(@el).html @template
         #progress_bars: ProgressBarCollection
-      #)
-
+    #collection: ProgressBarCollection
