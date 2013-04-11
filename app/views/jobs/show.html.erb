@@ -73,20 +73,22 @@
     <!-- this has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
     <div class="nine columns">
       <% @video = Video.find(@job.video_id) %>
-      <h3> <small> Video Filename: <%= @video.filename %> </small></h3>
-      <p>Video Size: <%= @video.size %> </p>
-      <p>Output Video Width: <%= @job.width %> </p>
-      <p>Output Video Height: <%= @job.height %> </p>
-      <p>H264 Profile: <%= @job.h264_profile %> </p>
-      <p>H264 Quality: <%= @job.h264_quality %> </p>
-      <p>Audio Codec: <%= @job.audio_codec %> </p>
-      <p>Audio Bitrate: <%= @job.audio_bitrate %> </p>
-      <p>Audio Volume: <%= @job.audio_volume %> </p>
-      <p>Mux Rate: <%= @job.mux_rate %> </p>
-      <p>Created At: <%= @job.created_at %> </p>
-      <p>Updated At: <%= @job.updated_at %> </p>
-      <p>Finished At: <%= @job.finished_at %> </p>
+      <ul class="block-grid two-up mobile">
+        <li><h3> <small> Video Name: <%= @video.video_name %> </small></h3></li>
+        <li><h3> <small> Video Filename: <%= @video.filename %> </small></h3></li>
+        <li>Video ID: <%= link_to "Video \##{@video.id}", @video %> </li>
+        <li>Video Size: <%= number_to_human_size(@video.size) %> </li>
+        <li>Output Video Width: <%= @job.width %> </li>
+        <li>Output Video Height: <%= @job.height %> </li>
+        <li>H264 Profile: <%= @job.h264_profile %> </li>
+        <li>H264 Quality: <%= @job.h264_quality %> </li>
+        <li>Audio Codec: <%= @job.audio_codec %> </li>
+        <li>Audio Bitrate: <%= @job.audio_bitrate %> </li>
+        <li>Audio Volume: <%= @job.audio_volume %> </li>
+        <li>Mux Rate: <%= @job.mux_rate %> </li>
+        <li>Created At: <%= @job.created_at %> </li>
+        <li>Updated At: <%= @job.updated_at %> </li>
+        <li>Finished At: <%= @job.finished_at %> </li>
+      </ul>
     </div>
   </div>
-
-
