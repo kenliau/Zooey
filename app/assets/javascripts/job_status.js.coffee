@@ -1,6 +1,8 @@
 if onJobShow() then $ ->
 
-  alert("test")
+  #App.Models.Job = Backbone.Model.extend({
+    #id
+  #alert("test")
   # Backbone
   #ProgressBar = Backbone.Model.extend()
 
