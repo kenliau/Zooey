@@ -4,19 +4,6 @@
 
 
 $ ->
-  _.templateSettings =
-    interpolate: /\{\{\=(.+?)\}\}/g
-    evaluate: /\{\{(.+?)\}\}/g
-    escape : /\{\{-(.+?)\}\}/g
-
-  window.App =
-    Models: {},
-    Collections: {},
-    Views: {}
-
-
-  window.template = (id) ->
-    return _.template $('#' + id).html()
 
   App.Models.Job = Backbone.Model.extend({
     initialize: ->
