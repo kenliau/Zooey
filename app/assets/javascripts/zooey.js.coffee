@@ -10,4 +10,10 @@ _.templateSettings =
   escape : /\{\{-(.+?)\}\}/g
 
 window.template = (id) ->
-  return _.template $('#' + id).html()
+  _.template $('#' + id).html()
+
+window.onJobShow = () ->
+  /\/jobs\/[0-9]+/.test(window.location.pathname)
+
+window.onJobsList = () ->
+  window.location.pathname == '/jobs/'

@@ -1,9 +1,4 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
-
-$ ->
+if onJobsList() then $ ->
 
   App.Models.Job = Backbone.Model.extend({
     initialize: ->
@@ -20,7 +15,7 @@ $ ->
     tagName: 'table'
     className: 'twelve columns'
     initialize: ->
-      this.$el.append( '<tr> <th>Job ID</th> <th>Status</th> <th>Width</th> <th>Height</th> <th></th> <th></th> </tr>')
+      this.$el.append('<tr> <th>Job ID</th> <th>Status</th> <th>Width</th> <th>Height</th> <th></th> <th></th> </tr>')
       this.collection.on('add', @addOne, this)
       return
     render: ->
