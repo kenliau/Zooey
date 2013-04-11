@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328110655) do
+ActiveRecord::Schema.define(:version => 20130411034923) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -35,13 +35,14 @@ ActiveRecord::Schema.define(:version => 20130328110655) do
     t.datetime "finished_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "ouptut_url"
+    t.integer  "output_size"
   end
 
   add_index "jobs", ["video_id"], :name => "index_jobs_on_video_id"
 
   create_table "progressions", :force => true do |t|
     t.integer  "job_id"
-    t.integer  "chunks"
     t.datetime "pull_start_time"
     t.datetime "pull_finish_time"
     t.datetime "chunker_start_time"
@@ -50,10 +51,10 @@ ActiveRecord::Schema.define(:version => 20130328110655) do
     t.datetime "tcoder_finish_time"
     t.datetime "merger_start_time"
     t.datetime "merger_finish_time"
-    t.integer  "chunks_tcoded_so_far"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.integer  "chunk_tcode_time",     :default => 0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "chunk_tcode_time",    :default => 0
+    t.text     "errors"
   end
 
   add_index "progressions", ["job_id"], :name => "index_progressions_on_job_id"
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130328110655) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.integer  "duration",       :default => 0
+    t.string   "video_name"
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
