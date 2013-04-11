@@ -33,16 +33,7 @@ $ ->
     tagName: 'table'
     className: 'twelve columns'
     initialize: ->
-      this.$el.append(
-        '<tr>
-          <th>Job ID</th>
-          <th>Status</th>
-          <th>Width</th>
-          <th>Height</th>
-          <th></th>
-          <th></th>
-        </tr>'
-      )
+      this.$el.append( '<tr> <th>Job ID</th> <th>Status</th> <th>Width</th> <th>Height</th> <th></th> <th></th> </tr>')
       this.collection.on('add', @addOne, this)
       return
     render: ->
@@ -94,7 +85,7 @@ $ ->
       progressBarTemplate = @template(this.model.toJSON())
       @$el.html(progressBarTemplate)
       return this
-   
+
   App.Collections.Progressions = Backbone.Collection.extend
     model: App.Models.ProgressBar
     url: '/jobs/progressions.json'
@@ -110,35 +101,3 @@ $ ->
   progressBarsCollection.fetch()
   progressBarsList = new App.Views.ProgressBarsList({ collection: progressBarsCollection })
   $('.progress-bar').html(progressBarsList.render().el)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  jobsC = new App.Collections.Jobs([
-    {
-      filename: 'Go to the store'
-      width: 1
-      height: 2
-    },
-    {
-      filename: 'Go to the mall'
-      width: 3
-      height: 4
-    },
-    {
-      filename: 'Get to work'
-      width: 5
-      height: 6
-    }
-  ])
-
