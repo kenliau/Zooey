@@ -13,7 +13,7 @@ class JobsController < ApplicationController
   end
 
   # Requires current user to own job or be admin
-  def owns_job_or_admin 
+  def owns_job_or_admin
     unless @job.video.user == current_user or current_user.is_admin
       return redirect_to '/jobs'
     end
@@ -34,7 +34,7 @@ class JobsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @job }
+      format.json { render json: @job.to_json(:include => [:progression, :video]) }
     end
   end
 
