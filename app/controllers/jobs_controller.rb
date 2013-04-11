@@ -1,12 +1,12 @@
 class JobsController < ApplicationController
   # Requires current user to own job or be admin
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:update_progress]
   before_filter :load_job, :only => [:show, :destroy]
   before_filter :owns_job_or_admin, :only => [:show, :destroy]
 
   # Sets instance variable for job and checks if it's blank
   def load_job
-    @job = Job.includes(:progression).find(params[:id])
+    @job = Job.includes(:progression, :video).find(params[:id])
     if @job.blank?
       return redirect_to '/jobs'
     end
@@ -46,6 +46,19 @@ class JobsController < ApplicationController
       format.html { redirect_to jobs_url }
       format.json { head :no_content }
     end
+  end
+
+  # PUT /jobs/:job_id/progression
+  def update_progress
+    @job = Job.retrieve_progress(params[:job_id])
+    @job.update_progress(params)
+    #stage = params[:stage]
+    #if (params[:stage] == 'pull')
+      #case params[:status]
+      #when 'start'
+      #when 'update'
+      #when 'finish'
+    #end
   end
 
 end
