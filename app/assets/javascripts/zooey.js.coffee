@@ -1,3 +1,4 @@
+# Backbone and Underscore initialization
 window.App =
   Models: {}
   Collections: {}
@@ -13,11 +14,11 @@ window.template = (id) ->
   _.template $('#' + id).html()
 
 
-# Detecting URL path
+# Detecting path location
 path = window.location.pathname
 
-window.onJobShow = () ->
+window.onJobShow = ->
    /\/jobs\/[0-9]+/.test(path) and parseInt(path.split('/')[2], 10)
 
-window.onJobsList = () ->
+window.onJobsList = ->
   path == '/jobs/'
