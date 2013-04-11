@@ -47,9 +47,9 @@ class VideosController < ApplicationController
     video_name = params[:video_name]
     filename = params[:video_file].to_s
     duration = Time.now #temp value
-    gop_length = rand(1..20) #temp value
-    frame_distance = rand(1..30) #temp value
-    size = rand(1..20) #temp value
+    gop_length = rand(1..20).to_i #temp value
+    frame_distance = rand(1..30).to_i #temp value
+    size = rand(1..20).to_i #temp value
     
     @video = @user.videos.new({
       video_name: video_name,
