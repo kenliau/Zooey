@@ -84,8 +84,9 @@
     </div>
     <div class="two columns">
     </div>
-    <div class="three columns">
-      <%= f.submit "Update", :class => " radius button", :style => "float: right" %>
+    <div class="three columns" style="text-align: right;">
+      <%= link_to "Back", :back, :class => "radius button alert" %>
+      <%= f.submit "Update", :class => " radius button" %>
     </div>
     <div class="four columns">
     </div>
@@ -118,4 +119,3 @@
 
 
 
-<%= link_to "Back", :back %>

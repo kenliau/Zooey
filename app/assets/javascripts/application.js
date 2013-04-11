@@ -15,5 +15,5 @@
 //= require foundation
 //= require underscore
 //= require backbone
-//= require zipreel
+//= require zooey
 //= require_tree .

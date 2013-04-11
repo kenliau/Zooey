@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411034923) do
+ActiveRecord::Schema.define(:version => 20130411075431) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130411034923) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.integer  "chunk_tcode_time",    :default => 0
-    t.text     "errors"
+    t.text     "progress_errors"
   end
 
   add_index "progressions", ["job_id"], :name => "index_progressions_on_job_id"

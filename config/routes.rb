@@ -3,13 +3,16 @@ Zipreel::Application.routes.draw do
 
   resources 'documentations', path: 'docs'
   resources 'videos', path: 'videos'
+
+  get 'jobs/progressions/' => 'progressions#index'
+
   resources 'jobs', path: 'jobs'
 
   get 'admin/users' => 'admin#users'
   get 'admin/videos' => 'admin#videos'
   get 'admin/jobs' => 'admin#jobs'
   resources :admin
-  
+
   get 'guide/:permalink' => 'documentations#show_by_permalink'
   get 'guide' => redirect('/docs/1')
 
@@ -21,4 +24,5 @@ Zipreel::Application.routes.draw do
 
   get 'jobs/progression/:job_id' => 'progressions#show_by_job_id'
   put 'jobs/progression/:job_id' => 'progressions#update_by_job_id'
+  put 'jobs/:job_id/progression' => 'jobs#update_progress'
 end

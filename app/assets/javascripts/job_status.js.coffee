@@ -1,40 +1,33 @@
-$ ->
-  meter = $('.meter')
-  job = $('#job-data')
-  job_id = parseInt(job.data('job-id'), 10)
+if onJobShow() then $ ->
 
-  meter.on 'update', (e, width) ->
-    width = 100 if width >= 100
-    percentage = width + '%'
-    $(this).animate width: percentage
+  vent = _.extend({}, Backbone.Events)
 
-  poll = () ->
-    $.ajax
-      url: '/jobs/progression/' + job_id,
-      type: 'GET',
-      success: (response) ->
-        width = if response.processed == 0 then 0 else (response.processed / response.size)*100
-        meter.trigger 'update', width
+  class Job extends Backbone.Model
+    urlRoot: '/jobs'
 
-  setInterval(poll, 2000)
+  class JobView extends Backbone.View
+    initialize: ->
+      @listenTo(@model, 'change', @show)
+      return
+    template: template('job-template')
+    show: =>
+      job = @model.toJSON()
+      if (job.finished_at?) then vent.trigger('job:finish')
+      @render
+    render: =>
+      console.log(@model.toJSON())
+      return this
 
 
-  # Backbone
-  ProgressBar = Backbone.model.extend()
+  job = new Job id: onJobShow()
+  window.ja = job
+  jobView = new JobView model: job
 
-  ProgressBarCollection = Backbone.Collection.extend(
-    model: ProgressBar
-  )
 
-  #ProgressBarView = Backbone.View.extend(
-    #el: $('.progress-bar')
-    #template: _.template( $('#progress-bar-template').html() )
-    #initialize: ->
-      #this.listenTo(@collection, 'change', @render)
-      #this.listenTo(@collection, 'add', @render)
-      #@render()
-    #render: ->
-      #$(@el).html(@template(
-        #progress_bars: ProgressBarCollection
-      #)
+  refresher = setInterval ->
+    job.fetch()
+    console.log("called")
+  , 2500
+
+  vent.on('job:finish', -> clearInterval(refresher))
 
