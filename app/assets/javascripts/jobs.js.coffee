@@ -1,8 +1,8 @@
 if onJobsList() then $ ->
-
+  console.log('executing jobsList backbone')
   App.Models.Job = Backbone.Model.extend({
     initialize: ->
-      console.log('creating a model')
+      console.log('creating a job model')
       return
   })
 
@@ -12,10 +12,8 @@ if onJobsList() then $ ->
 
 
   App.Views.JobsList = Backbone.View.extend
-    tagName: 'table'
-    className: 'twelve columns'
+    tagName: 'tbody'
     initialize: ->
-      this.$el.append('<tr> <th>Job ID</th> <th>Status</th> <th>Width</th> <th>Height</th> <th></th> <th></th> </tr>')
       this.collection.on('add', @addOne, this)
       return
     render: ->
@@ -77,7 +75,7 @@ if onJobsList() then $ ->
   jobsCollection = new App.Collections.Jobs()
   jobsCollection.fetch()
   jobsList = new App.Views.JobsList({ collection: jobsCollection })
-  $('.jobs-div').html(jobsList.render().el)
+  $('#jobs-table').append(jobsList.render().el)
 
   progressBarsCollection = new App.Collections.Progressions()
   progressBarsCollection.fetch()
