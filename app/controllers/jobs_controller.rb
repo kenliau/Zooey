@@ -25,7 +25,7 @@ class JobsController < ApplicationController
     @jobs = Job.by_user(current_user)
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @jobs }
+      format.json { render json: @jobs.to_json(:include => [:progression]) }
     end
   end
 
