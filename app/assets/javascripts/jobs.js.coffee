@@ -66,18 +66,7 @@ if onJobsList() then $ ->
       @$el.html(progressBarTemplate)
       return this
 
-  App.Collections.Progressions = Backbone.Collection.extend
-    model: App.Models.ProgressBar
-    url: '/jobs/progressions.json'
-
-
-
   jobsCollection = new App.Collections.Jobs()
   jobsCollection.fetch()
   jobsList = new App.Views.JobsList({ collection: jobsCollection })
   $('#jobs-table').append(jobsList.render().el)
-
-  progressBarsCollection = new App.Collections.Progressions()
-  progressBarsCollection.fetch()
-  progressBarsList = new App.Views.ProgressBarsList({ collection: progressBarsCollection })
-  $('.progress-bar').html(progressBarsList.render().el)

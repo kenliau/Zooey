@@ -12,13 +12,18 @@
 </div>
 
 <script id="progressBarTemplate" type="text/template">
-  <span style="width: {{= chunks_tcoded_so_far }}%;" class="meter"></span> 
+  <span style="width: {{= progression.id }}%;" class="meter"></span> 
   <span id="job-data" data-job-id="{{= id }}"></span>
 </script>
 
 <script id="jobDetailsTemplate" type="text/template">
   <td>{{= id }}</td>
-  <td class="will be progress bar"></td>
+  <td class="progressBar" >
+    <div class="nice round progress twelve" >
+      <span style="width: {{= progression.id }}%;" class="meter"></span> 
+      <span id="job-data" data-job-id="{{= id }}"></span>
+    </div>
+  </td>
   <td>{{= width }}</td>
   <td>{{= height }}</td>
   <td>*</td>
