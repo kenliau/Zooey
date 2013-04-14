@@ -50,8 +50,10 @@ class JobsController < ApplicationController
 
   # PUT /jobs/:job_id/progression
   def update_progress
-    @job = Job.retrieve_progress(params[:job_id])
-    @job.update_progress(params)
+    @job = Job.retrieve_progress(params)
+    Rails.logger.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    Rails.logger.debug(params)
+    Job.update_progress(params)
     #stage = params[:stage]
     #if (params[:stage] == 'pull')
       #case params[:status]
@@ -59,6 +61,10 @@ class JobsController < ApplicationController
       #when 'update'
       #when 'finish'
     #end
+    respond_to do |format|
+      format.html {render :nothing => true}
+      format.json {render :nothing => true}
+    end
   end
 
 end

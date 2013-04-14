@@ -23,29 +23,35 @@ class Job < ActiveRecord::Base
                     body: self.to_json(:include => [:video]))
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
-                    body: self.to_json(:include => [:video]))
+                    #body: self.to_json(:include => [:video]))
+                    body: {id: self.id, video: {size: 300}})
     end
   end
 
   def percent_complete
     #percent = (self.progression.chunks_tcoded_so_far.to_i / self.video.size) * 100
     #percent > 100 ? 100 : percent
-    100
+    rand(1..100).to_i
   end
 
-  def update_progress(params)
+  def self.update_progress(params)
     # Needs to format params
-    $redis.set(Job.redis_key(self.id),
-               self.to_json(:include => [:progression, :video]))
-    if (params[:status] === 'start' || params === 'finish')
+    if (params[:status] === 'start' || params[:status] === 'finish')
       self.save
     end
   end
 
-  def self.retrieve_progress(job_id)
-    job = $redis.get(self.redis_key(job_id))
-    job ||= Job.includes(:progression, :video).find(job_id)
+  def self.retrieve_progress(params)
+    job = $redis.get(self.redis_key(params[:job_id]))
+    if job.nil?
+      
+      $redis.set(self.redis_key(params[:job_id]),
+               self.find(params[:job_id]).to_json(:include => [:progression, :video]))
+
+    end
+    job = $redis.get(self.redis_key(params[:job_id]))
   end
+
 
   def self.redis_key(job_id)
     "job_progress:#{job_id}"
