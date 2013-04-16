@@ -51,7 +51,7 @@ class JobsController < ApplicationController
   # PUT /jobs/:job_id/progression
   def update_progress
     @job = Job.retrieve_progress(params)
-    Rails.logger.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    Rails.logger.debug("$$$$$$$$$$$$$$$$ PARAMS FROM CLUSTER$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     Rails.logger.debug(params)
     Job.update_progress(params)
     #stage = params[:stage]

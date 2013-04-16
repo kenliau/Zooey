@@ -28,19 +28,26 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def status_hash
+  STATUS_HASH =
     {
-      status: '',
-      stage: '',
-      metrics: {
+      pull: {
         bytes: 0,
-        speed: 0,
-        chunk_count: 0,
+        speed: 0
+      },
+      chunk: {
+        chunk_count: 0
+      },
+      transcode: {
+        bytes: 0,
+        speed: 0
+      },
+      merger: {
         output_size: 0,
         output_url: ''
+      },
+      cleanup: {
       }
     }
-  end
 
   def percent_complete
     #percent = (self.progression.chunks_tcoded_so_far.to_i / self.video.size) * 100
@@ -50,47 +57,83 @@ class Job < ActiveRecord::Base
 
   def self.update_progress(params)
     # Needs to format params
+    status = $redis.get(self.redis_key(params[:job_id]))
+    status = JSON.parse(status)
     stage = params[:stage]
     if stage === 'pull'
       case params[:status]
       when 'start'
         puts 'pull start'
+        # set pull_start_time in DB
+        status['pull']['bytes'] = params[:metrics][:bytes]
+        status['pull']['speed'] = params[:metrics][:speed]
       when 'update'
         puts 'pull update'
+        status['pull']['bytes'] = params[:metrics][:bytes]
+        status['pull']['speed'] = params[:metrics][:speed]
       when 'finish'
         puts 'pull finish'
+        # set pull_finish_time in DB
+        status['pull']['bytes'] = params[:metrics][:bytes]
+        status['pull']['speed'] = params[:metrics][:speed]
       end
     elsif stage == 'chunk'
       case params[:status]
       when 'start'
         puts 'chunk start'
+        # set chunk_start_time in DB
+        status['chunk']['chunk_count'] = params[:metrics][:chunk_count]
       when 'update'
         puts 'chunk update'
+        status['chunk']['chunk_count'] = params[:metrics][:chunk_count]
       when 'finish'
         puts 'chunk finish'
+        # set chunk_finish_time in DB
+        status['chunk']['chunk_count'] = params[:metrics][:chunk_count]
       end
     elsif stage == 'transcode'
       case params[:status]
       when 'start'
         puts 'transcode start'
+        # set transcode_start_time in DB
+        status['transcode']['bytes'] = params[:metrics][:bytes]
+        status['transcode']['speed'] = params[:metrics][:speed]
       when 'update'
         puts 'transcode update'
+        status['transcode']['bytes'] = params[:metrics][:bytes]
+        status['transcode']['speed'] = params[:metrics][:speed]
       when 'finish'
         puts 'transcode finish'
+        # set transcode_finish_time in DB
+        status['transcode']['bytes'] = params[:metrics][:bytes]
+        status['transcode']['speed'] = params[:metrics][:speed]
       end
     elsif stage == 'merger'
       case params[:status]
       when 'start'
         puts 'merger start'
+        # set merger_start_time in DB
+        status['merger']['output_size'] = params[:metrics][:output_size]
+        status['merger']['output_url'] = params[:metrics][:output_url]
       when 'update'
         puts 'merger update'
+        status['merger']['output_size'] = params[:metrics][:output_size]
+        status['merger']['output_url'] = params[:metrics][:output_url]
       when 'finish'
         puts 'merger finish'
+        # set merger_finish_time in DB
+        status['merger']['output_size'] = params[:metrics][:output_size]
+        status['merger']['output_url'] = params[:metrics][:output_url]
       end
     else
       puts 'cleanup'
 
     end
+
+    # Assign to REDIS
+    status = status.to_json.to_s
+    $redis.set(self.redis_key(params[:job_id]), status)
+
   end
 
   def self.retrieve_progress(params)
@@ -100,13 +143,12 @@ class Job < ActiveRecord::Base
       
       #$redis.set(self.redis_key(params[:job_id]),
       #         self.find(params[:job_id]).to_json(:include => [:progression, :video]))
-      $redis.set(self.redis_key(params[:job_id]),
-                 params)
+      status = STATUS_HASH.to_json.to_s
+      $redis.set(self.redis_key(params[:job_id]), status)
 
     end
     job = $redis.get(self.redis_key(params[:job_id]))
   end
-
 
   def self.redis_key(job_id)
     "job_progress:#{job_id}"
