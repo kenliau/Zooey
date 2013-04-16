@@ -24,8 +24,22 @@ class Job < ActiveRecord::Base
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
                     #body: self.to_json(:include => [:video]))
-                    body: {id: self.id, video: {size: 300}})
+                    body: {id: self.id, video: {size: 100}})
     end
+  end
+
+  def status_hash
+    {
+      status: '',
+      stage: '',
+      metrics: {
+        bytes: 0,
+        speed: 0,
+        chunk_count: 0,
+        output_size: 0,
+        output_url: ''
+      }
+    }
   end
 
   def percent_complete
@@ -36,17 +50,58 @@ class Job < ActiveRecord::Base
 
   def self.update_progress(params)
     # Needs to format params
-    if (params[:status] === 'start' || params[:status] === 'finish')
-      self.save
+    stage = params[:stage]
+    if stage === 'pull'
+      case params[:status]
+      when 'start'
+        puts 'pull start'
+      when 'update'
+        puts 'pull update'
+      when 'finish'
+        puts 'pull finish'
+      end
+    elsif stage == 'chunk'
+      case params[:status]
+      when 'start'
+        puts 'chunk start'
+      when 'update'
+        puts 'chunk update'
+      when 'finish'
+        puts 'chunk finish'
+      end
+    elsif stage == 'transcode'
+      case params[:status]
+      when 'start'
+        puts 'transcode start'
+      when 'update'
+        puts 'transcode update'
+      when 'finish'
+        puts 'transcode finish'
+      end
+    elsif stage == 'merger'
+      case params[:status]
+      when 'start'
+        puts 'merger start'
+      when 'update'
+        puts 'merger update'
+      when 'finish'
+        puts 'merger finish'
+      end
+    else
+      puts 'cleanup'
+
     end
   end
 
   def self.retrieve_progress(params)
     job = $redis.get(self.redis_key(params[:job_id]))
     if job.nil?
+      # NOT FOUND, create a new entry in Redis
       
+      #$redis.set(self.redis_key(params[:job_id]),
+      #         self.find(params[:job_id]).to_json(:include => [:progression, :video]))
       $redis.set(self.redis_key(params[:job_id]),
-               self.find(params[:job_id]).to_json(:include => [:progression, :video]))
+                 params)
 
     end
     job = $redis.get(self.redis_key(params[:job_id]))
