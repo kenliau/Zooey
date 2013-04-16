@@ -49,7 +49,7 @@ class VideosController < ApplicationController
     duration = Time.now #temp value
     gop_length = rand(1..20).to_i #temp value
     frame_distance = rand(1..30).to_i #temp value
-    size = rand(1..20).to_i #temp value
+    size = 100 #temp value
     
     @video = @user.videos.new({
       video_name: video_name,

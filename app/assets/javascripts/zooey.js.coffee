@@ -7,7 +7,7 @@ window.App =
 
 _.templateSettings =
   interpolate: /\{\{\=(.+?)\}\}/g
-  evaluate: /\{\{(.+?)\}\}/g
+  evaluate: /\{\{\%(.+?)\}\}/g
   escape : /\{\{-(.+?)\}\}/g
 
 window.template = (id) ->

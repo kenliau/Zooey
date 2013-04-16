@@ -12,28 +12,37 @@
 </div>
 
 <script id="progressBarTemplate" type="text/template">
-  <span style="width: {{= progression.id }}%;" class="meter"></span> 
-  <span id="job-data" data-job-id="{{= id }}"></span>
+    <span id="job-data" data-job-id="{{= id }}"></span>
+    <span style="width: {{= status.transcode.bytes/video.size * 100 }}%;" class="meter"></span> 
 </script>
 
+
 <script id="jobDetailsTemplate" type="text/template">
-  <td>{{= id }}</td>
+  {{% pullPercent = status.pull.bytes/video.size * 100 }}
+  {{% transcodePercent = status.transcode.bytes/video.size * 100 }}
+  <td>{{= video.filename }}</td>
   <td class="progressBar" >
-    <div class="nice round progress twelve" >
-      <span style="width: {{= progression.id }}%;" class="meter"></span> 
-      <span id="job-data" data-job-id="{{= id }}"></span>
+    <span id="job-data" data-job-id="{{= id }}"></span>
+    <div class="radius success progress twelve" >
+      <span style="width:{{% if(pullPercent > 100) { }} {{=100}}{{% } else { }} {{=pullPercent}}{{% } }}%;" class="meter"></span> 
     </div>
+    <div class="radius progress twelve" >
+     <span style="width:{{% if(transcodePercent > 100) { }} {{=100}}{{% } else { }} {{=transcodePercent}}{{% } }}%;" class="meter"></span> 
+    </div>
+    </div>
+
   </td>
   <td>{{= width }}</td>
   <td>{{= height }}</td>
-  <td>*</td>
-  <td>*</td>
+  <td><%= link_to 'Show', 'jobs/{{=id}}' %></td>
+  <td><%= link_to 'Destroy', 'jobs/{{=id}}', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
 </script>
 
 
 
 <div class="row">
-  <table id="jobs-table" class="twelve columns">
+  <table id="jobs-table" class="twelve ">
     <thead>
       <tr>
         <td>Job ID</td>
@@ -65,7 +74,7 @@
     <% @jobs.each do |job| %>
       <tr>
       <% @video = Video.find(job.video_id) %>
-      <td><%= @video.filename %></td>
+      <td><%=  @video.filename %></td>
       <td><%= job.width %></td>
       <td><%= job.height %></td>
       <td><%= link_to 'Show', job %></td>

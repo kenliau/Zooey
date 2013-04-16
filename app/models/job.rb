@@ -131,24 +131,25 @@ class Job < ActiveRecord::Base
     end
 
     # Assign to REDIS
-    status = status.to_json.to_s
+    status = status.to_json
     $redis.set(self.redis_key(params[:job_id]), status)
 
   end
 
-  def self.retrieve_progress(params)
-    job = $redis.get(self.redis_key(params[:job_id]))
+  def self.retrieve_progress(job_id)
+    job = $redis.get(self.redis_key(job_id))
     if job.nil?
       # NOT FOUND, create a new entry in Redis
       
       #$redis.set(self.redis_key(params[:job_id]),
       #         self.find(params[:job_id]).to_json(:include => [:progression, :video]))
-      status = STATUS_HASH.to_json.to_s
-      $redis.set(self.redis_key(params[:job_id]), status)
+      status = STATUS_HASH.to_json
+      $redis.set(self.redis_key(job_id), status)
 
     end
-    job = $redis.get(self.redis_key(params[:job_id]))
+    job = $redis.get(self.redis_key(job_id))
   end
+
 
   def self.redis_key(job_id)
     "job_progress:#{job_id}"
