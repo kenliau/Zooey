@@ -14,9 +14,11 @@ if onJobsList() then $ ->
   App.Views.JobsList = Backbone.View.extend
     tagName: 'tbody'
     initialize: ->
+      this.collection.on('change', @render, this)
       this.collection.on('add', @addOne, this)
       return
     render: ->
+      this.$el.empty()
       this.collection.each(@addOne, this)
       return this
     addOne: (job) ->
@@ -70,3 +72,9 @@ if onJobsList() then $ ->
   jobsCollection.fetch()
   jobsList = new App.Views.JobsList({ collection: jobsCollection })
   $('#jobs-table').append(jobsList.render().el)
+
+  refresher = setInterval ->
+    jobsCollection.fetch()
+    console.log("fetching for jobsCollection")
+  , 2500
+
