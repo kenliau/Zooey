@@ -31,8 +31,8 @@
     </div>
 
   </td>
-  <td>{{= width }}</td>
-  <td>{{= height }}</td>
+  <td>{{= output_size }}</td>
+  <td>{{= output_url }}</td>
   <td><%= link_to 'Show', 'jobs/{{=id}}' %></td>
   <td><%= link_to 'Destroy', 'jobs/{{=id}}', method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
@@ -41,50 +41,26 @@
 
 
 <div class="row">
-  <table id="jobs-table" class="twelve ">
-    <thead>
-      <tr>
-        <td>Job ID</td>
-        <td>Status</td>
-        <td>Width</td>
-        <td>Height</td>
-        <td>*</td>
-        <td>*</td>
-      </tr>
-    </thead>
-  </table>
+  <div class="twelve column">
+    <table id="jobs-table" class="twelve ">
+      <thead>
+        <tr>
+          <td>Job ID</td>
+          <td>Status</td>
+          <td>Output Size</td>
+          <td>Output URL</td>
+          <td>*</td>
+          <td>*</td>
+        </tr>
+      </thead>
+    </table>
+    <hr />
+  </div>
 </div>
+  <%= link_to 'New Video', new_video_path %>
 
 <div class="row progress-bar">
 </div>
 
-<hr />
-
-<div class="row">
-
-  <table>
-    <tr>
-      <th>Video Filename</th>
-      <th>Width</th>
-      <th>Height</th>
-      <th></th>
-    </tr>
-
-    <% @jobs.each do |job| %>
-      <tr>
-      <% @video = Video.find(job.video_id) %>
-      <td><%=  @video.filename %></td>
-      <td><%= job.width %></td>
-      <td><%= job.height %></td>
-      <td><%= link_to 'Show', job %></td>
-      <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-
-  <% end %>
-  </table>
-
-  <br />
-
-  <%= link_to 'New Video', new_video_path %>
 
 </div>

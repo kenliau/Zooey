@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411075431) do
+ActiveRecord::Schema.define(:version => 20130417045747) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20130411075431) do
     t.datetime "finished_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "ouptut_url"
+    t.string   "output_url"
     t.integer  "output_size"
   end
 

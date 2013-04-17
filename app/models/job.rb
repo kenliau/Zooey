@@ -123,8 +123,9 @@ class Job < ActiveRecord::Base
       when 'finish'
         puts 'merger finish'
         @job.progression.merger_finish_time = Time.now
-        status['merger']['output_size'] = params[:metrics][:output_size]
-        status['merger']['output_url'] = params[:metrics][:output_url]
+         
+        @job.output_size = status['merger']['output_size'] = params[:metrics][:output_size]
+        @job.output_url = status['merger']['output_url'] = params[:metrics][:output_url]
       end
     else
       puts 'cleanup'
@@ -136,7 +137,7 @@ class Job < ActiveRecord::Base
     # Assign to REDIS
     status = status.to_json
     $redis.set(self.redis_key(params[:job_id]), status)
-    if (params[:status] === 'start' || params === 'finish')
+    if (params[:status] === 'start' || params[:status] === 'finish')
       @job.progression.save
       @job.save
     end
