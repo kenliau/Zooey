@@ -4,7 +4,13 @@ class Video < ActiveRecord::Base
   has_many :jobs
   attr_accessible :duration, :video_name, :filename, :frame_distance, :gop_length, :location, :size
 
-  validates :filename, :video_name,
+  validates :filename,
+    :presence => {
+      :unless => :location?,
+      message: "is a required field"
+    }
+
+  validates :video_name,
     :presence => {
       message: "is a required field"
     }

@@ -23,5 +23,4 @@ window.onJobShow = ->
 
 window.onJobsList = ->
   console.log('window.onJobsList is called')
-  path == '/jobs/'
-  return path
+  path == '/jobs'

@@ -50,7 +50,7 @@
             <!-- output mux rate -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:mux_rate, "Output Mux Rate") %></div>
-              <div class="three columns"><%= number_field_tag(:mux_rate, 500, :min => 500, :max => 1000) %> </div>
+              <div class="three columns"><%= number_field_tag(:mux_rate, 500, :min => 500, :max => 25000) %> </div>
               <div class="six columns"></div>
             </div>
 
@@ -129,10 +129,18 @@
 
             <!-- Video file -->
              <div class="row collapse">
-              <div class="three columns"><%= label_tag(:video_file, "Video") %></div>
+              <div class="three columns"><%= label_tag(:video_file, "Local Video") %></div>
               <div class="three columns"><%= file_field_tag 'video_file' %> </div>
               <div class="six columns"> </div>
             </div>
+            
+            <!-- Video file URL -->
+             <div class="row collapse">
+              <div class="three columns"><%= label_tag(:video_location, "Video URL") %></div>
+              <div class="six columns"><%= text_field_tag(:video_location) %> </div>
+              <div class="three columns"> </div>
+            </div>
+
 
             <div class="row collapse">
               <div class="three columns"> <button type="submit" class="radius button">Submit</button> </div>
