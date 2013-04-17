@@ -18,7 +18,10 @@ window.template = (id) ->
 path = window.location.pathname
 
 window.onJobShow = ->
-   /\/jobs\/[0-9]+/.test(path) and parseInt(path.split('/')[2], 10)
+  console.log('window.onJobShow is called')
+  /\/jobs\/[0-9]+/.test(path) and parseInt(path.split('/')[2], 10)
 
 window.onJobsList = ->
+  console.log('window.onJobsList is called')
   path == '/jobs/'
+  return path

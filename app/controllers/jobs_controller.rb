@@ -25,7 +25,7 @@ class JobsController < ApplicationController
     @jobs = Job.by_user(current_user)
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @jobs }
+      format.json { render json: @jobs.to_json(:include => [:progression]) }
     end
   end
 
@@ -50,8 +50,10 @@ class JobsController < ApplicationController
 
   # PUT /jobs/:job_id/progression
   def update_progress
-    @job = Job.retrieve_progress(params[:job_id])
-    @job.update_progress(params)
+    @job = Job.retrieve_progress(params)
+    Rails.logger.debug("$$$$$$$$$$$$$$$$ PARAMS FROM CLUSTER $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    Rails.logger.debug(params)
+    Job.update_progress(params)
     #stage = params[:stage]
     #if (params[:stage] == 'pull')
       #case params[:status]
@@ -59,6 +61,10 @@ class JobsController < ApplicationController
       #when 'update'
       #when 'finish'
     #end
+    respond_to do |format|
+      format.html {render :nothing => true}
+      format.json {render :nothing => true}
+    end
   end
 
 end
