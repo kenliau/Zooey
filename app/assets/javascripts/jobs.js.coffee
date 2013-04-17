@@ -11,19 +11,6 @@ if onJobsList() then $ ->
     url: '/jobs.json'
 
 
-  App.Views.JobsList = Backbone.View.extend
-    tagName: 'tbody'
-    initialize: ->
-      this.collection.on('add', @addOne, this)
-      return
-    render: ->
-      this.collection.each(@addOne, this)
-      return this
-    addOne: (job) ->
-      jobView = new App.Views.Job({ model: job })
-      this.$el.append(jobView.render().el)
-      return
-
   App.Views.Job = Backbone.View.extend
     tagName: 'tr'
     template: template('jobDetailsTemplate')
@@ -39,6 +26,22 @@ if onJobsList() then $ ->
     initialize: ->
       console.log('creating a progressBar')
       return
+
+  App.Views.JobsList = Backbone.View.extend
+    tagName: 'tbody'
+    initialize: ->
+      this.collection.on('change', @render, this)
+      this.collection.on('add', @addOne, this)
+      return
+    render: ->
+      this.$el.empty()
+      this.collection.each(@addOne, this)
+      return this
+    addOne: (job) ->
+      jobView = new App.Views.Job({ model: job })
+      this.$el.append(jobView.render().el)
+      return
+
 
 
   App.Views.ProgressBarsList = Backbone.View.extend
@@ -67,6 +70,13 @@ if onJobsList() then $ ->
       return this
 
   jobsCollection = new App.Collections.Jobs()
-  jobsCollection.fetch()
-  jobsList = new App.Views.JobsList({ collection: jobsCollection })
-  $('#jobs-table').append(jobsList.render().el)
+  jobsCollection.fetch().then(
+    jobsList = new App.Views.JobsList({ collection: jobsCollection })
+    $('#jobs-table').append(jobsList.render().el)
+  )
+
+  refresher = setInterval ->
+    jobsCollection.fetch()
+    console.log("fetching for jobsCollection")
+  , 2500
+

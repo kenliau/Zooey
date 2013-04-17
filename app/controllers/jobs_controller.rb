@@ -23,15 +23,23 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     @jobs = Job.by_user(current_user)
+    @jobs.each { |job|
+      @status = Job.retrieve_progress(job.id)
+      job['status'] = JSON.parse(@status)
+    }
+
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @jobs.to_json(:include => [:progression]) }
+      format.json { render json: @jobs.to_json(:include => [:video, :progression]) }
     end
   end
 
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    @status = Job.retrieve_progress(@job.id)
+    @job['status'] = JSON.parse(@status)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @job.to_json(:include => [:progression, :video]) }
@@ -50,7 +58,7 @@ class JobsController < ApplicationController
 
   # PUT /jobs/:job_id/progression
   def update_progress
-    @job = Job.retrieve_progress(params)
+    @job = Job.retrieve_progress(params[:job_id])
     Rails.logger.debug("$$$$$$$$$$$$$$$$ PARAMS FROM CLUSTER $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     Rails.logger.debug(params)
     Job.update_progress(params)
