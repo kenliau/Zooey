@@ -38,6 +38,8 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    @status = Job.retrieve_progress(@job.id)
+    @job['status'] = JSON.parse(@status)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @job.to_json(:include => [:progression, :video]) }
