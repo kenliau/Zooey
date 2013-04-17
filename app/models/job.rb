@@ -56,24 +56,25 @@ class Job < ActiveRecord::Base
 
   def self.update_progress(params)
     # Needs to format params
-    status = $redis.get(self.redis_key(params[:job_id]))
+    jobID = params[:job_id]
+    @job = Job.find(jobID)
+    status = $redis.get(self.redis_key(jobID))
     status = JSON.parse(status)
     stage = params[:stage]
     if stage === 'pull'
       case params[:status]
       when 'start'
         puts 'pull start'
-        # set pull_start_time in DB
+        @job.progression.pull_start_time = Time.now
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
-        self.progression.pull_start_time = Time.now
       when 'update'
         puts 'pull update'
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
       when 'finish'
         puts 'pull finish'
-        # set pull_finish_time in DB
+        @job.progression.pull_finish_time = Time.now
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
       end
@@ -81,21 +82,21 @@ class Job < ActiveRecord::Base
       case params[:status]
       when 'start'
         puts 'chunk start'
-        # set chunk_start_time in DB
+        @job.progression.chunker_start_time = Time.now
         status['chunk']['chunk_count'] = params[:metrics][:chunk_count]
       when 'update'
         puts 'chunk update'
         status['chunk']['chunk_count'] = params[:metrics][:chunk_count]
       when 'finish'
         puts 'chunk finish'
-        # set chunk_finish_time in DB
+        @job.progression.chunker_finish_time = Time.now
         status['chunk']['chunk_count'] = params[:metrics][:chunk_count]
       end
     elsif stage == 'transcode'
       case params[:status]
       when 'start'
         puts 'transcode start'
-        # set transcode_start_time in DB
+        @job.progression.tcoder_start_time = Time.now
         status['transcode']['bytes'] = params[:metrics][:bytes]
         status['transcode']['speed'] = params[:metrics][:speed]
       when 'update'
@@ -104,7 +105,7 @@ class Job < ActiveRecord::Base
         status['transcode']['speed'] = params[:metrics][:speed]
       when 'finish'
         puts 'transcode finish'
-        # set transcode_finish_time in DB
+        @job.progression.tcoder_finish_time = Time.now
         status['transcode']['bytes'] = params[:metrics][:bytes]
         status['transcode']['speed'] = params[:metrics][:speed]
       end
@@ -112,7 +113,7 @@ class Job < ActiveRecord::Base
       case params[:status]
       when 'start'
         puts 'merger start'
-        # set merger_start_time in DB
+        @job.progression.merger_start_time = Time.now
         status['merger']['output_size'] = params[:metrics][:output_size]
         status['merger']['output_url'] = params[:metrics][:output_url]
       when 'update'
@@ -121,12 +122,14 @@ class Job < ActiveRecord::Base
         status['merger']['output_url'] = params[:metrics][:output_url]
       when 'finish'
         puts 'merger finish'
-        # set merger_finish_time in DB
+        @job.progression.merger_finish_time = Time.now
         status['merger']['output_size'] = params[:metrics][:output_size]
         status['merger']['output_url'] = params[:metrics][:output_url]
       end
     else
       puts 'cleanup'
+      @job.finished_at = Time.now
+      @job.save
 
     end
 
@@ -134,8 +137,9 @@ class Job < ActiveRecord::Base
     status = status.to_json.to_s
     $redis.set(self.redis_key(params[:job_id]), status)
     if (params[:status] === 'start' || params === 'finish')
-      self.progression.save
-      self.save
+      @job.progression.save
+      @job.save
+    end
   end
 
   def self.retrieve_progress(params)
