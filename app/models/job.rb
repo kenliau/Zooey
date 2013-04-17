@@ -20,11 +20,10 @@ class Job < ActiveRecord::Base
   def transcode
     if Rails.env.production?
       HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
-                    body: self.to_json(:include => [:video]))
+                    body: self.as_json(:include => [:video]))
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
-                    #body: self.to_json(:include => [:video]))
-                    body: {id: self.id, video: {size: 100}})
+                    body: self.as_json(:include => [:video]))
     end
   end
 
@@ -140,7 +139,7 @@ class Job < ActiveRecord::Base
     job = $redis.get(self.redis_key(params[:job_id]))
     if job.nil?
       # NOT FOUND, create a new entry in Redis
-      
+
       #$redis.set(self.redis_key(params[:job_id]),
       #         self.find(params[:job_id]).to_json(:include => [:progression, :video]))
       status = STATUS_HASH.to_json.to_s
