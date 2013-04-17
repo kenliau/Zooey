@@ -66,6 +66,7 @@ class Job < ActiveRecord::Base
         # set pull_start_time in DB
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
+        self.progression.pull_start_time = Time.now
       when 'update'
         puts 'pull update'
         status['pull']['bytes'] = params[:metrics][:bytes]
@@ -132,7 +133,9 @@ class Job < ActiveRecord::Base
     # Assign to REDIS
     status = status.to_json.to_s
     $redis.set(self.redis_key(params[:job_id]), status)
-
+    if (params[:status] === 'start' || params === 'finish')
+      self.progression.save
+      self.save
   end
 
   def self.retrieve_progress(params)
