@@ -1,197 +1,229 @@
-  <!-- header and nav -->
+<!-- header and nav -->
 
-  <div class="row">
-    <div class="seven columns">
-      <h1>Job Description</h1>
+<div class="row">
+  <div class="seven columns">
+    <h1>Job Description</h1>
+  </div>
+</div>
+
+<!-- end header and nav -->
+
+
+<div class="row">
+  <noscript>
+    <div class="alert-box">
+      Please enable Javascript for this application to function properly.
     </div>
-  </div>
-
-  <!-- end header and nav -->
-
-
-  <div class="row">
-    <noscript>
-      <div class="alert-box">
-        Please enable Javascript for this application to function properly.
-      </div>
-    </noscript>
-  </div>
+  </noscript>
+</div>
 
 <!-- Header and Nav -->
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
 
-
-  <div class="row">
-    <div class="nice round progress twelve">
-      <span id="job-data" data-job-id="<%= @job.id %>"></span>
-      <span style="width: <%= @job.percent_complete %>%;" class="meter"></span>
+<div class="content">
+  <% unless @job.finished_at %>
+    <div class="progress-bars">
+      <div class="row">
+        <h4>Pull Progress <small>Speed: 42mbps</small></h4>
+        <div class="nice round progress twelve">
+          <span style="width: <%= @job.percent_complete %>%;" class="meter"></span>
+        </div>
+      </div>
+      <div class="row">
+        <h4>Transcode Progress <small>Speed: 22mbps</small></h4>
+        <div class="nice round success progress twelve">
+          <span style="width: <%= @job.percent_complete %>%;" class="meter"></span>
+        </div>
+      </div>
     </div>
+  <% else %>
+    <h3>Job Complete</h3>
+    <div><a href="<%= @job.output_url %>">Link to transcoded video</a></div>
+  <% end %>
+
+  <div class ="row">
+    <h4 class="subheader">Progress Milestones</h4>
+    <table id="progression-table" class="twelve ">
+      <thead>
+        <tr>
+          <th>Pull Start Time</th>
+          <th>Pull Finish Time</th>
+          <th>Chunk Start Time</th>
+          <th>Chunk Finish Time</th>
+          <th>Transcode Start Time</th>
+          <th>Transcode Finish Time</th>
+          <th>Merger Start Time</th>
+          <th>Merger Finish Time</th>
+        </tr>
+       </thead>
+      <tbody>
+      <tr>
+        <td><%= @job.progression.pull_start_time %></td>
+        <td><%= @job.progression.pull_finish_time %></td>
+        <td><%= @job.progression.chunker_start_time %></td>
+        <td><%= @job.progression.chunker_finish_time %></td>
+        <td><%= @job.progression.tcoder_start_time %></td>
+        <td><%= @job.progression.tcoder_finish_time %></td>
+        <td><%= @job.progression.merger_start_time %></td>
+        <td><%= @job.progression.merger_finish_time %></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-
-  <%#<div class="row">%>
-    <%#<div class="twelve columns">%>
-      <%#<div class="three mobile-one columns">%>
-        <%#<h5 class="center" > Pull </h5>%>
-      <%#</div>%>
-      <%#<div class="three mobile-one columns">%>
-        <%#<h5 class="center" > TCoder </h5>%>
-      <%#</div>%>
-     <%#<div class="three mobile-one columns">%>
-        <%#<h5 class="center" > Chunker </h5>%>
-      <%#</div>%>
-     <%#<div class="three mobile-one columns">%>
-        <%#<h5 class="center" > Merger </h5>%>
-      <%#</div>%>
-
-    <%#</div>%>
-  <%#</div>%>
-
-
-  <%#<div class="row">%>
-    <%#<div class="twelve columns">%>
-      <%#<div id="pull" class="three mobile-one columns">%>
-      <%#</div>%>
-      <%#<div id="tcoder" class="three mobile-one columns">%>
-      <%#</div>%>
-     <%#<div id="chunker" class="three mobile-one columns">%>
-      <%#</div>%>
-     <%#<div id="merger" class="three mobile-one columns">%>
-      <%#</div>%>
-    <%#</div>%>
-  <%#</div>%>
-
-  <%#<div class="row">%>
-    <%#<div class="twelve columns">%>
-    <%#</div>%>
-  <%#</div>%>
-  <%#<br />  %>
+  <script id="job-template" type="text/template">
+    <td>{{ progression.pull_start_time }}</td>
+    <td>{{ progression.pull_finish_time }}</td>
+    <td>{{ progression.chunker_start_time }}</td>
+    <td>{{ progression.chunker_finish_time }}</td>
+    <td>{{ progression.tcoder_start_time }}</td>
+    <td>{{ progression.tcoder_finish_time }}</td>
+    <td>{{ progression.merger_start_time }}</td>
+    <td>{{ progression.merger_finish_time }}</td>
+  </script>
 
   <% @video = Video.find(@job.video_id) %>
   <div class="row">
     <div class="twelve columns">
       <ul class="block-grid two-up mobile-one-up">
         <li>
-    <div class="six columns">
-      <h4 class="subheader">Video Specifications</h4>
-    </div>
+          <div class="six columns">
+            <h4 class="subheader">Video Specifications</h4>
+          </div>
 
           <table id="video-table" class="twelve columns">
             <tbody>
-              <tr>
-                <td>Video Name :</td>
-                <td><%= @video.video_name %></td>
-              </tr>
-              <tr>
-                <td>Video Filename :</td>
-                <td><%= @video.filename %></td>
-              </tr>
-              <tr>
-                <td>Size :</td>
-                <td><%= number_to_human_size(@video.size) %></td>
-              </tr>
-              <tr>
-                <td>Duration :</td>
-                <td><%= @video.duration %></td>
-              </tr>
-              <tr>
-                <td>Location :</td>
-                <td><%= @video.location %></td>
-              </tr>
-              <tr>
-                <td>Frame Distance :</td>
-                <td><%= @video.frame_distance %></td>
-              </tr>
-              <tr>
-                <td>GOP Length :</td>
-                <td><%= @video.gop_length %></td>
-              </tr>
-              <tr>
-                <td>Created At :</td>
-                <td><%= @video.created_at %></td>
-              </tr>
+            <tr>
+              <td>Video Filename :</td>
+              <td><%= @video.filename %></td>
+            </tr>
+            <tr>
+              <td>Size :</td>
+              <td><%= number_to_human_size(@video.size) %></td>
+            </tr>
+            <tr>
+              <td>Duration :</td>
+              <td><%= @video.duration %></td>
+            </tr>
+            <tr>
+              <td>Location :</td>
+              <td><%= @video.location %></td>
+            </tr>
+            <tr>
+              <td>Frame Distance :</td>
+              <td><%= @video.frame_distance %></td>
+            </tr>
+            <tr>
+              <td>GOP Length :</td>
+              <td><%= @video.gop_length %></td>
+            </tr>
+            <tr>
+              <td>Created At :</td>
+              <td><%= @video.created_at %></td>
+            </tr>
             </tbody>
           </table>
         </li>
 
         <li>
-  <div class="six columns">
-      <h4 class="subheader">Job Specifications</h4>
-    </div>
-
+          <div class="six columns">
+            <h4 class="subheader">Job Specifications</h4>
+          </div>
           <table id="video-table" class="twelve columns">
             <tbody>
-              <tr>
-                <td>Width :</td>
-                <td><%= @job.width %></td>
-              </tr>
-              <tr>
-                <td>Height :</td>
-                <td><%= @job.height %></td>
-              </tr>
-              <tr>
-                <td>H264 Profile : </td>
-                <td><%= @job.h264_profile  %></td>
-              </tr>
-              <tr>
-                <td>H264 Quality : </td>
-                <td><%= @job.h264_quality %></td>
-              </tr>
-              <tr>
-                <td>Audio Codec :</td>
-                <td><%= @job.audio_codec %></td>
-              </tr>
-              <tr>
-                <td>Audio Bitrate :</td>
-                <td><%= @job.audio_bitrate %></td>
-              </tr>
-              <tr>
-                <td>Audio Volume :</td>
-                <td><%= @job.audio_volume %></td>
-              </tr>
-              <tr>
-                <td>Audio Mux Rate :</td>
-                <td><%= @job.mux_rate %></td>
-              </tr>
-              <tr>
-                <td>Created At :</td>
-                <td><%= @job.created_at %></td>
-              </tr>
-              <tr>
-                <td>Finished At :</td>
-                <td><%= @job.finished_at %></td>
-              </tr>
+            <tr>
+              <td>Width :</td>
+              <td><%= @job.width %></td>
+            </tr>
+            <tr>
+              <td>Height :</td>
+              <td><%= @job.height %></td>
+            </tr>
+            <tr>
+              <td>H264 Profile : </td>
+              <td><%= @job.h264_profile  %></td>
+            </tr>
+            <tr>
+              <td>H264 Quality : </td>
+              <td><%= @job.h264_quality %></td>
+            </tr>
+            <tr>
+              <td>Audio Codec :</td>
+              <td><%= @job.audio_codec %></td>
+            </tr>
+            <tr>
+              <td>Audio Bitrate :</td>
+              <td><%= @job.audio_bitrate %></td>
+            </tr>
+            <tr>
+              <td>Audio Volume :</td>
+              <td><%= @job.audio_volume %></td>
+            </tr>
+            <tr>
+              <td>Audio Mux Rate :</td>
+              <td><%= @job.mux_rate %></td>
+            </tr>
+            <tr>
+              <td>Output Size:</td>
+              <td><%= @job.output_size || '-' %></td>
+            </tr>
+            <tr>
+              <td>Created At :</td>
+              <td><%= @job.created_at %></td>
+            </tr>
+            <tr>
+              <td>Finished At :</td>
+              <td><%= @job.finished_at || '-' %></td>
+            </tr>
             </tbody>
           </table>
         </li>
       </ul>
     </div>
-    <!-- main content section -->
-    <!-- this has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
-    <%#<div class="nine columns">%>
-      <%#<% @video = Video.find(@job.video_id) %>
-      <%#<ul class="block-grid two-up mobile">%>
-        <%#<li><h3> <small> Video Name: <%= @video.video_name % </small></h3></li>%>
-        <%#<li><h3> <small> Video Filename: <%= @video.filename % </small></h3></li>%>
-        <%#<li>Video ID: <%= link_to "Video \##{@video.id}", @video % </li>%>
-        <%#<li>Video Size: <%= number_to_human_size(@video.size) % </li>%>
-        <%#<li>Output Video Width: <%= @job.width % </li>%>
-        <%#<li>Output Video Height: <%= @job.height % </li>%>
-        <%#<li>H264 Profile: <%= @job.h264_profile % </li>%>
-        <%#<li>H264 Quality: <%= @job.h264_quality % </li>%>
-        <%#<li>Audio Codec: <%= @job.audio_codec % </li>%>
-        <%#<li>Audio Bitrate: <%= @job.audio_bitrate % </li>%>
-        <%#<li>Audio Volume: <%= @job.audio_volume % </li>%>
-        <%#<li>Mux Rate: <%= @job.mux_rate % </li>%>
-        <%#<li>Created At: <%= @job.created_at % </li>%>
-        <%#<li>Updated At: <%= @job.updated_at % </li>%>
-        <%#<li>Finished At: <%= @job.finished_at % </li>%>
-      <%#</ul>%>
-    <%#</div>%>
   </div>
+</div>
 
-  <script id="job-template" type="text/template">
-  </script>
+<script id="job-template" type="text/template">
+  <tr>
+    <td>Width :</td>
+    <td>{{ width }}</td>
+  </tr>
+  <tr>
+    <td>Height :</td>
+    <td>{{ height }}</td>
+  </tr>
+  <tr>
+    <td>H264 Profile : </td>
+    <td>{{ h264_profile }}</td>
+  </tr>
+  <tr>
+    <td>H264 Quality : </td>
+    <td>{{ h264_profile }}</td>
+  </tr>
+  <tr>
+    <td>Audio Codec :</td>
+    <td>{{ audio_codec }}</td>
+  </tr>
+  <tr>
+    <td>Audio Bitrate :</td>
+    <td>{{ audio_bitrate }}</td>
+  </tr>
+  <tr>
+    <td>Audio Volume :</td>
+    <td>{{ audio_volume }}</td>
+  </tr>
+  <tr>
+    <td>Audio Mux Rate :</td>
+    <td>{{ mux_rate }}</td>
+  </tr>
+  <tr>
+    <td>Output Size:</td>
+    <td>{{ output_size}}</td>
+  </tr>
+  <tr>
+    <td>Created At :</td>
+    <td>{{ created_at }}</td>
+  </tr>
+  <tr>
+    <td>Finished At :</td>
+    <td>{{ finished_at }}</td>
+  </tr>
+</script>
