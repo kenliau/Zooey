@@ -63,15 +63,10 @@ class VideosController < ApplicationController
     })
     @video.save
 
-    resolution = params[:output_resolution].to_s
-    x_index = resolution.index('x')
-    width = resolution[0, x_index]
-    height = resolution[x_index+1, resolution.length]
-
     @job = @video.jobs.new({
       mux_rate: params[:mux_rate],
-      width: width,
-      height: height,
+      width: params[:width],
+      height: params[:height],
       h264_profile: params[:h264_profile],
       h264_quality: params[:h264_quality],
       audio_codec: params[:audio_codec],
