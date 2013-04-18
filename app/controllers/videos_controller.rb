@@ -46,6 +46,7 @@ class VideosController < ApplicationController
 
     video_name = params[:video_name]
     filename = params[:video_file].to_s
+    video_location = params[:video_location]
     duration = Time.now #temp value
     gop_length = rand(1..20).to_i #temp value
     frame_distance = rand(1..30).to_i #temp value
@@ -54,6 +55,7 @@ class VideosController < ApplicationController
     @video = @user.videos.new({
       video_name: video_name,
       filename: filename,
+      location: video_location,
       duration: duration,
       gop_length: gop_length,
       frame_distance: frame_distance,
@@ -61,15 +63,10 @@ class VideosController < ApplicationController
     })
     @video.save
 
-    resolution = params[:output_resolution].to_s
-    x_index = resolution.index('x')
-    width = resolution[0, x_index]
-    height = resolution[x_index+1, resolution.length]
-
     @job = @video.jobs.new({
       mux_rate: params[:mux_rate],
-      width: width,
-      height: height,
+      width: params[:width],
+      height: params[:height],
       h264_profile: params[:h264_profile],
       h264_quality: params[:h264_quality],
       audio_codec: params[:audio_codec],

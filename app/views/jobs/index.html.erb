@@ -20,7 +20,7 @@
 <script id="jobDetailsTemplate" type="text/template">
   {{% pullPercent = status.pull.bytes/video.size * 100 }}
   {{% transcodePercent = status.transcode.bytes/video.size * 100 }}
-  <td>{{= video.filename }}</td>
+  <td><%= link_to '{{=id}}', 'jobs/{{=id}}' %></td>
   <td class="progressBar" >
     <span id="job-data" data-job-id="{{= id }}"></span>
     <div class="radius success progress twelve" >
@@ -33,7 +33,6 @@
   </td>
   <td>{{= output_size }}</td>
   <td>{{= output_url }}</td>
-  <td><%= link_to 'Show', 'jobs/{{=id}}' %></td>
   <td><%= link_to 'Destroy', 'jobs/{{=id}}', method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 </script>
@@ -41,7 +40,7 @@
 
 
 <div class="row">
-  <div class="twelve column">
+  <div class="twelve columns">
     <table id="jobs-table" class="twelve ">
       <thead>
         <tr>
@@ -50,14 +49,19 @@
           <td>Output Size</td>
           <td>Output URL</td>
           <td>*</td>
-          <td>*</td>
         </tr>
       </thead>
     </table>
     <hr />
   </div>
 </div>
-  <%= link_to 'New Video', new_video_path %>
+
+<div class="row">
+  <div class="twelve columns">
+    <%= link_to 'Upload New Video', new_video_path, :class => "small radius button" %>
+  </div>
+</div>
+
 
 <div class="row progress-bar">
 </div>

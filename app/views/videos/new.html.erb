@@ -50,28 +50,23 @@
             <!-- output mux rate -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:mux_rate, "Output Mux Rate") %></div>
-              <div class="three columns"><%= number_field_tag(:mux_rate, 500, :min => 500, :max => 1000) %> </div>
+              <div class="three columns"><%= number_field_tag(:mux_rate, 500, :min => 500, :max => 25000) %> </div>
               <div class="six columns"></div>
             </div>
 
-
-
-            <!-- output resolution -->
+            <!-- output resolution width -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:output_resolution, "Output Resolution") %></div>
-              <div class="three columns">
-                <%= select_tag(:output_resolution, options_for_select([
-                                                                      ['HD (1920×1080)', "1920x1080"], 
-                                                                      ['SD (1280x720)', "1280x720"],
-                                                                      ['NTSC (720x480)', "720x480"],
-                                                                      ['NTSC (704x480)', "704x480"],
-                                                                      ['PAL (720x576)', "720x576"],
-                                                                      ['PAL (704x576)', "704x576"],
-                                                                      ['VGA (640x480)', "640x480"]])) %> </div>
-              <div class="six columns"> </div>
+              <div class="three columns"><%= label_tag(:width, "Output Resolution Width") %></div>
+              <div class="three columns"><%= number_field_tag(:width, 1920) %> </div>
+              <div class="six columns"></div>
             </div>
 
-
+           <!-- output resolution height -->
+            <div class="row collapse">
+              <div class="three columns"><%= label_tag(:height, "Output Resolution Height") %></div>
+              <div class="three columns"><%= number_field_tag(:height, 1080) %> </div>
+              <div class="six columns"></div>
+            </div>
 
           <!-- H264 Profile -->
            <div class="row collapse">
@@ -129,10 +124,18 @@
 
             <!-- Video file -->
              <div class="row collapse">
-              <div class="three columns"><%= label_tag(:video_file, "Video") %></div>
+              <div class="three columns"><%= label_tag(:video_file, "Local Video") %></div>
               <div class="three columns"><%= file_field_tag 'video_file' %> </div>
               <div class="six columns"> </div>
             </div>
+            
+            <!-- Video file URL -->
+             <div class="row collapse">
+              <div class="three columns"><%= label_tag(:video_location, "Video URL") %></div>
+              <div class="six columns"><%= text_field_tag(:video_location) %> </div>
+              <div class="three columns"> </div>
+            </div>
+
 
             <div class="row collapse">
               <div class="three columns"> <button type="submit" class="radius button">Submit</button> </div>

@@ -14,7 +14,7 @@
           <div class="title">
             <div class="row">
               <div class="three columns">
-                <%= link_to video.filename, video %>
+                <%= link_to video.video_name, video %>
               </div>
               <div class="three columns">
                 <%= number_to_human_size(video.size) %>
@@ -29,7 +29,7 @@
 
           </div>
           <div class="content">
-            <h6>All Jobs for <%= video.filename %> : </h6>
+            <h6>All Jobs for <%= video.video_name %> : </h6>
             <ul class="block-grid three-up mobile-five-up">
               <% @jobs.each do |job| %>
                 <% if job.video_id == video.id %>
