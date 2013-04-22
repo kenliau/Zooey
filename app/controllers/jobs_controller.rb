@@ -49,7 +49,10 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
+    @progressions = Progression.where( job_id: @job.id )
+    @progressions.destroy_all
     @job.destroy
+
     respond_to do |format|
       format.html { redirect_to jobs_url }
       format.json { head :no_content }

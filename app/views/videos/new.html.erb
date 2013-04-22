@@ -4,7 +4,7 @@
   <div class="row">
 
     <!-- Contact Details -->
-    <div class="nine columns">
+    <div class="twelve columns">
 
       <h3>Upload Video</h3>
       <p>Time to upload your video to us. After that, <b>we'll take care of the rest. </b></p>
@@ -50,21 +50,21 @@
             <!-- output mux rate -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:mux_rate, "Output Mux Rate") %></div>
-              <div class="three columns"><%= number_field_tag(:mux_rate, 500, :min => 500, :max => 25000) %> </div>
+              <div class="three columns"><%= number_field_tag(:mux_rate, 500, :min => 1, :max => 25000) %> </div>
               <div class="six columns"></div>
             </div>
 
             <!-- output resolution width -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:width, "Output Resolution Width") %></div>
-              <div class="three columns"><%= number_field_tag(:width, 1920) %> </div>
+              <div class="three columns"><%= number_field_tag(:width, 1920, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
            <!-- output resolution height -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:height, "Output Resolution Height") %></div>
-              <div class="three columns"><%= number_field_tag(:height, 1080) %> </div>
+              <div class="three columns"><%= number_field_tag(:height, 1080, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
@@ -172,26 +172,9 @@
     <!-- End Contact Details -->
 
 
-    <!-- Sidebar -->
-
-    <div class="three columns">
-
-      <h5>Title</h5>
-
-      <p>
-        <a href="" data-reveal-id="mapModal"><img src="http://placehold.it/400x280" /></a><br />
-      </p>
-
-      <p>
-        What to put here?!!!
-      </p>
-
-    </div>
-
-    <!-- End Sidebar -->
   </div>
 
   <!-- End Main Content and Sidebar -->
 
 
- 
+

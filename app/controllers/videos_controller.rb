@@ -109,8 +109,14 @@ class VideosController < ApplicationController
     # Find, stop and delete all jobs with this video_id
     @jobs = Job.where( video_id: params[:id] )
     
-    @video.destroy
+    @jobs.each { |job|
+      @progressions = Progression.where( job_id: job.id )
+      @progressions.destroy_all
+    }
     @jobs.destroy_all
+    @video.destroy
+
+
 
     respond_to do |format|
       format.html { redirect_to videos_url }
