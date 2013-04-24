@@ -125,10 +125,16 @@
             <!-- Video file -->
              <div class="row collapse">
               <div class="three columns"><%= label_tag(:video_file, "Local Video") %></div>
-              <div class="three columns"><%= file_field_tag 'video_file' %> </div>
+              <div class="three columns"><%= f.file_field :video_file %> </div>
               <div class="six columns"> </div>
             </div>
             
+            <div class="row collapse">
+              <div class="three columns"></div>
+              <div class="three columns">  <b> OR </b> </div>
+              <div class="six columns"> </div>
+            </div>
+
             <!-- Video file URL -->
              <div class="row collapse">
               <div class="three columns"><%= label_tag(:video_location, "Video URL") %></div>

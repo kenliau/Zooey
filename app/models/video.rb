@@ -33,6 +33,7 @@ class Video < ActiveRecord::Base
   def valid_url?
     require "net/http"
     begin
+      location.gsub!(" ", "%20")
       url = URI.parse(location)
       req = Net::HTTP.new(url.host, url.port)
       res = req.request_head(url.path)
