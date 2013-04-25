@@ -24,6 +24,14 @@ if onJobShow() then $ ->
       return this
 
 
+  class ProgressView extends Backbone.View
+    el: '#progress-row'
+    template: template('progression-template')
+    initialize: ->
+      @listenTo(@model, 'change', @render)
+      return
+    render: =>
+      $(@el).html(@template(@model.toJSON()))
       return this
 
 
