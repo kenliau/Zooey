@@ -36,6 +36,7 @@
 			<li class="has-dropdown">
 			<%= link_to "My Account", "#" %>
 			<ul class="dropdown">
+				<li> <%= link_to "API Token", '/users/token' %> </li>
 				<li><%= link_to "Edit My Account", edit_user_registration_path %></li>
 				<li> <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %> </li>
 			</ul>

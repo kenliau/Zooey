@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # devise :validatable handles password length and regex
   # configurable in config/initializers/devise.rb
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
     :first_name, :last_name, :is_admin, :membership
@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
   # on creation of a new model
   before_create :capitalize_names, :initialize_is_admin
+  after_create :reset_auth_token
 
   def capitalize_names
     self.first_name.capitalize!
@@ -35,6 +36,10 @@ class User < ActiveRecord::Base
     self.is_admin ||= false;
     # BEFORE_CREATES CAN NEVER RETURN FALSE
     true
+  end
+
+  def reset_auth_token
+    self.reset_authentication_token!
   end
 
   def admin?
