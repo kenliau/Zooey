@@ -35,14 +35,33 @@ if onJobShow() then $ ->
       return this
 
 
-  job = new Job id: onJobShow()
-  window.ja = job
-  jobView = new JobView model: job
+  class ProgressBarView extends Backbone.View
+    el: '#job-status'
+    initialize: ->
+      @listenTo(@model, 'change', @render)
+      return
+    render: =>
+      current_job = @model.toJSON()
+      if current_job.finished_at?
+        finished_template = template('finished-job-template')(@model.toJSON())
+        $(@el).html(finished_template)
+        @stopListening()
+      else
+        vent.trigger(
+          'progress:change',
+          current_job.status.pull,
+          current_job.status.transcode,
+          current_job.video.size
+        )
 
+
+  job = new Job id: onJobShow()
+  jobView = new JobView model: job
+  progressView = new ProgressView model: job
+  progressBarView = new ProgressBarView model: job
 
   refresher = setInterval ->
     job.fetch()
-    console.log("called")
   , 2500
 
   vent.on('job:finish', -> clearInterval(refresher))
