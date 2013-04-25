@@ -45,13 +45,22 @@ class VideosController < ApplicationController
     @user = User.find(current_user.id)
 
     video_name = params[:video_name]
-    filename = params[:video_file].to_s
+
     video_location = params[:video_location]
+    if params[:video]
+      uploaded_io = params[:video][:video_file]
+      File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      filename = uploaded_io.original_filename
+      video_location = request.protocol + request.host_with_port + '/uploads/' + filename
+    end
     duration = Time.now #temp value
     gop_length = rand(1..20).to_i #temp value
     frame_distance = rand(1..30).to_i #temp value
     size = 100 #temp value
     
+
     @video = @user.videos.new({
       video_name: video_name,
       filename: filename,
@@ -109,8 +118,14 @@ class VideosController < ApplicationController
     # Find, stop and delete all jobs with this video_id
     @jobs = Job.where( video_id: params[:id] )
     
-    @video.destroy
+    @jobs.each { |job|
+      @progressions = Progression.where( job_id: job.id )
+      @progressions.destroy_all
+    }
     @jobs.destroy_all
+    @video.destroy
+
+
 
     respond_to do |format|
       format.html { redirect_to videos_url }

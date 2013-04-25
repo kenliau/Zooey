@@ -8,10 +8,17 @@ class Job < ActiveRecord::Base
       message: "is a required field"
     }
 
-  validates :height, :width, :audio_bitrate, :audio_volume, :mux_rate,
+  validates :height, :width, :audio_bitrate, :audio_volume,
     :numericality => {
       :only_integer => true,
-      :greater_than_or_equal_to => 0
+      :greater_than_or_equal_to => 1
+    }
+
+  validates :mux_rate,
+    :numericality => {
+      :only_integer => true,
+      :less_than_or_equal_to => 25000,
+      :greater_than_or_equal_to => 1
     }
 
   after_create :transcode
