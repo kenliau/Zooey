@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(:version => 20130425075637) do
     t.string   "membership"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "api_key"
     t.string   "authentication_token"
   end
 
