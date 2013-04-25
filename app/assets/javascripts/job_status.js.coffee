@@ -3,20 +3,27 @@ if onJobShow() then $ ->
 
   vent = _.extend({}, Backbone.Events)
 
+
   class Job extends Backbone.Model
     urlRoot: '/jobs'
 
+
   class JobView extends Backbone.View
+    el: '#job-table-body'
     initialize: ->
-      @listenTo(@model, 'change', @show)
+      @listenTo(@model, 'change', @render)
       return
     template: template('job-template')
-    show: =>
-      job = @model.toJSON()
-      if (job.finished_at?) then vent.trigger('job:finish')
-      @render
     render: =>
-      console.log(@model.toJSON())
+      current_job = @model.toJSON()
+      debugger
+      if (current_job.finished_at?)
+        $(@el).html(@template(current_job))
+        vent.trigger('job:finish')
+        @stopListening
+      return this
+
+
       return this
 
 
