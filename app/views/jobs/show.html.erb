@@ -20,25 +20,36 @@
 <!-- Header and Nav -->
 
 <div class="content">
-  <% unless @job.finished_at %>
-    <div class="progress-bars">
-      <div class="row">
-        <h4>Pull Progress <small>Speed: 42mbps</small></h4>
-        <div class="nice round progress twelve">
-          <span style="width: <%= @job.percent_complete %>%;" class="meter"></span>
+  <div id="job-status">
+    <% unless @job.finished_at %>
+      <div class="progress-bars">
+        <div class="row progress-bar pull-progress-bar">
+          <h4>Pull Progress <small class="speed">Speed: 0mbps</small></h4>
+          <div class="nice round progress twelve">
+            <span style="width: 0;" class="meter"></span>
+          </div>
+        </div>
+        <div class="row progress-bar transcode-progress-bar">
+          <h4>Transcode Progress <small class="speed">Speed: 0mbps</small></h4>
+          <div class="nice round success progress twelve">
+            <span style="width: 0;" class="meter"></span>
+          </div>
         </div>
       </div>
+    <% else %>
       <div class="row">
-        <h4>Transcode Progress <small>Speed: 22mbps</small></h4>
-        <div class="nice round success progress twelve">
-          <span style="width: <%= @job.percent_complete %>%;" class="meter"></span>
-        </div>
+        <h3>Job Complete</h3>
+        <div><a href="<%= @job.output_url %>">Link to transcoded video</a></div>
       </div>
-    </div>
-  <% else %>
-    <h3>Job Complete</h3>
-    <div><a href="<%= @job.output_url %>">Link to transcoded video</a></div>
-  <% end %>
+    <% end %>
+  </div>
+
+  <script id="finished-job-template" type="text/template">
+      <div class="row">
+        <h3>Job Complete</h3>
+        <div><a href="{{= output_url }}">Link to transcoded video</a></div>
+      </div>
+  </script>
 
   <div class ="row">
     <h4 class="subheader">Progress Milestones</h4>
@@ -56,7 +67,7 @@
         </tr>
        </thead>
       <tbody>
-      <tr>
+      <tr id="progress-row">
         <td><%= @job.progression.pull_start_time %></td>
         <td><%= @job.progression.pull_finish_time %></td>
         <td><%= @job.progression.chunker_start_time %></td>
@@ -69,15 +80,15 @@
       </tbody>
     </table>
   </div>
-  <script id="job-template" type="text/template">
-    <td>{{ progression.pull_start_time }}</td>
-    <td>{{ progression.pull_finish_time }}</td>
-    <td>{{ progression.chunker_start_time }}</td>
-    <td>{{ progression.chunker_finish_time }}</td>
-    <td>{{ progression.tcoder_start_time }}</td>
-    <td>{{ progression.tcoder_finish_time }}</td>
-    <td>{{ progression.merger_start_time }}</td>
-    <td>{{ progression.merger_finish_time }}</td>
+  <script id="progression-template" type="text/template">
+    <td>{{= progression.pull_start_time }}</td>
+    <td>{{= progression.pull_finish_time }}</td>
+    <td>{{= progression.chunker_start_time }}</td>
+    <td>{{= progression.chunker_finish_time }}</td>
+    <td>{{= progression.tcoder_start_time }}</td>
+    <td>{{= progression.tcoder_finish_time }}</td>
+    <td>{{= progression.merger_start_time }}</td>
+    <td>{{= progression.merger_finish_time }}</td>
   </script>
 
   <% @video = Video.find(@job.video_id) %>
@@ -127,8 +138,8 @@
           <div class="six columns">
             <h4 class="subheader">Job Specifications</h4>
           </div>
-          <table id="video-table" class="twelve columns">
-            <tbody>
+          <table id="job-table" class="twelve columns">
+            <tbody id="job-table-body">
             <tr>
               <td>Width :</td>
               <td><%= @job.width %></td>
@@ -184,46 +195,46 @@
 <script id="job-template" type="text/template">
   <tr>
     <td>Width :</td>
-    <td>{{ width }}</td>
+    <td>{{= width }}</td>
   </tr>
   <tr>
     <td>Height :</td>
-    <td>{{ height }}</td>
+    <td>{{= height }}</td>
   </tr>
   <tr>
     <td>H264 Profile : </td>
-    <td>{{ h264_profile }}</td>
+    <td>{{= h264_profile }}</td>
   </tr>
   <tr>
     <td>H264 Quality : </td>
-    <td>{{ h264_profile }}</td>
+    <td>{{= h264_profile }}</td>
   </tr>
   <tr>
     <td>Audio Codec :</td>
-    <td>{{ audio_codec }}</td>
+    <td>{{= audio_codec }}</td>
   </tr>
   <tr>
     <td>Audio Bitrate :</td>
-    <td>{{ audio_bitrate }}</td>
+    <td>{{= audio_bitrate }}</td>
   </tr>
   <tr>
     <td>Audio Volume :</td>
-    <td>{{ audio_volume }}</td>
+    <td>{{= audio_volume }}</td>
   </tr>
   <tr>
     <td>Audio Mux Rate :</td>
-    <td>{{ mux_rate }}</td>
+    <td>{{= mux_rate }}</td>
   </tr>
   <tr>
     <td>Output Size:</td>
-    <td>{{ output_size}}</td>
+    <td>{{= output_size}}</td>
   </tr>
   <tr>
     <td>Created At :</td>
-    <td>{{ created_at }}</td>
+    <td>{{= created_at }}</td>
   </tr>
   <tr>
     <td>Finished At :</td>
-    <td>{{ finished_at }}</td>
+    <td>{{= finished_at }}</td>
   </tr>
 </script>
