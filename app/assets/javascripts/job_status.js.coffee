@@ -64,5 +64,21 @@ if onJobShow() then $ ->
     job.fetch()
   , 2500
 
-  vent.on('job:finish', -> clearInterval(refresher))
+  progressBars = $('.progress-bar')
 
+  vent.on 'progress:change', (pull, transcode, size) ->
+    progressBars.each ->
+      data = if $(this).hasClass('pull-progress-bar') then pull else transcode
+      percentage = (data.bytes / size) * 100
+      if percentage > 100 then percentage = 100
+      percentage = "#{percentage}%"
+      $(this).find('.speed').html("Speed: #{data.speed}mbps")
+      $(this).find('.meter').animate(width: percentage)
+
+
+  vent.on 'job:finish', ->
+    clearInterval(refresher)
+    jobData = job.toJSON()
+    bar_section = $('progress-bars')
+    if (bar_section.length > 0)
+      bar_section.html()
