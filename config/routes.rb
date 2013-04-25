@@ -6,6 +6,8 @@ Zipreel::Application.routes.draw do
 
   get 'jobs/progressions/' => 'progressions#index'
 
+  get 'users/token' => 'users#show_token'
+
   resources 'jobs', path: 'jobs'
 
   get 'admin/users' => 'admin#users'
