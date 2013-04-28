@@ -9,7 +9,7 @@ class JobsController < ApplicationController
     @job = Job.includes(:progression, :video).find(params[:id])
     if @job.blank?
       respond_to do |format|
-        format.json { render json: nil, status: 404 }
+        format.json { render :json => nil, :status => 404 }
         format.html { redirect_to jobs_url }
       end
     end
@@ -19,7 +19,7 @@ class JobsController < ApplicationController
   def owns_job_or_admin
     unless @job.video.user == current_user or current_user.is_admin
       respond_to do |format|
-        format.json { render json: nil, :status => :unauthorized }
+        format.json { render :json => nil, :status => :unauthorized }
         format.html { redirect_to jobs_url }
       end
     end
