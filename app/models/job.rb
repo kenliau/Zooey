@@ -43,7 +43,7 @@ class Job < ActiveRecord::Base
           'X-Gearman-Background' => 'true',
           'Content-Type' => 'application/json'
         }
-      )
+      ).body
 
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
