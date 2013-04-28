@@ -8,14 +8,20 @@ class JobsController < ApplicationController
   def load_job
     @job = Job.includes(:progression, :video).find(params[:id])
     if @job.blank?
-      return redirect_to '/jobs'
+      respond_to do |format|
+        format.json { render json: nil, status: 404 }
+        format.html { redirect_to jobs_url }
+      end
     end
   end
 
   # Requires current user to own job or be admin
   def owns_job_or_admin
     unless @job.video.user == current_user or current_user.is_admin
-      return redirect_to '/jobs'
+      respond_to do |format|
+        format.json { render json: nil, :status => :unauthorized }
+        format.html { redirect_to jobs_url }
+      end
     end
   end
 
@@ -49,14 +55,15 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
-    @progressions = Progression.where( job_id: @job.id )
-    @progressions.destroy_all
-    @job.destroy
-
-    respond_to do |format|
-      format.html { redirect_to jobs_url }
-      format.json { head :no_content }
+    binding.pry
+    unless (@job.finished_at?)
+      @job.destroy
+      respond_to do |format|
+        format.html { redirect_to jobs_url }
+        format.json { head :no_content }
+      end
     end
+    re
   end
 
   # PUT /jobs/:job_id/progression
