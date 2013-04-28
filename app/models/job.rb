@@ -28,6 +28,7 @@ class Job < ActiveRecord::Base
     if Rails.env.production?
       #HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
       HTTParty.post(ENV['CLUSTER_IP'],
+                    :headers => {'X-Gearman-Background' => 'true'}, 
                     body: self.as_json(:include => [:video]))
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
