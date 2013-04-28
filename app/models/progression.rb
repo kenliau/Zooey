@@ -5,7 +5,7 @@ class Progression < ActiveRecord::Base
   after_create :set_in_redis
   after_update :set_in_redis
   before_destroy :delete_in_redis
- 
+
   def set_in_redis
     status = self.status_hash.to_json.to_s
     $redis.set(Progression.redis_key(self.job.id), status)
@@ -18,15 +18,15 @@ class Progression < ActiveRecord::Base
 
   def status_hash
     {
-      size: self.job.video.size, 
+      size: self.job.video.size,
       processed: 0
     }
   end
-  
+
   def self.status_by_job_id(job_id)
     status = $redis.get(self.redis_key(job_id))
     unless status.nil?
-      JSON.parse(status) 
+      JSON.parse(status)
     else
       progression = Progression.where(:job_id => job_id).first
       progression.status_hash unless progression.nil?

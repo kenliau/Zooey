@@ -1,5 +1,5 @@
 class Job < ActiveRecord::Base
-  has_one :progression
+  has_one :progression, :dependent => :destroy
   belongs_to :video
   attr_accessible :audio_bitrate, :audio_codec, :audio_volume, :finished_at, :h264_profile, :h264_quality, :height, :mux_rate, :width, :pull_speed, :pull_bytes, :transcode_speed, :transcode_bytes, :chunks
 
@@ -130,7 +130,7 @@ class Job < ActiveRecord::Base
       when 'finish'
         puts 'merger finish'
         @job.progression.merger_finish_time = Time.now
-         
+
         @job.output_size = status['merger']['output_size'] = params[:metrics][:output_size]
         @job.output_url = status['merger']['output_url'] = params[:metrics][:output_url]
       end
