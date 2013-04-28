@@ -26,7 +26,9 @@ class Job < ActiveRecord::Base
   # temporarily this only starts the mock backend
   def transcode
     if Rails.env.production?
-      HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
+      #HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
+      binding.pry
+      HTTParty.post(ENV['CLUSTER_IP'],
                     body: self.as_json(:include => [:video]))
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
