@@ -55,7 +55,6 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
-    binding.pry
     unless (@job.finished_at?)
       @job.destroy
       respond_to do |format|
@@ -63,7 +62,6 @@ class JobsController < ApplicationController
         format.json { head :no_content }
       end
     end
-    re
   end
 
   # PUT /jobs/:job_id/progression
