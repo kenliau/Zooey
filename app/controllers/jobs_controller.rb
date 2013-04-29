@@ -55,12 +55,12 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
-    unless (@job.finished_at?)
+    if !@job.finished_at?
       @job.destroy
-      respond_to do |format|
-        format.html { redirect_to jobs_url }
-        format.json { head :no_content }
-      end
+    end
+    respond_to do |format|
+      format.html { redirect_to jobs_url }
+      format.json { head :no_content }
     end
   end
 
