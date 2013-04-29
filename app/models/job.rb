@@ -28,7 +28,7 @@ class Job < ActiveRecord::Base
     if Rails.env.production?
       puts self.as_json(:include => [:video]).to_json
       #HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
-      p HTTParty.post(
+      HTTParty.post(
         ENV['CLUSTER_IP'],
         body: self.as_json(:include => [:video]).to_json,
         headers:  {
@@ -36,15 +36,6 @@ class Job < ActiveRecord::Base
           'Content-Type' => 'application/json'
         }
       )
-      p HTTParty.post(
-        'http://ruschedule.com/hack',
-        body: self.as_json(:include => [:video]),
-        headers:  {
-          'X-Gearman-Background' => 'true',
-          'Content-Type' => 'application/json'
-        }
-      ).body
-
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
                     body: self.as_json(:include => [:video]))
