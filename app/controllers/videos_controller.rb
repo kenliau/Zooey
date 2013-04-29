@@ -56,8 +56,8 @@ class VideosController < ApplicationController
       video_location = request.protocol + request.host_with_port + '/uploads/' + filename
     end
     duration = Time.now #temp value
-    gop_length = rand(1..20).to_i #temp value
-    frame_distance = rand(1..30).to_i #temp value
+    gop_length = params[:gop_length]
+    frame_distance = params[:frame_distance]
     size = 100 #temp value
     
 
