@@ -30,7 +30,7 @@ class Job < ActiveRecord::Base
       #HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
       HTTParty.post(
         ENV['CLUSTER_IP'],
-        body: self.as_json(:include => [:video]).to_json,
+        body: self.as_json(:include => [:video]).to_json, 
         headers:  {
           'X-Gearman-Background' => 'true',
           'Content-Type' => 'application/json'
