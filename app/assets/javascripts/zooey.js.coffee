@@ -24,3 +24,8 @@ window.onJobShow = ->
 window.onJobsList = ->
   console.log('window.onJobsList is called')
   path == '/jobs'
+
+
+# Prevent browser from caching ajax requests
+$.ajaxSetup
+  cache: false

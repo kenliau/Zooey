@@ -8,7 +8,7 @@ if onJobsList() then $ ->
 
   App.Collections.Jobs = Backbone.Collection.extend
     model: App.Models.Job
-    url: '/jobs.json'
+    url: '/jobs'
 
 
   App.Views.Job = Backbone.View.extend
