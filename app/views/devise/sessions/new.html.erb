@@ -1,84 +1,70 @@
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="five columns">
-    <h2>Sign In</h2>
-    <hr />
-  </div>
-  <div class="four columns">
+  <div class="six columns centered">
+    <div class="twelve columns">
+      <h2>Sign In</h2>
+      <hr />
+    </div>
   </div>
 </div>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
   <div class="row">
-    <div class="three columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :email %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.email_field :email, :autofocus => true %></div>
+      </div>
     </div>
-    <div class="one columns">
-      <div><%= f.label :email %></div>
-    </div>
-    <div class="three columns">
-      <%= f.email_field :email, :autofocus => true %>
-    </div>
-    <div class="five columns">
+  </div>
+  
+  <div class="row">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :password %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.password_field :password %></div>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="one columns">
-      <div><%= f.label :password %></div>
-    </div>
-    <div class="three columns">
-      <%= f.password_field :password %>
-    </div>
-    <div class="five columns">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="one columns">
-      <%= f.submit "Sign in", :class => "small radius button"%>
-    </div>
-    <div class="three columns">
-      <% if devise_mapping.rememberable? -%>
-        <%= f.check_box :remember_me %> 
-        <%= f.label :remember_me, :class => "inline"%>
-      <% end -%>
-    </div>
-    <div class="five columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.submit "Sign in", :class => "small radius button"%></div>
+      </div>
+      <div class="eight columns">
+        <% if devise_mapping.rememberable? -%>
+          <%= f.check_box :remember_me %> 
+          <%= f.label :remember_me, :class => "inline"%>
+        <% end -%>
+      </div>
     </div>
   </div>
-
 <% end %>
 
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="five columns">
+  <div class="six columns centered">
     <hr />
-  </div>
-  <div class="four columns">
   </div>
 </div>
 
 
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="two mobile-two columns ">
-    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <%= link_to "Sign up", new_registration_path(resource_name), :style => "float: left" %>
-    <% end -%>
-  </div>
-  <div class="three mobile-two columns">
-    <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-      <%= link_to "Forgot your password?", new_password_path(resource_name), :style => "float: right" %>
-    <% end -%>
-  </div>
-  <div class="four columns">
+  <div class="six columns centered">
+    <div class="six mobile-two columns ">
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <%= link_to "Sign up", new_registration_path(resource_name), :style => "float: left" %>
+      <% end -%>
+    </div>
+    <div class="six mobile-two columns">
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+        <%= link_to "Forgot your password?", new_password_path(resource_name), :style => "float: right" %>
+      <% end -%>
+    </div>
   </div>
 </div>
 

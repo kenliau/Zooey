@@ -1,52 +1,45 @@
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="five columns">
-    <h2>Forgot My Password</h2>
-    <hr />
-    <% if resource.errors.any? %>
-      <div id="error_explanation">
-        <% resource.errors.full_messages.each do |msg| %>
-          <div class="alert alert-box">
-            <%= msg %>
-            <a href="" class="close">&times;</a>
-          </div>
-        <% end %>
-      </div>
-    <% end %> 
-
-  </div>
-  <div class="four columns">
+	<div class="six columns centered">
+    <div class="twelve columns">
+      <h2>Forgot My Password</h2>
+      <hr />
+      <% if resource.errors.any? %>
+        <div id="error_explanation">
+          <% resource.errors.full_messages.each do |msg| %>
+            <div class="alert alert-box">
+              <%= msg %>
+              <a href="" class="close">&times;</a>
+            </div>
+          <% end %>
+        </div>
+      <% end %> 
+    </div>
   </div>
 </div>
 
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :email %></div>
-    </div>
-    <div class="three columns">
-      <%= f.email_field :email, :autofocus => true %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :email %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.email_field :email, :autofocus => true %></div>
+      </div>
     </div>
   </div>
+
 
   <br />
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-    </div>
-    <div class="three columns">
-      <%= f.submit "Reset my password", :class => "small radius button", :style => "float: right" %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="twelve columns">
+        <div><%= f.submit "Reset my password", :class => "small radius button", :style => "float: right" %></div>
+      </div>
     </div>
   </div>
+
 <% end %>
 

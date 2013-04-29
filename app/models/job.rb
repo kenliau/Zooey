@@ -26,8 +26,16 @@ class Job < ActiveRecord::Base
   # temporarily this only starts the mock backend
   def transcode
     if Rails.env.production?
-      HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
-                    body: self.as_json(:include => [:video]))
+      puts self.as_json(:include => [:video]).to_json
+      #HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
+      HTTParty.post(
+        ENV['CLUSTER_IP'],
+        body: self.as_json(:include => [:video]).to_json, 
+        headers:  {
+          'X-Gearman-Background' => 'true',
+          'Content-Type' => 'application/json'
+        }
+      )
     elsif Rails.env.development?
       HTTParty.post('http://localhost:4000/transcode',
                     body: self.as_json(:include => [:video]))
@@ -130,7 +138,7 @@ class Job < ActiveRecord::Base
       when 'finish'
         puts 'merger finish'
         @job.progression.merger_finish_time = Time.now
-         
+
         @job.output_size = status['merger']['output_size'] = params[:metrics][:output_size]
         @job.output_url = status['merger']['output_url'] = params[:metrics][:output_url]
       end

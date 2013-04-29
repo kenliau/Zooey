@@ -16,7 +16,6 @@ if onJobShow() then $ ->
     template: template('job-template')
     render: =>
       current_job = @model.toJSON()
-      debugger
       if (current_job.finished_at?)
         $(@el).html(@template(current_job))
         vent.trigger('job:finish')

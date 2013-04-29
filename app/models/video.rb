@@ -4,7 +4,7 @@ class Video < ActiveRecord::Base
   has_many :jobs
   attr_accessible :duration, :video_name, :filename, :frame_distance, :gop_length, :location, :size
 
-  validate :valid_url?
+  #validate :valid_url?
 
   validates :filename,
     :presence => {

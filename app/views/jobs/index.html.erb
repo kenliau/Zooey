@@ -33,8 +33,13 @@
   </td>
   <td>{{= output_size }}</td>
   <td>{{= output_url }}</td>
-  <td><%= link_to 'Destroy', 'jobs/{{=id}}', method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
+  <td>
+      {{% if(finished_at != null) { }}
+        {{='Job Complete'}}
+      {{% } else {  }} 
+        <%= link_to 'Destroy', 'jobs/{{=id}}', method: :delete, data: { confirm: 'Are you sure?' } %>
+      {{% } }}
+  </td>
 </script>
 
 

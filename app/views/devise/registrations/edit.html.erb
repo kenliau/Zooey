@@ -1,119 +1,112 @@
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="five columns">
-    <h2>Edit <%= resource_name.to_s.humanize %> Account</h2>
-    <hr />
-    <% if resource.errors.any? %>
-      <div id="error_explanation">
-        <% resource.errors.full_messages.each do |msg| %>
-          <div class="alert alert-box">
-            <%= msg %>
-            <a href="" class="close">&times;</a>
-          </div>
-        <% end %>
-      </div>
-    <% end %> 
-
-  </div>
-  <div class="four columns">
+  <div class="eight columns centered">
+    <div class="twelve columns">
+      <h2>Edit <%= resource_name.to_s.humanize %> Account</h2>
+      <hr />
+      <% if resource.errors.any? %>
+        <div id="error_explanation">
+          <% resource.errors.full_messages.each do |msg| %>
+            <div class="alert alert-box">
+              <%= msg %>
+              <a href="" class="close">&times;</a>
+            </div>
+          <% end %>
+        </div>
+      <% end %> 
+    </div>
   </div>
 </div>
 
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :email %></div>
-    </div>
-    <div class="three columns">
-      <%= f.email_field :email, :autofocus => true %>
-    </div>
-    <div class="four columns">
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        Currently waiting confirmation for: <%= resource.unconfirmed_email %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :password %></div>
-    </div>
-    <div class="three columns">
-      <%= f.password_field :password, :autocomplete => "off"  %>
-    </div>
-    <div class="four columns">
-      <em>Please leave blank if you don't want to change your password.</em>
+    <div class="eight columns centered">
+      <div class="three columns">
+        <div><%= f.label :email %></div>
+      </div>
+      <div class="five columns">
+        <div><%= f.email_field :email, :autofocus => true %></div>
+      </div>
+      <div class="four columns">
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+        <% end %>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :password_confirmation %></div>
-    </div>
-    <div class="three columns">
-      <%= f.password_field :password_confirmation %>
-    </div>
-    <div class="four columns">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :current_password %></div>
-    </div>
-    <div class="three columns">
-      <%= f.password_field :current_password %>
-    </div>
-    <div class="four columns">
-      <em>Please enter your current password to confirm your changes.</em>
+    <div class="eight columns centered">
+      <div class="three columns">
+        <div><%= f.label :password %></div>
+      </div>
+      <div class="five columns">
+        <div><%= f.password_field :password, :autocomplete => "off"  %></div>
+      </div>
+      <div class="four columns">
+        <em>Please leave blank if you don't want to change your password.</em>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
+    <div class="eight columns centered">
+      <div class="three columns">
+        <div><%= f.label :password_confirmation %></div>
+      </div>
+      <div class="five columns">
+        <div><%= f.password_field :password_confirmation %></div>
+      </div>
+      <div class="four columns">
+      </div>
     </div>
-    <div class="two columns">
+  </div>
+
+  <div class="row">
+    <div class="eight columns centered">
+      <div class="three columns">
+        <div><%= f.label :current_password %></div>
+      </div>
+      <div class="five columns">
+        <div><%= f.password_field :current_password %></div>
+      </div>
+      <div class="four columns">
+        <em>Please enter your current password to confirm your changes.</em>
+      </div>
     </div>
-    <div class="three columns" style="text-align: right;">
-      <%= link_to "Back", :back, :class => "radius button alert" %>
-      <%= f.submit "Update", :class => " radius button" %>
-    </div>
-    <div class="four columns">
+  </div>
+
+  <div class="row">
+    <div class="eight columns centered">
+      <div class="twelve columns" style="text-align: center;">
+        <%= link_to "Back", :back, :class => "radius button alert" %>
+        <%= f.submit "Update", :class => " radius button" %>
+      </div>
     </div>
   </div>
 
 <% end %>
 
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="five columns">
-    <h5>Cancel This Account</h5>
+  <div class="eight columns centered">
     <hr />
-  </div>
-  <div class="four columns">
   </div>
 </div>
 
 
 <div class="row">
-  <div class="three columns">
+  <div class="four columns centered" style="text-align: center">
+    <h5>Cancel This Account</h5>
+    <hr />
   </div>
-  <div class="five mobile-two columns" style="text-align: center">
-    <p> Not satisfied with our services? </p>
-    <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure you want to cancel this account?         (This action can't be undone)" }, :method => :delete, :class => "small radius button alert" %>
-  </div>
-  <div class="three columns">
+</div>
+
+<div class="row">
+  <div class="four columns centered">
+    <div class="twelve mobile-four columns" style="text-align: center">
+      <p> Not satisfied with our services? </p>
+      <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure you want to cancel this account?         (This action can't be undone)" }, :method => :delete, :class => "small radius button alert" %>
+    </div>
   </div>
 </div>
 
