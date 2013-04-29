@@ -1,7 +1,5 @@
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="five columns">
+  <div class="six columns centered">
     <h2>Sign Up</h2>
     <hr />
     <% if resource.errors.any? %>
@@ -14,119 +12,96 @@
         <% end %>
       </div>
     <% end %> 
-
-  </div>
-  <div class="four columns">
   </div>
 </div>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :email %></div>
-    </div>
-    <div class="three columns">
-      <%= f.email_field :email, :autofocus => true %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :email %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.email_field :email, :autofocus => true %></div>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :first_name %></div>
-    </div>
-    <div class="three columns">
-      <%= f.text_field :first_name %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :first_name %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.text_field :first_name %></div>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :last_name %></div>
-    </div>
-    <div class="three columns">
-      <%= f.text_field :last_name %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :last_name %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.text_field :last_name %></div>
+      </div>
     </div>
   </div>
-
-
+  
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :password %></div>
-    </div>
-    <div class="three columns">
-      <%= f.password_field :password %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :password %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.password_field :password %></div>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :password_confirmation %></div>
-    </div>
-    <div class="three columns">
-      <%= f.password_field :password_confirmation %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :password_confirmation %></div>
+      </div>
+      <div class="eight columns">
+        <div><%= f.password_field :password_confirmation %></div>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-      <div><%= f.label :membership %></div>
-      <span class="subheader">must be 0, 1, or 2</span>
-    </div>
-    <div class="three columns">
-      <%= f.select :membership, options_for_select([['Membership 0', 0], ['Membership 1', 1], ['Membership 2', 2]]) %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="four columns">
+        <div><%= f.label :membership %></div>
+        <span class="subheader">must be 0, 1, or 2</span>
+      </div>
+      <div class="eight columns">
+        <div><%= f.select :membership, options_for_select([['Gold', 0], ['Silver', 1], ['Bronze', 2]]) %></div> 
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="three columns">
-    </div>
-    <div class="two columns">
-    </div>
-    <div class="three columns">
-      <%= f.submit "Sign Up", :class => " radius button", :style => "float: right" %>
-    </div>
-    <div class="four columns">
+    <div class="six columns centered">
+      <div class="twelve columns">
+        <div><%= f.submit "Sign Up", :class => " radius button", :style => "float: right" %></div>
+      </div>
     </div>
   </div>
 
 <% end %>
 
 <div class="row">
-  <div class="three columns">
-  </div>
-  <div class="five columns" style="text-align: center">
-    <hr />
-    <%- if controller_name != 'sessions' %>
-      <%= link_to "Already have an account?", new_session_path(resource_name) %>
-
-    <% end -%>
-  </div>
-  <div class="three columns">
+  <div class="six columns centered">
+    <div class="twelve columns" style="text-align: center">
+      <hr />
+      <%- if controller_name != 'sessions' %>
+        <%= link_to "Already have an account?", new_session_path(resource_name) %>
+      <% end -%>
+    </div>
   </div>
 </div>
 
