@@ -22,17 +22,25 @@
 <div class="content">
   <div id="job-status">
     <% unless @job.finished_at %>
-      <div class="progress-bars">
-        <div class="row progress-bar pull-progress-bar">
-          <h4>Pull Progress <small class="speed">Speed: 0mbps</small></h4>
-          <div class="nice round progress twelve">
-            <span style="width: 0;" class="meter"></span>
-          </div>
-        </div>
-        <div class="row progress-bar transcode-progress-bar">
-          <h4>Transcode Progress <small class="speed">Speed: 0mbps</small></h4>
-          <div class="nice round success progress twelve">
-            <span style="width: 0;" class="meter"></span>
+      <div class="row">
+        <div class="twelve columns">
+          <div class="progress-bars">
+            <div class="row progress-bar pull-progress-bar">
+              <div class="twelve columns">
+                <h4>Pull Progress <small class="speed">Speed: 0mbps</small></h4>
+                <div class="nice round progress twelve">
+                  <span style="width: 0;" class="meter"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row progress-bar transcode-progress-bar">
+              <div class="twelve columns">
+                <h4>Transcode Progress <small class="speed">Speed: 0mbps</small></h4>
+                <div class="nice round success progress twelve">
+                  <span style="width: 0;" class="meter"></span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
