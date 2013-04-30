@@ -1,5 +1,4 @@
 if onJobShow() then $ ->
-  console.log('onJobShow function is called')
 
   vent = _.extend({}, Backbone.Events)
 

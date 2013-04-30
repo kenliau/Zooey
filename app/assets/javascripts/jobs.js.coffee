@@ -1,11 +1,9 @@
 if onJobsList() then $ ->
-  console.log('executing jobsList backbone')
 
   vent = _.extend({}, Backbone.Events)
 
   App.Models.Job = Backbone.Model.extend({
     initialize: ->
-      console.log('creating a job model')
       return
   })
 
@@ -58,7 +56,7 @@ if onJobsList() then $ ->
 
   refresher = setInterval ->
     jobsCollection.fetch()
-  , 4000
+  , 3000
 
 
   progressBars = $('.progress')
