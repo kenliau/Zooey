@@ -1,5 +1,4 @@
 $ ->
-  console.log('hi')
   video_file = $('#video_video_file')
   video_url = $('#video_location')
   video_file.change ->
