@@ -19,6 +19,8 @@ class VideosController < ApplicationController
     end
   end
 
+  # Check if url is reachable and 
+
   # GET /videos
   # GET /videos.json
   def index
@@ -47,20 +49,39 @@ class VideosController < ApplicationController
     video_name = params[:video_name]
 
     video_location = params[:video_location]
-    if params[:video]
-      uploaded_io = params[:video][:video_file]
-      File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
-        file.write(uploaded_io.read)
+    filename = ''
+    #if params[:video]
+      #uploaded_io = params[:video][:video_file]
+      #File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      #  file.write(uploaded_io.read)
+      #end
+      #filename = uploaded_io.original_filename
+      #video_location = request.protocol + request.host_with_port + '/uploads/' + filename
+    #end
+  
+    # Test if URL is reachable and get file size
+    require "net/http"
+    begin
+      Rack::Utils.escape(video_location)
+      url = URI.parse(video_location)
+      req = Net::HTTP.new(url.host, url.port)
+      res = req.request_head(url.path)
+      if res.code != "200"
+        video_location = nil
+        size = 0
+      elsif res.code == "200"
+        size = res.content_length
       end
-      filename = uploaded_io.original_filename
-      video_location = request.protocol + request.host_with_port + '/uploads/' + filename
+    rescue Exception => e
+      video_location = nil
+      size = 0
     end
+
+
     duration = Time.now #temp value
     gop_length = params[:gop_length]
     frame_distance = params[:frame_distance]
-    size = 100 #temp value
     
-
     @video = @user.videos.new({
       video_name: video_name,
       filename: filename,

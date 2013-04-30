@@ -23,10 +23,10 @@
   <td><%= link_to '{{=id}}', 'jobs/{{=id}}' %></td>
   <td class="progressBar" >
     <span id="job-data" data-job-id="{{= id }}"></span>
-    <div class="radius success progress twelve" >
+    <div class="radius  progress twelve" >
       <span style="width:{{% if(pullPercent > 100) { }} {{=100}}{{% } else { }} {{=pullPercent}}{{% } }}%;" class="meter"></span> 
     </div>
-    <div class="radius progress twelve" >
+    <div class="radius success progress twelve" >
      <span style="width:{{% if(transcodePercent > 100) { }} {{=100}}{{% } else { }} {{=transcodePercent}}{{% } }}%;" class="meter"></span> 
     </div>
 
