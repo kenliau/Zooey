@@ -19,14 +19,11 @@ class VideosController < ApplicationController
     end
   end
 
-  # Check if url is reachable and 
-
   # GET /videos
   # GET /videos.json
   def index
     @videos = Video.by_user(current_user)
     @jobs = Job.by_user(current_user)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @videos }
@@ -72,11 +69,10 @@ class VideosController < ApplicationController
       elsif res.code == "200"
         size = res.content_length
       end
-    rescue Exception => e
+    rescue Exception
       video_location = nil
       size = 0
     end
-
 
     duration = Time.now #temp value
     gop_length = params[:gop_length]
