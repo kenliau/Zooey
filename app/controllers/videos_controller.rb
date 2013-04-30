@@ -45,7 +45,6 @@ class VideosController < ApplicationController
 
     video_name = params[:video_name]
 
-    video_location = params[:video_location]
     filename = ''
     #if params[:video]
       #uploaded_io = params[:video][:video_file]
@@ -57,17 +56,18 @@ class VideosController < ApplicationController
     #end
   
     # Test if URL is reachable and get file size
+    video_location = params[:video_location]
     require "net/http"
     begin
       Rack::Utils.escape(video_location)
       url = URI.parse(video_location)
       req = Net::HTTP.new(url.host, url.port)
       res = req.request_head(url.path)
-      if res.code != "200"
+      if res.code == "200"
+        size = res.content_length
+      else
         video_location = nil
         size = 0
-      elsif res.code == "200"
-        size = res.content_length
       end
     rescue Exception
       video_location = nil
