@@ -32,7 +32,6 @@ class Job < ActiveRecord::Base
         ENV['CLUSTER_IP'],
         body: self.as_json(:include => [:video]).to_json, 
         headers:  {
-          'X-Gearman-Background' => 'true',
           'Content-Type' => 'application/json'
         }
       )

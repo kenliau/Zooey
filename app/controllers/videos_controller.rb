@@ -45,7 +45,10 @@ class VideosController < ApplicationController
 
     video_name = params[:video_name]
 
-    filename = ''
+    video_location = params[:video_location]
+    filename = File.basename(video_location)
+    Rack::Utils.escape(filename)
+
     #if params[:video]
       #uploaded_io = params[:video][:video_file]
       #File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
@@ -56,7 +59,6 @@ class VideosController < ApplicationController
     #end
   
     # Test if URL is reachable and get file size
-    video_location = params[:video_location]
     require "net/http"
     begin
       Rack::Utils.escape(video_location)
