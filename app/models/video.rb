@@ -6,7 +6,6 @@ class Video < ActiveRecord::Base
 
   validates :location,
     :presence => {
-      :unless => :filename?,
       message: "or a video file is invalid"
     }
 

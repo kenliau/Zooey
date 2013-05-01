@@ -3,6 +3,7 @@ class VideosController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_video, :only => [:show, :destroy]
   before_filter :owns_video_or_admin, :only => [:show, :destroy]
+  before_filter :smart_add_url_protocol, :only => [:create]
 
   # Sets instance variable for video and checks if it's blank
   def load_video
@@ -16,6 +17,13 @@ class VideosController < ApplicationController
   def owns_video_or_admin 
     unless @video.user == current_user or current_user.is_admin
       return redirect_to '/videos'
+    end
+  end
+
+  def smart_add_url_protocol
+    video_url = params[:video_location]
+    unless video_url[/^http:\/\//] || video_url[/^https:\/\//]
+      params[:video_location] = 'http://' + video_url
     end
   end
 
@@ -75,6 +83,8 @@ class VideosController < ApplicationController
       video_location = nil
       size = 0
     end
+
+    binding.pry
 
     duration = Time.now #temp value
     gop_length = params[:gop_length]
