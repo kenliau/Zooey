@@ -6,4 +6,4 @@ en:
     attributes:
       video:
         filename: "A video file"
-        location: "The Video URL"
+        location: "A Video URL"
