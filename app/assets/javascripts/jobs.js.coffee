@@ -80,3 +80,13 @@ if onJobsList() then $ ->
     console.log("fetching for jobsCollection")
   , 2500
 
+  $ ->
+    $("#select_all").click (event) ->
+      if @checked
+        $(":checkbox").each ->
+          @checked = true
+      else
+        $(":checkbox").each ->
+          @checked = ""
+
+

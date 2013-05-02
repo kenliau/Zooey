@@ -59,19 +59,25 @@ class JobsController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    unless !params[:selected_jobs]
+      Job.destroy(params[:selected_jobs])
+    end
+
+    respond_to do |format|
+      format.html { redirect_to jobs_url }
+      format.json { head :no_content }
+    end
+
+  end
+
   # PUT /jobs/:job_id/progression
   def update_progress
     @job = Job.retrieve_progress(params[:job_id])
     Rails.logger.debug("$$$$$$$$$$$$$$$$ PARAMS FROM CLUSTER $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     Rails.logger.debug(params)
     Job.update_progress(params)
-    #stage = params[:stage]
-    #if (params[:stage] == 'pull')
-      #case params[:status]
-      #when 'start'
-      #when 'update'
-      #when 'finish'
-    #end
+
     respond_to do |format|
       format.html {render :nothing => true}
       format.json {render :nothing => true}
