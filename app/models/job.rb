@@ -45,7 +45,13 @@ class Job < ActiveRecord::Base
     {
       pull: {
         bytes: 0,
-        speed: 0
+        speed: 0,
+        input_codec: '', 
+        input_width: 0, 
+        input_height: 0,
+        input_duration: 0,
+        input_bitrate: 0,
+        input_frames_per_sec: 0
       },
       chunk: {
         chunk_count: 0
@@ -91,6 +97,12 @@ class Job < ActiveRecord::Base
         @job.progression.pull_finish_time = Time.now
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
+        status['pull']['input_codec'] = params[:metrics][:input_codec]
+        status['pull']['input_width'] = params[:metrics][:input_width]
+        status['pull']['input_height'] = params[:metrics][:input_height]
+        status['pull']['input_duration'] = params[:metrics][:input_duration]
+        status['pull']['input_bitrate'] = params[:metrics][:input_bitrate]
+        status['pull']['input_frames_per_sec'] = params[:metrics][:input_frames_per_sec]
       end
     elsif stage == 'chunk'
       case params[:status]
