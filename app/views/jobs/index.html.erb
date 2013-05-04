@@ -20,7 +20,7 @@
 <script id="jobDetailsTemplate" type="text/template">
   {{% pullPercent = status.pull.bytes/video.size * 100 }}
   {{% transcodePercent = status.transcode.bytes/video.size * 100 }}
-  <td><%= check_box_tag "selected_jobs[]", "{{=id}}", false, :id => "checkbox-{{=id}}"  %> </td> 
+  <td> <input id="checkbox-{{=id}}" name="selected_jobs[]" type="checkbox" value="{{=id}}" > </td>
   <td><%= link_to '{{=id}}', 'jobs/{{=id}}' %></td>
   <td class="progressBar" >
     <span id="job-data" data-job-id="{{= id }}"></span>

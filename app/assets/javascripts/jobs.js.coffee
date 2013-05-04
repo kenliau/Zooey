@@ -14,12 +14,18 @@ if onJobsList() then $ ->
   App.Views.Job = Backbone.View.extend
     tagName: 'tr'
     template: template('jobDetailsTemplate')
+    json: ''
     initialize: ->
-      this.model.on('change', @render, this)
+      this.json = this.model.toJSON()
       return
-    render: ->
-      jobTemplate = @template(this.model.toJSON())
-      @$el.html(jobTemplate)
+    render: (checkBoxValue) ->
+      jobTemplate = @template(this.json)
+      @$el.html(jobTemplate).attr('id', 'row-'+this.json.id )
+      checkBox = @$el.find('input:checkbox:first')
+      if checkBoxValue == true
+        checkBox.attr('checked', 'checked')
+      else
+        checkBox.removeAttr('checked')
       return this
 
   App.Models.ProgressBar = Backbone.Model.extend
@@ -34,12 +40,15 @@ if onJobsList() then $ ->
       this.collection.on('add', @addOne, this)
       return
     render: ->
-      this.$el.empty()
       this.collection.each(@addOne, this)
       return this
     addOne: (job) ->
+      jobJSON = job.toJSON()
+      jobID = jobJSON.id
+      checkBoxValue = $('#checkbox-'+jobID).prop('checked')
       jobView = new App.Views.Job({ model: job })
-      this.$el.append(jobView.render().el)
+      $('#row-'+jobID).remove()
+      this.$el.append(jobView.render(checkBoxValue).el)
       return
 
 
