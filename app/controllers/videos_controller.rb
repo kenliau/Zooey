@@ -26,7 +26,7 @@ class VideosController < ApplicationController
     @jobs = Job.by_user(current_user)
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @videos }
+      format.json { render json: @videos.to_json(:include => [:jobs]) }
     end
   end
 
