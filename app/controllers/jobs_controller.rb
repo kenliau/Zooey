@@ -28,7 +28,6 @@ class JobsController < ApplicationController
       job['status'] = JSON.parse(@status)
     }
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs.to_json(:include => [:video, :progression]) }
@@ -65,13 +64,7 @@ class JobsController < ApplicationController
     Rails.logger.debug("$$$$$$$$$$$$$$$$ PARAMS FROM CLUSTER $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     Rails.logger.debug(params)
     Job.update_progress(params)
-    #stage = params[:stage]
-    #if (params[:stage] == 'pull')
-      #case params[:status]
-      #when 'start'
-      #when 'update'
-      #when 'finish'
-    #end
+
     respond_to do |format|
       format.html {render :nothing => true}
       format.json {render :nothing => true}

@@ -84,8 +84,6 @@ class VideosController < ApplicationController
       size = 0
     end
 
-    binding.pry
-
     duration = Time.now #temp value
     gop_length = params[:gop_length]
     frame_distance = params[:frame_distance]
