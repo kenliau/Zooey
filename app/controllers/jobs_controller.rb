@@ -28,7 +28,6 @@ class JobsController < ApplicationController
       job['status'] = JSON.parse(@status)
     }
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs.to_json(:include => [:video, :progression]) }

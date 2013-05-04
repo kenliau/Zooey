@@ -9,7 +9,8 @@ if onJobsList() then $ ->
   App.Collections.Jobs = Backbone.Collection.extend
     model: App.Models.Job
     url: '/jobs'
-
+    comparator: (job) ->
+      return -job.get("id")
 
   App.Views.Job = Backbone.View.extend
     tagName: 'tr'
@@ -50,8 +51,6 @@ if onJobsList() then $ ->
       $('#row-'+jobID).remove()
       this.$el.append(jobView.render(checkBoxValue).el)
       return
-
-
 
   App.Views.ProgressBarsList = Backbone.View.extend
     tagName: 'div'
