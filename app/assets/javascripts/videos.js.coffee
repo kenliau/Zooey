@@ -46,15 +46,25 @@ if onVideosList() then $ ->
       this.$el.append(videoView.render(checkBoxValue).el)
       return
 
-    videosCollection = new VideoCollection()
-    videosCollection.fetch().then(
-      videosList = new VideoListView({ collection: videosCollection })
-      $('#videos-table').append(videosList.render().el)
-    )
+  videosCollection = new VideoCollection()
+  videosCollection.fetch().then(
+    videosList = new VideoListView({ collection: videosCollection })
+    $('#videos-table').append(videosList.render().el)
+  )
 
-    refresher = setInterval ->
-      videosCollection.fetch()
-    , 2500
+  refresher = setInterval ->
+    videosCollection.fetch()
+  , 2500
+
+  $ ->
+    $("#select_all").click (event) ->
+      if @checked
+        $(":checkbox").each ->
+          @checked = true
+      else
+        $(":checkbox").each ->
+          @checked = ""
+
 
 
 

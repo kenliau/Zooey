@@ -141,9 +141,16 @@ class VideosController < ApplicationController
     }
     @jobs.destroy_all
     @video.destroy
+    respond_to do |format|
+      format.html { redirect_to videos_url }
+      format.json { head :no_content }
+    end
+  end
 
-
-
+  def destroy_multiple
+    unless !params[:selected_videos]
+      Video.destroy(params[:selected_videos])
+    end
     respond_to do |format|
       format.html { redirect_to videos_url }
       format.json { head :no_content }
