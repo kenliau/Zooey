@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505212558) do
+ActiveRecord::Schema.define(:version => 20130505222543) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -90,10 +90,15 @@ ActiveRecord::Schema.define(:version => 20130505212558) do
     t.string   "filename"
     t.string   "location"
     t.float    "size"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "duration",   :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "duration",       :default => 0
     t.string   "video_name"
+    t.string   "audio_codec"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "audio_bitrate"
+    t.float    "frames_per_sec"
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"

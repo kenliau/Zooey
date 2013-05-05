@@ -96,16 +96,16 @@ class VideosController < ApplicationController
     @video.save
 
     @job = @video.jobs.new({
-      mux_rate: params[:mux_rate],
-      width: params[:width],
-      height: params[:height],
-      h264_profile: params[:h264_profile],
-      h264_quality: params[:h264_quality],
-      gop_length:  params[:gop_length],
-      frame_distance: params[:frame_distance],
-      audio_codec: params[:audio_codec],
-      audio_bitrate: params[:audio_bitrate],
-      audio_volume: params[:audio_volume]
+      mux_rate: params[:output_mux_rate],
+      width: params[:output_width],
+      height: params[:output_height],
+      h264_profile: params[:output_h264_profile],
+      h264_quality: params[:output_h264_quality],
+      gop_length:  params[:output_gop_length],
+      frame_distance: params[:output_frame_distance],
+      audio_codec: params[:output_audio_codec],
+      audio_bitrate: params[:output_audio_bitrate],
+      audio_volume: params[:output_audio_volume]
     })
 
 

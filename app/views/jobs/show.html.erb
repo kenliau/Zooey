@@ -122,11 +122,11 @@
             </tr>
             <tr>
               <td>Width :</td>
-              <td>-</td>
+              <td><%= @video.width || '-' %></td>
             </tr>
             <tr>
               <td>Height :</td>
-              <td>-</td>
+              <td><%= @video.height || '-' %></td>
             </tr>
             <tr>
               <td>Size :</td>
@@ -142,15 +142,15 @@
             </tr>
             <tr>
               <td>Audio Bitrate :</td>
-              <td>-</td>
+              <td><%= @video.audio_bitrate || '-' %></td>
             </tr>
             <tr>
               <td>Audio Codec :</td>
-              <td>-</td>
+              <td><%= @video.audio_codec || '-' %></td>
             </tr>
              <tr>
               <td>Frames/sec :</td>
-              <td>-</td>
+              <td><%= @video.frames_per_sec || '-' %></td>
             </tr>
             <tr>
               <td>Created At :</td>
@@ -234,19 +234,19 @@
   </tr>
   <tr>
     <td>Width :</td>
-    <td>{{= status.pull.input_width }}</td>
+    <td>{{= video.width || '-'}}</td>
   </tr>
   <tr>
     <td>Height :</td>
-    <td>{{= status.pull.input_height }}</td>
+    <td>{{= video.height || '-'}}</td>
   </tr>
   <tr>
     <td>Size :</td>
-    <td> {{= video.size }}</td>
+    <td> {{= video.size || '-'}}</td>
   </tr>
   <tr>
     <td>Duration :</td>
-    <td>{{= video.duration }} seconds</td>
+    <td>{{= video.duration || 0}} seconds</td>
   </tr>
   <tr>
     <td>Location :</td>
@@ -254,15 +254,15 @@
   </tr>
   <tr>
     <td>Audio Bitrate :</td>
-    <td>{{= status.pull.input_bitrate }} Kbps</td>
+    <td>{{= video.audio_bitrate || '-'}} Kbps</td>
   </tr>
   <tr>
     <td>Audio Codec :</td>
-    <td>{{= status.pull.input_codec }} </td>
+    <td>{{= video.audio_codec || '-'}} </td>
   </tr>
   <tr>
     <td>Frames/sec :</td>
-    <td>{{= status.pull.input_frames_per_sec }} </td>
+    <td>{{= video.frames_per_sec || '-'}} </td>
   </tr>
   <tr>
     <td>Created At :</td>

@@ -49,45 +49,45 @@
 
             <!-- output mux rate -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:mux_rate, "Output Mux Rate") %></div>
-              <div class="three columns"><%= number_field_tag(:mux_rate, 500, :min => 1, :max => 25000) %> </div>
+              <div class="three columns"><%= label_tag(:output_mux_rate, "Output Mux Rate") %></div>
+              <div class="three columns"><%= number_field_tag(:output_mux_rate, 500, :min => 1, :max => 25000) %> </div>
               <div class="six columns"></div>
             </div>
 
             <!-- output resolution width -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:width, "Output Resolution Width") %></div>
-              <div class="three columns"><%= number_field_tag(:width, 1920, :min => 1) %> </div>
+              <div class="three columns"><%= label_tag(:output_width, "Output Resolution Width") %></div>
+              <div class="three columns"><%= number_field_tag(:output_width, 1920, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
            <!-- output resolution height -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:height, "Output Resolution Height") %></div>
-              <div class="three columns"><%= number_field_tag(:height, 1080, :min => 1) %> </div>
+              <div class="three columns"><%= label_tag(:output_height, "Output Resolution Height") %></div>
+              <div class="three columns"><%= number_field_tag(:output_height, 1080, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
            <!-- frame distance -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:frame_distance, "Frame Distance") %></div>
-              <div class="three columns"><%= number_field_tag(:frame_distance, 3, :min => 1) %> </div>
+              <div class="three columns"><%= label_tag(:output_frame_distance, "Frame Distance") %></div>
+              <div class="three columns"><%= number_field_tag(:output_frame_distance, 3, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
             <!-- GOP length -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:gop_length, "GOP Length") %></div>
-              <div class="three columns"><%= number_field_tag(:gop_length, 60, :min => 1) %> </div>
+              <div class="three columns"><%= label_tag(:output_gop_length, "GOP Length") %></div>
+              <div class="three columns"><%= number_field_tag(:output_gop_length, 60, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
 
           <!-- H264 Profile -->
            <div class="row collapse">
-              <div class="three columns"><%= label_tag(:h264_profile, "H264 Profile") %></div>
+              <div class="three columns"><%= label_tag(:output_h264_profile, "H264 Profile") %></div>
               <div class="three columns">
-                <%= select_tag(:h264_profile, options_for_select([
+                <%= select_tag(:output_h264_profile, options_for_select([
                                                                  ['BASELINE (66)', "baseline"], 
                                                                  ['MAIN (77)', "main"],
                                                                  ['HIGH (100)', "high"]])) %> </div>
@@ -96,18 +96,18 @@
 
            <!-- H264 Quality -->
            <div class="row collapse">
-              <div class="three columns"><%= label_tag(:h264_quality, "H264 Quality") %></div>
+              <div class="three columns"><%= label_tag(:output_h264_quality, "H264 Quality") %></div>
               <div class="three columns">
-                <%= select_tag(:h264_quality, options_for_select([
+                <%= select_tag(:output_h264_quality, options_for_select([
                                                                  ['17', "17"]])) %> </div>
               <div class="six columns"> </div>
             </div>
 
             <!-- Audio Codec -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:audio_codec, "Audio Codec") %></div>
+              <div class="three columns"><%= label_tag(:output_audio_codec, "Audio Codec") %></div>
               <div class="three columns">
-                <%= select_tag(:audio_codec, options_for_select([
+                <%= select_tag(:output_audio_codec, options_for_select([
                                                                 ['PASSTHROUGH (DEFAULT)', "passthrough"], 
                                                                 ['AACLC', "aaclc"]])) %> </div>
               <div class="six columns"> </div>
@@ -115,9 +115,9 @@
 
             <!-- Audio Bitrate -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:audio_bitrate, "Audio Bitrate") %></div>
+              <div class="three columns"><%= label_tag(:output_audio_bitrate, "Audio Bitrate") %></div>
               <div class="four columns">
-                <%= select_tag(:audio_bitrate, options_for_select([
+                <%= select_tag(:output_audio_bitrate, options_for_select([
                                                                 ['24 kbps MPEG4 HE-AAC v2', '24'],
                                                                 ['32 kbps MPEG4 HE-AAC v2', '32'],
                                                                 ['40 kbps MPEG4 HE-AAC v2', '40'],
@@ -130,8 +130,8 @@
 
             <!-- audio volume -->
             <div class="row collapse">
-              <div class="three columns"><%= label_tag(:audio_volume, "Audio Volume") %></div>
-              <div class="three columns"><%= number_field_tag(:audio_volume, 100, :min => 100, :max => 500) %> </div>
+              <div class="three columns"><%= label_tag(:output_audio_volume, "Audio Volume") %></div>
+              <div class="three columns"><%= number_field_tag(:output_audio_volume, 100, :min => 100, :max => 500) %> </div>
               <div class="six columns"></div>
             </div>
 

@@ -79,7 +79,6 @@ if onJobShow() then $ ->
   vent.on 'progress:change', (pull, transcode, size) ->
     progressBars.each ->
       data = if $(this).hasClass('pull-progress-bar') then pull else transcode
-      console.log(data)
       percentage = (data.bytes / size) * 100
       if percentage > 100 then percentage = 100
       percentage = "#{percentage}%"
