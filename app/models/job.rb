@@ -1,6 +1,6 @@
 class Job < ActiveRecord::Base
   default_scope order('created_at DESC')
-  has_one :progression
+  has_one :progression, :dependent => :destroy
   belongs_to :video
   attr_accessible :audio_bitrate, :audio_codec, :audio_volume, :finished_at, :h264_profile, :h264_quality, :height, :mux_rate, :width, :pull_speed, :pull_bytes, :transcode_speed, :transcode_bytes, :chunks
 

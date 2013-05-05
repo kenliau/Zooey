@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :videos
+  has_many :videos, :dependent => :destroy
 
   # devise :validatable handles password length and regex
   # configurable in config/initializers/devise.rb
