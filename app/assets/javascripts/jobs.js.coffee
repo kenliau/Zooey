@@ -1,8 +1,9 @@
 if onJobsList() then $ ->
-  console.log('executing jobsList backbone')
+
+  vent = _.extend({}, Backbone.Events)
+
   App.Models.Job = Backbone.Model.extend({
     initialize: ->
-      console.log('creating a job model')
       return
   })
 
@@ -29,11 +30,6 @@ if onJobsList() then $ ->
         checkBox.removeAttr('checked')
       return this
 
-  App.Models.ProgressBar = Backbone.Model.extend
-    initialize: ->
-      console.log('creating a progressBar')
-      return
-
   App.Views.JobsList = Backbone.View.extend
     tagName: 'tbody'
     initialize: ->
@@ -50,32 +46,14 @@ if onJobsList() then $ ->
       jobView = new App.Views.Job({ model: job })
       $('#row-'+jobID).remove()
       this.$el.append(jobView.render(checkBoxValue).el)
+      vent.trigger(
+        'progress:change',
+        jobJSON.id,
+        jobJSON.status.pull,
+        jobJSON.status.transcode,
+        jobJSON.video.size
+      )
       return
-
-  App.Views.ProgressBarsList = Backbone.View.extend
-    tagName: 'div'
-    initialize: ->
-      this.collection.on('add', @createOne, this)
-      return
-    render: ->
-      this.collection.each(@createOne, this)
-      return this
-    createOne: (progressBar) ->
-      progressBarView = new App.Views.ProgressBar({ model: progressBar })
-      this.$el.append(progressBarView.render().el)
-      return
-
-  App.Views.ProgressBar = Backbone.View.extend
-    tagName: 'div'
-    className: 'nice round progress twelve job-bar'
-    template: template('progressBarTemplate')
-    initialize: ->
-      this.model.on('change', @render, this)
-      return
-    render: ->
-      progressBarTemplate = @template(this.model.toJSON())
-      @$el.html(progressBarTemplate)
-      return this
 
   jobsCollection = new App.Collections.Jobs()
   jobsCollection.fetch().then(
@@ -85,8 +63,18 @@ if onJobsList() then $ ->
 
   refresher = setInterval ->
     jobsCollection.fetch()
-    console.log("fetching for jobsCollection")
-  , 2500
+  , 3000
+
+
+  progressBars = $('.progress')
+
+  vent.on 'progress:change', (id, pull, transcode, size) ->
+    $('.progress').each ->
+      data = if $(this).hasClass('pull-progress-bar') then pull else transcode
+      percentage = (data.bytes / size) * 100
+      if percentage > 100 then percentage = 100
+      percentage = "#{percentage}%"
+      $(this).find("##{id}-meter").css(width: percentage)
 
   $ ->
     $("#select_all").click (event) ->

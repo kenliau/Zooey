@@ -11,12 +11,6 @@
   </div>
 </div>
 
-<script id="progressBarTemplate" type="text/template">
-    <span id="job-data" data-job-id="{{= id }}"></span>
-    <span style="width: {{= status.transcode.bytes/video.size * 100 }}%;" class="meter"></span> 
-</script>
-
-
 <script id="jobDetailsTemplate" type="text/template">
   {{% pullPercent = status.pull.bytes/video.size * 100 }}
   {{% transcodePercent = status.transcode.bytes/video.size * 100 }}
@@ -24,11 +18,11 @@
   <td><%= link_to '{{=id}}', 'jobs/{{=id}}' %></td>
   <td class="progressBar" >
     <span id="job-data" data-job-id="{{= id }}"></span>
-    <div class="radius  progress twelve" >
-      <span style="width:{{% if(pullPercent > 100) { }} {{=100}}{{% } else { }} {{=pullPercent}}{{% } }}%;" class="meter"></span> 
+    <div class="radius pull-progress-bar progress twelve" >
+      <span style="width: 0%" id="{{= id }}-meter" class="meter"></span> 
     </div>
-    <div class="radius success progress twelve" >
-     <span style="width:{{% if(transcodePercent > 100) { }} {{=100}}{{% } else { }} {{=transcodePercent}}{{% } }}%;" class="meter"></span> 
+    <div class="radius success transcode-progress-bar progress twelve" >
+      <span style="width: 0%" id="{{= id }}-meter" class="meter"></span> 
     </div>
 
   </td>

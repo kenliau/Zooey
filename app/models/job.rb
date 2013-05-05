@@ -33,7 +33,6 @@ class Job < ActiveRecord::Base
         ENV['CLUSTER_IP'],
         body: self.as_json(:include => [:video]).to_json, 
         headers:  {
-          'X-Gearman-Background' => 'true',
           'Content-Type' => 'application/json'
         }
       )
@@ -47,7 +46,13 @@ class Job < ActiveRecord::Base
     {
       pull: {
         bytes: 0,
-        speed: 0
+        speed: 0,
+        input_codec: '', 
+        input_width: 0, 
+        input_height: 0,
+        input_duration: 0,
+        input_bitrate: 0,
+        input_frames_per_sec: 0
       },
       chunk: {
         chunk_count: 0
@@ -74,6 +79,7 @@ class Job < ActiveRecord::Base
     # Needs to format params
     jobID = params[:job_id]
     @job = Job.find(jobID)
+    @video = Video.find(@job.video_id)
     status = $redis.get(self.redis_key(jobID))
     status = JSON.parse(status)
     stage = params[:stage]
@@ -91,8 +97,15 @@ class Job < ActiveRecord::Base
       when 'finish'
         puts 'pull finish'
         @job.progression.pull_finish_time = Time.now
+        @video.duration = params[:metrics][:input_duration]
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
+        status['pull']['input_codec'] = params[:metrics][:input_codec]
+        status['pull']['input_width'] = params[:metrics][:input_width]
+        status['pull']['input_height'] = params[:metrics][:input_height]
+        status['pull']['input_duration'] = params[:metrics][:input_duration]
+        status['pull']['input_bitrate'] = params[:metrics][:input_bitrate]
+        status['pull']['input_frames_per_sec'] = params[:metrics][:input_frames_per_sec]
       end
     elsif stage == 'chunk'
       case params[:status]
@@ -156,6 +169,7 @@ class Job < ActiveRecord::Base
     if (params[:status] === 'start' || params[:status] === 'finish')
       @job.progression.save
       @job.save
+      @video.save
     end
   end
 

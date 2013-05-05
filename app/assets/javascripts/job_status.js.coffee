@@ -1,11 +1,21 @@
 if onJobShow() then $ ->
-  console.log('onJobShow function is called')
 
   vent = _.extend({}, Backbone.Events)
 
 
   class Job extends Backbone.Model
     urlRoot: '/jobs'
+
+  class VideoView extends Backbone.View
+    el: '#video-table-body'
+    initialize: ->
+      @listenTo(@model, 'change', @render)
+      return
+    template: template('video-template')
+    render: =>
+      current_video = @model.toJSON()
+      $(@el).html(@template(current_video))
+      return this
 
 
   class JobView extends Backbone.View
@@ -56,6 +66,7 @@ if onJobShow() then $ ->
 
   job = new Job id: onJobShow()
   jobView = new JobView model: job
+  videoView = new VideoView model: job
   progressView = new ProgressView model: job
   progressBarView = new ProgressBarView model: job
 

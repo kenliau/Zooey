@@ -1,6 +1,19 @@
 // Place all the styles related to the jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin table-base {
+  td {
+  }
+}
+
+#video-table, #job-table {
+  @include table-base;
+  td:first-child {
+    font-weight: bold;
+  }
+}
+
 #jobs-table tr td {
   text-align: center;
 }
+

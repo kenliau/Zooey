@@ -1,12 +1,12 @@
 class Video < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
+  default_scope order('created_at DESC')
   belongs_to :user
   has_many :jobs
   attr_accessible :duration, :video_name, :filename, :frame_distance, :gop_length, :location, :size
 
   validates :location,
     :presence => {
-      :unless => :filename?,
       message: "or a video file is invalid"
     }
 

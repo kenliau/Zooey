@@ -3,6 +3,7 @@ class VideosController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_video, :only => [:show, :destroy]
   before_filter :owns_video_or_admin, :only => [:show, :destroy]
+  before_filter :smart_add_url_protocol, :only => [:create]
 
   # Sets instance variable for video and checks if it's blank
   def load_video
@@ -16,6 +17,13 @@ class VideosController < ApplicationController
   def owns_video_or_admin 
     unless @video.user == current_user or current_user.is_admin
       return redirect_to '/videos'
+    end
+  end
+
+  def smart_add_url_protocol
+    video_url = params[:video_location]
+    unless video_url[/^http:\/\//] || video_url[/^https:\/\//]
+      params[:video_location] = 'http://' + video_url
     end
   end
 
@@ -45,7 +53,10 @@ class VideosController < ApplicationController
 
     video_name = params[:video_name]
 
-    filename = ''
+    video_location = params[:video_location]
+    filename = File.basename(video_location)
+    Rack::Utils.escape(filename)
+
     #if params[:video]
       #uploaded_io = params[:video][:video_file]
       #File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
@@ -56,7 +67,6 @@ class VideosController < ApplicationController
     #end
   
     # Test if URL is reachable and get file size
-    video_location = params[:video_location]
     require "net/http"
     begin
       Rack::Utils.escape(video_location)
@@ -74,7 +84,7 @@ class VideosController < ApplicationController
       size = 0
     end
 
-    duration = Time.now #temp value
+    duration = 0
     gop_length = params[:gop_length]
     frame_distance = params[:frame_distance]
     
