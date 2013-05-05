@@ -84,5 +84,3 @@ if onJobsList() then $ ->
       else
         $(":checkbox").each ->
           @checked = ""
-
-

@@ -5,51 +5,74 @@
   </div>
 </div>
 
+<script id="videoDetailsTemplate" type="text/template">
+  <div class="title">
+    <div class="row">
+      <div class="one columns">
+        <input id="checkbox-{{=id}}" name="selected_videos[]" type="checkbox" value="{{=id}}">
+      </div>
+      <div class="three columns">
+        <%= link_to '{{=video_name}}', 'videos/{{=id}}' %>
+      </div>
+      <div class="three columns">
+        {{=size}}
+      </div>
+      <div class="three columns">
+        {{=created_at}}
+      </div>
+      <div class="two columns">
+        <%= link_to image_tag("trash.png"), 'videos/{{=id}}', method: :delete, data: { confirm: 'Are you sure you want to destroy this video? All jobs associated with this video will be deleted as well.' } %>
+      </div>
+    </div>
+  </div>
 
-<div class="row">
-  <div class="twelve columns">
-    <ul class="accordion">
-      <% @videos.each do |video| %>
-        <li>
-          <div class="title">
-            <div class="row">
-              <div class="three columns">
-                <%= link_to video.video_name, video %>
-              </div>
-              <div class="three columns">
-                <%= number_to_human_size(video.size) %>
-              </div>
-               <div class="three columns">
-                <%= video.created_at %>
-              </div>
-              <div class="three columns">
-                <%= link_to image_tag("trash.png"), video, method: :delete, data: { confirm: 'Are you sureyou want to destroy this video? All jobs associated with this video will be deleted as well.' } %>
-              </div>
-            </div>
+  <div class="content">
+    <h6>All Jobs for {{=video_name}} : </h6>
+    <ul class="block-grid three-up mobile-five-up">
+      {{% _.each(jobs, function(i) { }}
+        <li> <%= link_to "Job {{=i.id}}" , "jobs/{{=i.id}}" %></li>
+      {{% }); }}
 
-          </div>
-          <div class="content">
-            <h6>All Jobs for <%= video.video_name %> : </h6>
-            <ul class="block-grid three-up mobile-five-up">
-              <% @jobs.each do |job| %>
-                <% if job.video_id == video.id %>
-                  <li> <%= link_to "Job \##{job.id}", job %></li>
-                <% end %>
-              <% end %>
-            </ul>
-          </div>
-        </li>
-      <% end %>
     </ul>
   </div>
-</div>
 
+</script>
+
+<div>
+  <div class="row">
+    <div class="twelve columns">
+      <table class="twelve columns">
+          <thead>
+            <tr>
+              <td><input type="checkbox" id="select_all"> </td> 
+              <td>Video Name</td>
+              <td>Video Size</td>
+              <td>Created At</td>
+              <td>Delete</td>
+            </tr>
+          </thead>
+      </table>
+    </div>
+
+    <%= form_tag destroy_multiple_videos_path,  :method => :delete, data: {confirm: 'Are you sure you want to delete the selected videos?' } do %>
+
+      <div id="videos-table" class="twelve columns">
+      </div>
+      <div class="twelve columns">
+        <%= submit_tag "Delete Selected", :class => "small radius alert button"%>
+        <hr />
+      </div>
+    <% end %>
+
+  </div>
+</div>
 
 <div class="row">
   <div class="twelve columns">
     <%= link_to 'Upload New Video', new_video_path, :class => "small radius button" %>
   </div>
-<div>
-
-
 </div>
+
+
+
+

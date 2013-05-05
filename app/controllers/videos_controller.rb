@@ -34,7 +34,7 @@ class VideosController < ApplicationController
     @jobs = Job.by_user(current_user)
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @videos }
+      format.json { render json: @videos.to_json(:include => [:jobs]) }
     end
   end
 
@@ -151,9 +151,16 @@ class VideosController < ApplicationController
     }
     @jobs.destroy_all
     @video.destroy
+    respond_to do |format|
+      format.html { redirect_to videos_url }
+      format.json { head :no_content }
+    end
+  end
 
-
-
+  def destroy_multiple
+    unless !params[:selected_videos]
+      Video.destroy(params[:selected_videos])
+    end
     respond_to do |format|
       format.html { redirect_to videos_url }
       format.json { head :no_content }

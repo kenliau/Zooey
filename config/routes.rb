@@ -2,6 +2,12 @@ Zipreel::Application.routes.draw do
   devise_for :users
 
   resources 'documentations', path: 'docs'
+
+  resources :videos do
+    collection do
+      delete 'destroy_multiple'
+    end
+  end
   resources 'videos', path: 'videos'
   
   resources :jobs do
@@ -9,6 +15,8 @@ Zipreel::Application.routes.draw do
       delete 'destroy_multiple'
     end
   end
+
+
 
 
   get 'jobs/progressions/' => 'progressions#index'
