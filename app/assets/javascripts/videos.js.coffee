@@ -66,17 +66,6 @@ if onVideosList() then $ ->
           @checked = ""
 
 
-
-
-
-
-
-
-
-
-
-
-
 if onVideoNew() then $ ->
   video_file = $('#video_video_file')
   video_url = $('#video_location')
@@ -100,5 +89,4 @@ if onVideoNew() then $ ->
     if(video_url.val() != '')
       video_file.attr("disabled", "disabled")
 
-  
   return
