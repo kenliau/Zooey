@@ -85,16 +85,12 @@ class VideosController < ApplicationController
     end
 
     duration = 0
-    gop_length = params[:gop_length]
-    frame_distance = params[:frame_distance]
-    
+
     @video = @user.videos.new({
       video_name: video_name,
       filename: filename,
       location: video_location,
       duration: duration,
-      gop_length: gop_length,
-      frame_distance: frame_distance,
       size: size
     })
     @video.save
@@ -105,6 +101,8 @@ class VideosController < ApplicationController
       height: params[:height],
       h264_profile: params[:h264_profile],
       h264_quality: params[:h264_quality],
+      gop_length:  params[:gop_length],
+      frame_distance: params[:frame_distance],
       audio_codec: params[:audio_codec],
       audio_bitrate: params[:audio_bitrate],
       audio_volume: params[:audio_volume]

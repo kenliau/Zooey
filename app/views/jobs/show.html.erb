@@ -134,7 +134,7 @@
             </tr>
             <tr>
               <td>Duration :</td>
-              <td><%= @video.duration %></td>
+              <td><%= @video.duration %> seconds </td>
             </tr>
             <tr>
               <td>Location :</td>
@@ -182,6 +182,15 @@
               <td>H264 Quality : </td>
               <td><%= @job.h264_quality %></td>
             </tr>
+            <tr>
+              <td>Frame Distance : </td>
+              <td><%= @job.frame_distance %></td>
+            </tr>
+            <tr>
+              <td>GOP Length : </td>
+              <td><%= @job.gop_length %></td>
+            </tr>
+
             <tr>
               <td>Audio Codec :</td>
               <td><%= @job.audio_codec %></td>
@@ -233,7 +242,7 @@
   </tr>
   <tr>
     <td>Size :</td>
-    <td>{{= video.size }}</td>
+    <td> {{= video.size }}</td>
   </tr>
   <tr>
     <td>Duration :</td>
@@ -241,7 +250,7 @@
   </tr>
   <tr>
     <td>Location :</td>
-    <td><a href="{{= video.duration }}"> {{= video.filename }} </a> </td>
+    <td><a href="{{= video.location }}"> {{= video.filename }} </a> </td>
   </tr>
   <tr>
     <td>Audio Bitrate :</td>
@@ -255,10 +264,6 @@
     <td>Frames/sec :</td>
     <td>{{= status.pull.input_frames_per_sec }} </td>
   </tr>
-
-
-
-
   <tr>
     <td>Created At :</td>
     <td>{{= created_at }}</td>
@@ -282,6 +287,15 @@
     <td>H264 Quality : </td>
     <td>{{= h264_quality }}</td>
   </tr>
+  <tr>
+    <td>Frame Distance : </td>
+    <td>{{= frame_distance }}</td>
+  </tr>
+  <tr>
+    <td>GOP Length : </td>
+    <td>{{= gop_length }}</td>
+  </tr>
+
   <tr>
     <td>Audio Codec :</td>
     <td>{{= audio_codec }}</td>

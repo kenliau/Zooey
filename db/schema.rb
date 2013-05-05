@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425075637) do
+ActiveRecord::Schema.define(:version => 20130505212558) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -33,10 +33,12 @@ ActiveRecord::Schema.define(:version => 20130425075637) do
     t.integer  "audio_volume"
     t.integer  "mux_rate"
     t.datetime "finished_at"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "output_url"
     t.integer  "output_size"
+    t.integer  "frame_distance"
+    t.integer  "gop_length"
   end
 
   add_index "jobs", ["video_id"], :name => "index_jobs_on_video_id"
@@ -88,11 +90,9 @@ ActiveRecord::Schema.define(:version => 20130425075637) do
     t.string   "filename"
     t.string   "location"
     t.float    "size"
-    t.integer  "frame_distance"
-    t.integer  "gop_length"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.integer  "duration",       :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "duration",   :default => 0
     t.string   "video_name"
   end
 

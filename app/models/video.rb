@@ -3,7 +3,7 @@ class Video < ActiveRecord::Base
   default_scope order('created_at DESC')
   belongs_to :user
   has_many :jobs, :dependent => :destroy
-  attr_accessible :duration, :video_name, :filename, :frame_distance, :gop_length, :location, :size
+  attr_accessible :duration, :video_name, :filename, :location, :size
 
   validates :location,
     :presence => {
@@ -13,12 +13,6 @@ class Video < ActiveRecord::Base
   validates :video_name,
     :presence => {
       message: "is a required field"
-    }
-
-  validates :frame_distance, :gop_length,
-    :numericality => {
-      :only_integer => true,
-      :greater_than => 0
     }
 
   validates :size,

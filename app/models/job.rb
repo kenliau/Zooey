@@ -2,14 +2,14 @@ class Job < ActiveRecord::Base
   default_scope order('created_at DESC')
   has_one :progression, :dependent => :destroy
   belongs_to :video
-  attr_accessible :audio_bitrate, :audio_codec, :audio_volume, :finished_at, :h264_profile, :h264_quality, :height, :mux_rate, :width, :pull_speed, :pull_bytes, :transcode_speed, :transcode_bytes, :chunks
+  attr_accessible :audio_bitrate, :audio_codec, :audio_volume, :finished_at, :h264_profile, :h264_quality, :height, :mux_rate, :width, :pull_speed, :pull_bytes, :transcode_speed, :transcode_bytes, :chunks, :frame_distance, :gop_length 
 
   validates :audio_bitrate, :audio_codec, :audio_volume, :h264_profile, :h264_quality, :height, :mux_rate, :width,
     :presence => {
       message: "is a required field"
     }
 
-  validates :height, :width, :audio_bitrate, :audio_volume,
+  validates :height, :width, :audio_bitrate, :audio_volume, :frame_distance, :gop_length,
     :numericality => {
       :only_integer => true,
       :greater_than_or_equal_to => 1
