@@ -78,6 +78,7 @@ class Job < ActiveRecord::Base
     # Needs to format params
     jobID = params[:job_id]
     @job = Job.find(jobID)
+    @video = Video.find(@job.video_id)
     status = $redis.get(self.redis_key(jobID))
     status = JSON.parse(status)
     stage = params[:stage]
@@ -95,6 +96,7 @@ class Job < ActiveRecord::Base
       when 'finish'
         puts 'pull finish'
         @job.progression.pull_finish_time = Time.now
+        @video.duration = params[:metrics][:input_duration]
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
         status['pull']['input_codec'] = params[:metrics][:input_codec]
@@ -166,6 +168,7 @@ class Job < ActiveRecord::Base
     if (params[:status] === 'start' || params[:status] === 'finish')
       @job.progression.save
       @job.save
+      @video.save
     end
   end
 
