@@ -2,18 +2,17 @@ if onJobsList() then $ ->
 
   vent = _.extend({}, Backbone.Events)
 
-  App.Models.Job = Backbone.Model.extend({
+  class JobModel extends Backbone.Model
     initialize: ->
       return
-  })
 
-  App.Collections.Jobs = Backbone.Collection.extend
-    model: App.Models.Job
+  class JobsCollection extends Backbone.Collection
+    model: JobModel
     url: '/jobs'
     comparator: (job) ->
       return -job.get("id")
 
-  App.Views.Job = Backbone.View.extend
+  class JobView extends Backbone.View
     tagName: 'tr'
     template: template('jobDetailsTemplate')
     json: ''
@@ -30,7 +29,7 @@ if onJobsList() then $ ->
         checkBox.removeAttr('checked')
       return this
 
-  App.Views.JobsList = Backbone.View.extend
+  class JobsListView extends Backbone.View
     tagName: 'tbody'
     initialize: ->
       this.collection.on('change', @render, this)
@@ -43,7 +42,7 @@ if onJobsList() then $ ->
       jobJSON = job.toJSON()
       jobID = jobJSON.id
       checkBoxValue = $('#checkbox-'+jobID).prop('checked')
-      jobView = new App.Views.Job({ model: job })
+      jobView = new JobView({ model: job })
       $('#row-'+jobID).remove()
       this.$el.append(jobView.render(checkBoxValue).el)
       vent.trigger(
@@ -55,9 +54,9 @@ if onJobsList() then $ ->
       )
       return
 
-  jobsCollection = new App.Collections.Jobs()
+  jobsCollection = new JobsCollection()
   jobsCollection.fetch().then(
-    jobsList = new App.Views.JobsList({ collection: jobsCollection })
+    jobsList = new JobsListView({ collection: jobsCollection })
     $('#jobs-table').append(jobsList.render().el)
   )
 
