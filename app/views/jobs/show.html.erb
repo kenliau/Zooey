@@ -124,9 +124,17 @@
           data-merger-start="<%= @job.progression.merger_start_time %>"
           data-merger-finish="<%= @job.progression.merger_finish_time %>"
         ></canvas>
+        <div class="right milestone-legend">
+          <fieldset><legend>Legend</legend>
+          <div class="pulling">Pulling</div>
+          <div class="chunking">Chunking</div>
+          <div class="transcoding">Transcoding</div>
+          <div class="merging">Merging</div>
+        </fieldset>
+        </div>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="twelve columns">
       <ul class="block-grid two-up mobile-one-up">

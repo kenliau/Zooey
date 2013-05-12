@@ -1,6 +1,28 @@
 $light_blue: #2BA6CB;
 $gray: #A9A9A9;
 
+.milestone-legend {
+  div {
+    padding-left: 5px;
+    margin-bottom: 5px;
+    &.pulling {
+      border-left: 15px solid #F7464A;
+    }
+
+    &.chunking {
+      border-left: 15px solid #D4C739
+    }
+
+    &.transcoding {
+      border-left: 15px solid #B3F2F9;
+    }
+
+    &.merging {
+      border-left: 15px solid #F209D4;
+    }
+  }
+}
+
 .job_status_bar {
   min-height: 60px;
   padding: 30px;
