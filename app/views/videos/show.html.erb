@@ -11,16 +11,11 @@
     <div class="twelve columns">
       <ul class="block-grid two-up mobile-one-up">
         <li>
-          <div class="flex-video">
-            <iframe width="420" height="315" src="<%= @video.location %>" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </li>
-        <li>
           <table id="video-table" class="twelve columns">
             <tbody>
               <tr>
                 <td>Filename :</td>
-                <td><%= @video.video_name %></td>
+                <td><%= @video.filename %></td>
               </tr>
               <tr>
                 <td>Size :</td>
@@ -45,7 +40,7 @@
               </tr>
               <tr>
                 <td>Audio Bitrate :</td>
-                <td><%= @video.audio_bitrate || '-' %></td>
+                <td><%= @video.audio_bitrate || '-' %> Kbps</td>
               </tr>
               <tr>
                 <td>Audio Codec :</td>

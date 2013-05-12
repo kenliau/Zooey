@@ -26,8 +26,8 @@
     </div>
 
   </td>
-  <td>{{= output_size }}</td>
-  <td>{{= output_url }}</td>
+  <td>{{= readablizeBytes(output_size) }}</td>
+  <td> <a href="{{= output_url }}"> {{= output_url}} </a> </td>
   <td>
       {{% if(finished_at != null) { }}
         {{='Job Complete'}}

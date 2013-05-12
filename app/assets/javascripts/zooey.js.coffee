@@ -31,3 +31,9 @@ window.onVideoNew = ->
 # Prevent browser from caching ajax requests
 $.ajaxSetup
   cache: false
+
+window.readablizeBytes = (bytes) ->
+  s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
+  e = Math.floor(Math.log(bytes) / Math.log(1024))
+  (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e]
+

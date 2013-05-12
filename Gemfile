@@ -16,6 +16,8 @@ gem 'redcarpet'
 gem 'albino'
 gem 'pygmentize'
 gem 'httparty'
+gem 'momentjs-rails'
+gem 'chart-js-rails'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'

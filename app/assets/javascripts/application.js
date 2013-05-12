@@ -16,4 +16,6 @@
 //= require underscore
 //= require backbone
 //= require zooey
+//= require moment
+//= require chart
 //= require_tree .
