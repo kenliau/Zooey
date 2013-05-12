@@ -8,6 +8,7 @@ if onJobShow() then $ ->
 
     outputSize ||= parseInt(chartElement.data('output-size'), 10)
     originalSize ||= parseInt(chartElement.data('original-size'), 10)
+    console.log(outputSize, originalSize)
     ctx = chartElement.get(0).getContext("2d")
     data = [
       value: outputSize
