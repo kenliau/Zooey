@@ -107,34 +107,40 @@
 
   <% @video = Video.find(@job.video_id) %>
 
-  <div class="row">
-    <div class="six columns">
-      <h4 class="subheader">Compression Ratio<h4>
-      <canvas data-original-size="120000" data-output-size="40000" id="sizeChart" width="400" height="400"></canvas>
-    </div>
-    <div class="six columns">
-      <h4 class="subheader">Time Breakdown<h4>
-      <canvas id="milestonesChart" width="400" height="400"
-          data-pull-start="<%= @job.progression.pull_start_time %>"
-          data-pull-finish="<%= @job.progression.pull_finish_time %>"
-          data-chunker-start="<%= @job.progression.chunker_start_time %>"
-          data-chunker-finish="<%= @job.progression.chunker_finish_time %>"
-          data-tcoder-start="<%= @job.progression.tcoder_start_time %>"
-          data-tcoder-finish="<%= @job.progression.tcoder_finish_time %>"
-          data-merger-start="<%= @job.progression.merger_start_time %>"
-          data-merger-finish="<%= @job.progression.merger_finish_time %>"
-        ></canvas>
+  <% if @job.finished_at %>
+    <div class="row">
+      <div class="six columns">
+        <h4 class="subheader">Compression Ratio<h4>
+        <canvas id="sizeChart" width="400" height="400"
+          data-original-size="<%= @video.size %>" 
+          data-output-size="<%= @job.output_size %>">
+        </canvas>
+      </div>
+      <div class="six columns">
+        <h4 class="subheader">Time Breakdown<h4>
+        <canvas id="milestonesChart" width="400" height="400"
+            data-pull-start="<%= @job.progression.pull_start_time %>"
+            data-pull-finish="<%= @job.progression.pull_finish_time %>"
+            data-chunker-start="<%= @job.progression.chunker_start_time %>"
+            data-chunker-finish="<%= @job.progression.chunker_finish_time %>"
+            data-tcoder-start="<%= @job.progression.tcoder_start_time %>"
+            data-tcoder-finish="<%= @job.progression.tcoder_finish_time %>"
+            data-merger-start="<%= @job.progression.merger_start_time %>"
+            data-merger-finish="<%= @job.progression.merger_finish_time %>" >
+        </canvas>
         <div class="right milestone-legend">
-          <fieldset><legend>Legend</legend>
-          <div class="pulling">Pulling</div>
-          <div class="chunking">Chunking</div>
-          <div class="transcoding">Transcoding</div>
-          <div class="merging">Merging</div>
-        </fieldset>
+          <fieldset>
+            <legend>Legend</legend>
+            <div class="pulling">Pulling</div>
+            <div class="chunking">Chunking</div>
+            <div class="transcoding">Transcoding</div>
+            <div class="merging">Merging</div>
+          </fieldset>
         </div>
+      </div>
     </div>
-  </div>
-
+  <% end %>
+  
   <div class="row">
     <div class="twelve columns">
       <ul class="block-grid two-up mobile-one-up">
@@ -343,7 +349,7 @@
   </tr>
   <tr>
     <td>Output Size :</td>
-    <td>{{= output_size}}</td>
+    <td>{{= readablizeBytes(output_size) }}</td>
   </tr>
   <tr>
     <td>Created At :</td>
