@@ -2,6 +2,24 @@ if onJobShow() then $ ->
 
   vent = _.extend({}, Backbone.Events)
 
+  renderSizeChart = (originalSize, outputSize) ->
+    chartElement = $("#sizeChart")
+    if chartElement.length < 1 then return
+
+    outputSize ||= parseInt(chartElement.data('output-size'), 10)
+    originalSize ||= parseInt(chartElement.data('original-size'), 10)
+    console.log(outputSize, originalSize)
+    ctx = chartElement.get(0).getContext("2d")
+    data = [
+      value: outputSize
+      color: "#F7464A"
+    ,
+      value: originalSize
+      color: "#D4C739"
+    ]
+    sizeChart = new Chart(ctx).Doughnut(data)
+
+  renderSizeChart()
 
   class Job extends Backbone.Model
     urlRoot: '/jobs'
@@ -92,3 +110,4 @@ if onJobShow() then $ ->
     bar_section = $('progress-bars')
     if (bar_section.length > 0)
       bar_section.html()
+
