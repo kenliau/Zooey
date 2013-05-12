@@ -19,7 +19,40 @@ if onJobShow() then $ ->
     ]
     sizeChart = new Chart(ctx).Doughnut(data)
 
+  renderMilestonesChart = (milestones) ->
+    chartElement = $('#milestonesChart')
+    if chartElement.length < 1 then return
+
+    milestones.pullStart      ||= chartElement.data('pull-start')
+    milestones.pullFinish     ||= chartElement.data('pull-finish')
+    milestones.chunkerStart   ||= chartElement.data('chunker-start')
+    milestones.chunkerFinish  ||= chartElement.data('chunker-finish')
+    milestones.tcoderStart    ||= chartElement.data('tcoder-start')
+    milestones.tcoderFinish   ||= chartElement.data('tcoder-finish')
+    milestones.mergerStart    ||= chartElement.data('merger-start')
+    milestones.mergerFinish   ||= chartElement.data('merger-finish')
+
+    ctx = chartElement.get(0).getContext('2d')
+    data = [
+      value: (Date.parse(milestones.pullFinish) - Date.parse(milestones.pullStart)) / 1000
+      color: "#F7464A"
+    ,
+      value: (Date.parse(milestones.chunkerFinish) - Date.parse(milestones.chunkerStart)) / 1000
+      color: "#D4C739"
+    ,
+      value: (Date.parse(milestones.tcoderFinish) - Date.parse(milestones.tcoderStart)) / 1000
+      color: "#B3F2F9"
+    ,
+      value: (Date.parse(milestones.mergerFinish) - Date.parse(milestones.mergerStart)) / 1000
+      color: "#F209D4"
+    ]
+    console.log(data)
+    polarChart = new Chart(ctx).PolarArea(data, {
+    })
+
+
   renderSizeChart()
+  renderMilestonesChart({})
 
   class Job extends Backbone.Model
     urlRoot: '/jobs'

@@ -109,9 +109,21 @@
 
   <div class="row">
     <div class="six columns">
+      <h4 class="subheader">Compression Ratio<h4>
       <canvas data-original-size="120000" data-output-size="40000" id="sizeChart" width="400" height="400"></canvas>
     </div>
     <div class="six columns">
+      <h4 class="subheader">Time Breakdown<h4>
+      <canvas id="milestonesChart" width="400" height="400"
+          data-pull-start="<%= @job.progression.pull_start_time %>"
+          data-pull-finish="<%= @job.progression.pull_finish_time %>"
+          data-chunker-start="<%= @job.progression.chunker_start_time %>"
+          data-chunker-finish="<%= @job.progression.chunker_finish_time %>"
+          data-tcoder-start="<%= @job.progression.tcoder_start_time %>"
+          data-tcoder-finish="<%= @job.progression.tcoder_finish_time %>"
+          data-merger-start="<%= @job.progression.merger_start_time %>"
+          data-merger-finish="<%= @job.progression.merger_finish_time %>"
+        ></canvas>
     </div>
   </div>
   <div class="row">
