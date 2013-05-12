@@ -8,16 +8,26 @@ if onJobShow() then $ ->
 
     outputSize ||= parseInt(chartElement.data('output-size'), 10)
     originalSize ||= parseInt(chartElement.data('original-size'), 10)
-    console.log(outputSize, originalSize)
     ctx = chartElement.get(0).getContext("2d")
     data = [
       value: outputSize
-      color: "#F7464A"
+      color: "#67bf95"
     ,
       value: originalSize
-      color: "#D4C739"
+      color: "#22c9e3"
     ]
-    sizeChart = new Chart(ctx).Doughnut(data)
+    sizeChart = new Chart(ctx).Doughnut(data,
+      { onAnimationComplete : ->
+          ctx.font = "bold 12px sans-serif"
+          ctx.fillStyle = "#22c9e3"
+          ctx.fillText("Original Size", 140, 250)
+          ctx.font = "bold 12px sans-serif"
+          ctx.fillStyle = "#67bf95"
+          ctx.fillText("Output Size", 200, 150)
+      }
+    )
+    return
+
 
   renderMilestonesChart = (milestones) ->
     chartElement = $('#milestonesChart')
