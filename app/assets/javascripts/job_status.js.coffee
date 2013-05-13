@@ -19,11 +19,11 @@ if onJobShow() then $ ->
     sizeChart = new Chart(ctx).Doughnut(data,
       { onAnimationComplete : ->
           ctx.font = "bold 12px sans-serif"
-          ctx.fillStyle = "#22c9e3"
-          ctx.fillText("Original Size", 140, 250)
-          ctx.font = "bold 12px sans-serif"
-          ctx.fillStyle = "#67bf95"
-          ctx.fillText("Output Size", 200, 150)
+          #ctx.fillStyle = "#22c9e3"
+          #ctx.fillText("Original Size", 140, 250)
+          #ctx.font = "bold 12px sans-serif"
+          #ctx.fillStyle = "#67bf95"
+          #ctx.fillText("Output Size", 200, 150)
       }
     )
     return
