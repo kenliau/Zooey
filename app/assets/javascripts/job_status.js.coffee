@@ -8,7 +8,6 @@ if onJobShow() then $ ->
 
     outputSize ||= parseInt(chartElement.data('output-size'), 10)
     originalSize ||= parseInt(chartElement.data('original-size'), 10)
-    console.log(outputSize, originalSize)
     ctx = chartElement.get(0).getContext("2d")
     data = [
       value: outputSize
@@ -28,6 +27,31 @@ if onJobShow() then $ ->
       }
     )
     return
+
+  renderSpeedChart = (pullSpeed, transcodeSpeed) ->
+    chartElement = $('#speedChart')
+    if chartElement.length < 1 then return
+
+    pullSpeed ||= parseInt(chartElement.data('pull-speed'), 10)
+    transcodeSpeed ||= parseInt(chartElement.data('transcode-speed'), 10)
+    ctx = chartElement.get(0).getContext("2d")
+    console.log(pullSpeed, transcodeSpeed)
+
+    data =
+      labels: ["Speed"]
+      datasets: [
+        fillColor: "rgba(220,220,220,0.5)"
+        strokeColor: "rgba(220,220,220,1)"
+        data: [pullSpeed]
+        ,
+          fillColor: "rgba(151,187,205,0.5)"
+          strokeColor: "rgba(151,187,205,1)"
+          data: [transcodeSpeed]
+      ]
+
+    speedChart = new Chart(ctx).Bar(data)
+    return
+
 
 
   renderMilestonesChart = (milestones) ->
@@ -57,12 +81,12 @@ if onJobShow() then $ ->
       value: (Date.parse(milestones.mergerFinish) - Date.parse(milestones.mergerStart)) / 1000
       color: "#F209D4"
     ]
-    console.log(data)
     polarChart = new Chart(ctx).PolarArea(data, {
     })
 
 
   renderSizeChart()
+  renderSpeedChart()
   renderMilestonesChart({})
 
   class Job extends Backbone.Model

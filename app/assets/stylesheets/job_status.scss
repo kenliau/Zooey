@@ -1,6 +1,35 @@
 $light_blue: #2BA6CB;
 $gray: #A9A9A9;
 
+.size-legend {
+  div {
+    padding-left: 5px;
+    margin-bottom: 5px;
+    &.original {
+      border-left: 15px solid #22c9e3;    
+    }
+    &.output {
+      border-left: 15px solid #67bf95;
+    }
+  }
+}
+
+
+.speed-legend {
+  div {
+    padding-left: 5px;
+    margin-bottom: 5px;
+    &.pullSpeed {
+      border-left: 15px solid #DCDCDC;
+    }
+
+    &.transcodeSpeed {
+      border-left: 15px solid #97BBCD;
+    }
+  }
+}
+
+
 .milestone-legend {
   div {
     padding-left: 5px;
