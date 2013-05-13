@@ -7,9 +7,13 @@ class VideosController < ApplicationController
 
   # Sets instance variable for video and checks if it's blank
   def load_video
-    @video = Video.find(params[:id])
-    if @video.blank?
-      return redirect_to '/videos'
+    begin
+      @video = Video.find(params[:id])
+    rescue Exception
+      respond_to do |format|
+        format.json { render :json => nil, :status => 404 }
+        format.html { redirect_to videos_url }
+      end
     end
   end
 

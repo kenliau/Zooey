@@ -6,8 +6,9 @@ class JobsController < ApplicationController
 
   # Sets instance variable for job and checks if it's blank
   def load_job
-    @job = Job.includes(:progression, :video).find(params[:id])
-    if @job.blank?
+    begin
+      @job = Job.includes(:progression, :video).find(params[:id])
+    rescue Exception
       respond_to do |format|
         format.json { render :json => nil, :status => 404 }
         format.html { redirect_to jobs_url }

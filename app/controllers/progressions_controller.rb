@@ -12,12 +12,14 @@ class ProgressionsController < ApplicationController
   # GET /jobs/progression/:job_id
   # GET /jobs/progression/:job_id.json
   def show_by_job_id
-    @progression = Job.retrieve_progress(params[:job_id])
-    respond_to do |format|
-      unless @progression.blank?
+    begin
+      @progression = Job.retrieve_progress(params[:job_id])
+      respond_to do |format|
         format.json { render json: @progression }
-      else
-        format.json { render json: @progression, status: 404 }
+      end
+    rescue Exception
+      respond_to do |format|
+        format.json { render :json => nil, status: 404 }
       end
     end
   end
