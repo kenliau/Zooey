@@ -54,12 +54,12 @@
   </div>
 
   <script id="finished-job-template" type="text/template">
-      <div class="row">
-        <div class="twelve columns">
-          <h3>Job Complete</h3>
-          <div><a href="{{= output_url }}">Link to transcoded video</a></div>
-        </div>
+    <div class="row">
+      <div class="twelve columns">
+        <h3>Job Complete</h3>
+        <div><a href="{{= output_url }}">Link to transcoded video</a></div>
       </div>
+    </div>
   </script>
 
   <script id="progression-template" type="text/template">
@@ -77,16 +77,38 @@
 
   <% if @job.finished_at %>
     <div class="row">
-      <div class="six columns">
+      <div class="four columns">
         <h4 class="subheader">Compression Ratio<h4>
-        <canvas id="sizeChart" width="400" height="400"
+        <canvas id="sizeChart" width="300" height="300"
           data-original-size="<%= @video.size %>" 
           data-output-size="<%= @job.output_size %>">
         </canvas>
+        <div class="right size-legend">
+          <fieldset>
+            <legend>Legend</legend>
+            <div class="original">Original Size</div>
+            <div class="output">Output Size</div>
+          </fieldset>
+        </div>
+
       </div>
-      <div class="six columns">
+      <div class="four columns">
+        <h4 class="subheader">Pull & Transcode Speed<h4>
+        <canvas id="speedChart" width="300" height="300"
+          data-pull-speed="<%= @job.status['pull']['speed'] %>" 
+          data-transcode-speed="<%= @job.status['transcode']['speed'] %>">
+        </canvas>
+        <div class="right speed-legend">
+          <fieldset>
+            <legend>Legend</legend>
+            <div class="pullSpeed">Pull</div>
+            <div class="transcodeSpeed">Transcode</div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="four columns">
         <h4 class="subheader">Time Breakdown<h4>
-        <canvas id="milestonesChart" width="400" height="400"
+        <canvas id="milestonesChart" width="300" height="300"
             data-pull-start="<%= @job.progression.pull_start_time %>"
             data-pull-finish="<%= @job.progression.pull_finish_time %>"
             data-chunker-start="<%= @job.progression.chunker_start_time %>"

@@ -10,7 +10,6 @@ if onJobShow() then $ ->
 
     outputSize ||= parseInt(chartElement.data('output-size'), 10)
     originalSize ||= parseInt(chartElement.data('original-size'), 10)
-    console.log(outputSize, originalSize)
     ctx = chartElement.get(0).getContext("2d")
     data = [
       value: outputSize
@@ -22,13 +21,37 @@ if onJobShow() then $ ->
     sizeChart = new Chart(ctx).Doughnut(data,
       { onAnimationComplete : ->
           ctx.font = "bold 12px sans-serif"
-          ctx.fillStyle = "#22c9e3"
-          ctx.fillText("Original Size", 140, 250)
-          ctx.font = "bold 12px sans-serif"
-          ctx.fillStyle = "#67bf95"
-          ctx.fillText("Output Size", 200, 150)
+          #ctx.fillStyle = "#22c9e3"
+          #ctx.fillText("Original Size", 140, 250)
+          #ctx.font = "bold 12px sans-serif"
+          #ctx.fillStyle = "#67bf95"
+          #ctx.fillText("Output Size", 200, 150)
       }
     )
+
+  renderSpeedChart = (pullSpeed, transcodeSpeed) ->
+    chartElement = $('#speedChart')
+    if chartElement.length < 1 or chartElement.hasClass('rendered') then return
+    chartElement.addClass('rendered')
+
+    pullSpeed ||= parseInt(chartElement.data('pull-speed'), 10)
+    transcodeSpeed ||= parseInt(chartElement.data('transcode-speed'), 10)
+    ctx = chartElement.get(0).getContext("2d")
+    console.log(pullSpeed, transcodeSpeed)
+
+    data =
+      labels: ["Speed"]
+      datasets: [
+        fillColor: "rgba(220,220,220,0.5)"
+        strokeColor: "rgba(220,220,220,1)"
+        data: [pullSpeed]
+        ,
+          fillColor: "rgba(151,187,205,0.5)"
+          strokeColor: "rgba(151,187,205,1)"
+          data: [transcodeSpeed]
+      ]
+
+    speedChart = new Chart(ctx).Bar(data)
 
   renderMilestonesChart = (milestones) ->
     chartElement = $('#milestonesChart')
@@ -58,10 +81,10 @@ if onJobShow() then $ ->
       value: (Date.parse(milestones.mergerFinish) - Date.parse(milestones.mergerStart)) / 1000
       color: "#F209D4"
     ]
-    console.log(data)
     polarChart = new Chart(ctx).PolarArea(data)
 
   renderSizeChart()
+  renderSpeedChart()
   renderMilestonesChart({})
 
   # Backbone
@@ -153,7 +176,9 @@ if onJobShow() then $ ->
     clearInterval(refresher)
     jobData = job.toJSON()
     progress = jobData.progression
+    status = jobData.status
     renderSizeChart(jobData.video.size, jobData.output_size)
+    renderSpeedChart(status.pull.speed, status.transcode.speed)
     renderMilestonesChart(
       pullStart: progress.pull_start_time,
       pullFinish: progress.pull_finish_time,

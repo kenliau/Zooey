@@ -12,8 +12,6 @@
 </div>
 
 <script id="jobDetailsTemplate" type="text/template">
-  {{% pullPercent = status.pull.bytes/video.size * 100 }}
-  {{% transcodePercent = status.transcode.bytes/video.size * 100 }}
   <td> <input id="checkbox-{{=id}}" name="selected_jobs[]" type="checkbox" value="{{=id}}" > </td>
   <td><%= link_to '{{=id}}', 'jobs/{{=id}}' %></td>
   <td class="progressBar" >
@@ -27,7 +25,11 @@
 
   </td>
   <td>{{= readablizeBytes(output_size) }}</td>
-  <td> <a href="{{= output_url }}"> {{= output_url}} </a> </td>
+  <td>
+    {{% if(output_url == null) { }}
+        {{= '-' }} {{% } else{ }}
+        {{= '<a href=' }} {{= output_url }} {{= '>' }} {{= output_url }} {{= '</a>' }} {{% } }}
+  </td> 
   <td>
       {{% if(finished_at != null) { }}
         {{='Job Complete'}}
@@ -37,26 +39,28 @@
   </td>
 </script>
 
-
-
 <div class="row">
   <div class="twelve columns">
-    <%= form_tag destroy_multiple_jobs_path,  :method => :delete, data: {confirm: 'Are you sure you want to delete the selected jobs?' } do %>
-      <table id="jobs-table" class="twelve columns">
-        <thead>
-          <tr>
-            <td><input type="checkbox" id="select_all"/> </td> 
-            <td>Job ID</td>
-            <td>Status</td>
-            <td>Output Size</td>
-            <td>Output URL</td>
-            <td>*</td>
-          </tr>
-        </thead>
-      </table>
-      <%= submit_tag "Delete Selected", :class => "small radius alert button"%>
+    <% if @jobs.empty? %>
+      <h3> There is no job for this account. </h3>
+    <% else %>
+      <%= form_tag destroy_multiple_jobs_path,  :method => :delete, data: {confirm: 'Are you sure you want to delete the selected jobs?' } do %>
+        <table id="jobs-table" class="twelve columns">
+          <thead>
+            <tr>
+              <td><input type="checkbox" id="select_all"/> </td> 
+              <td>Job ID</td>
+              <td>Status</td>
+              <td>Output Size</td>
+              <td>Output URL</td>
+              <td>*</td>
+            </tr>
+          </thead>
+        </table>
+        <%= submit_tag "Delete Selected", :class => "small radius alert button"%>
+      <% end %>
+      <hr />
     <% end %>
-    <hr />
   </div>
 </div>
 
