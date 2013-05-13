@@ -26,6 +26,7 @@ class VideosController < ApplicationController
 
   def smart_add_url_protocol
     video_url = params[:video_location]
+    return video_url if video_url.nil?
     unless video_url[/^http:\/\//] || video_url[/^https:\/\//]
       params[:video_location] = 'http://' + video_url
     end
