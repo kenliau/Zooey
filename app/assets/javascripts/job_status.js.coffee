@@ -2,9 +2,11 @@ if onJobShow() then $ ->
 
   vent = _.extend({}, Backbone.Events)
 
+  # ChartJS
   renderSizeChart = (originalSize, outputSize) ->
     chartElement = $("#sizeChart")
-    if chartElement.length < 1 then return
+    if chartElement.length < 1 or chartElement.hasClass('rendered') then return
+    chartElement.addClass('rendered')
 
     outputSize ||= parseInt(chartElement.data('output-size'), 10)
     originalSize ||= parseInt(chartElement.data('original-size'), 10)
@@ -27,12 +29,11 @@ if onJobShow() then $ ->
           ctx.fillText("Output Size", 200, 150)
       }
     )
-    return
-
 
   renderMilestonesChart = (milestones) ->
     chartElement = $('#milestonesChart')
-    if chartElement.length < 1 then return
+    if chartElement.length < 1 or chartElement.hasClass('rendered') then return
+    chartElement.addClass('rendered')
 
     milestones.pullStart      ||= chartElement.data('pull-start')
     milestones.pullFinish     ||= chartElement.data('pull-finish')
@@ -58,13 +59,12 @@ if onJobShow() then $ ->
       color: "#F209D4"
     ]
     console.log(data)
-    polarChart = new Chart(ctx).PolarArea(data, {
-    })
-
+    polarChart = new Chart(ctx).PolarArea(data)
 
   renderSizeChart()
   renderMilestonesChart({})
 
+  # Backbone
   class Job extends Backbone.Model
     urlRoot: '/jobs'
 
@@ -114,9 +114,10 @@ if onJobShow() then $ ->
     render: =>
       current_job = @model.toJSON()
       if current_job.finished_at?
-        finished_template = template('finished-job-template')(@model.toJSON())
-        $(@el).html(finished_template)
         @stopListening()
+        if $('.completed-job').length > 0 then return this
+        finished_template = template('finished-job-template')(@model.toJSON())
+        $(@el).append(finished_template)
       else
         vent.trigger(
           'progress:change',
@@ -151,7 +152,23 @@ if onJobShow() then $ ->
   vent.on 'job:finish', ->
     clearInterval(refresher)
     jobData = job.toJSON()
-    bar_section = $('progress-bars')
-    if (bar_section.length > 0)
-      bar_section.html()
+    progress = jobData.progression
+    renderSizeChart(jobData.video.size, jobData.output_size)
+    renderMilestonesChart(
+      pullStart: progress.pull_start_time,
+      pullFinish: progress.pull_finish_time,
+      chunkerStart: progress.chunker_start_time,
+      chunkerFinish: progress.chunker_start_time,
+      tcoderStart: progress.tcoder_start_time,
+      tcoderFinish: progress.tcoder_finish_time,
+      mergerStart: progress.merger_start_time,
+      mergerFinish: progress.merger_finish_time
+    )
 
+  $('#detail-toggle').on('click', (e) ->
+    e.preventDefault()
+    $this = $(this)
+    $this.text(if $this.text() == 'Show Details' then 'Hide Details' else 'Show Details')
+    $('#details').slideToggle()
+    false
+  )

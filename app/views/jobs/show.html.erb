@@ -21,31 +21,30 @@
 
 <div class="content">
   <div id="job-status">
-    <% unless @job.finished_at %>
-      <div class="row">
-        <div class="twelve columns">
-          <div class="progress-bars">
-            <div class="row progress-bar pull-progress-bar">
-              <div class="twelve columns">
-                <h4>Pull Progress <small class="speed">Speed: 0mbps</small></h4>
-                <div class="nice radius progress twelve">
-                  <span style="width: 0;" class="meter"></span>
-                </div>
+    <div class="row">
+      <div class="twelve columns">
+        <div class="progress-bars">
+          <div class="row progress-bar pull-progress-bar">
+            <div class="twelve columns">
+              <h4>Pull Progress <small class="speed">Speed: 0mbps</small></h4>
+              <div class="nice radius progress twelve">
+                <span style="width: <%= @job.finished_at? ? '100%' : '0' %>;" class="meter"></span>
               </div>
             </div>
-            <div class="row progress-bar transcode-progress-bar">
-              <div class="twelve columns">
-                <h4>Transcode Progress <small class="speed">Speed: 0mbps</small></h4>
-                <div class="nice radius success progress twelve">
-                  <span style="width: 0;" class="meter"></span>
-                </div>
+          </div>
+          <div class="row progress-bar transcode-progress-bar">
+            <div class="twelve columns">
+              <h4>Transcode Progress <small class="speed">Speed: 0mbps</small></h4>
+              <div class="nice radius success progress twelve">
+                <span style="width: <%= @job.finished_at? ? '100%' : '0' %>;" class="meter"></span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <% else %>
-      <div class="row">
+    </div>
+    <% if @job.finished_at %>
+      <div class="row completed-job">
         <div class="twelve columns">
           <h3>Job Complete</h3>
           <div><a href="<%= @job.output_url %>">Link to transcoded video</a></div>
@@ -63,37 +62,6 @@
       </div>
   </script>
 
-  <div class ="row">
-    <div class="twelve columns">
-      <h4 class="subheader">Progress Milestones</h4>
-      <table id="progression-table" class="twelve ">
-        <thead>
-          <tr>
-            <th>Pull Start Time</th>
-            <th>Pull Finish Time</th>
-            <th>Chunk Start Time</th>
-            <th>Chunk Finish Time</th>
-            <th>Transcode Start Time</th>
-            <th>Transcode Finish Time</th>
-            <th>Merger Start Time</th>
-            <th>Merger Finish Time</th>
-          </tr>
-         </thead>
-        <tbody>
-        <tr id="progress-row">
-          <td><%= @job.progression.pull_start_time %></td>
-          <td><%= @job.progression.pull_finish_time %></td>
-          <td><%= @job.progression.chunker_start_time %></td>
-          <td><%= @job.progression.chunker_finish_time %></td>
-          <td><%= @job.progression.tcoder_start_time %></td>
-          <td><%= @job.progression.tcoder_finish_time %></td>
-          <td><%= @job.progression.merger_start_time %></td>
-          <td><%= @job.progression.merger_finish_time %></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
   <script id="progression-template" type="text/template">
     <td>{{= progression.pull_start_time }}</td>
     <td>{{= progression.pull_finish_time }}</td>
@@ -141,6 +109,41 @@
     </div>
   <% end %>
   
+  <div class="row">
+    <div class="twelve columns"><a id="detail-toggle" href="#">Show Details</a></div>
+  </div>
+  <div class ="row">
+    <div id="details" style="display: none;" class="twelve columns">
+      <h4 class="subheader">Progress Milestones</h4>
+      <table id="progression-table" class="twelve ">
+        <thead>
+          <tr>
+            <th>Pull Start Time</th>
+            <th>Pull Finish Time</th>
+            <th>Chunk Start Time</th>
+            <th>Chunk Finish Time</th>
+            <th>Transcode Start Time</th>
+            <th>Transcode Finish Time</th>
+            <th>Merger Start Time</th>
+            <th>Merger Finish Time</th>
+          </tr>
+         </thead>
+        <tbody>
+        <tr id="progress-row">
+          <td><%= @job.progression.pull_start_time %></td>
+          <td><%= @job.progression.pull_finish_time %></td>
+          <td><%= @job.progression.chunker_start_time %></td>
+          <td><%= @job.progression.chunker_finish_time %></td>
+          <td><%= @job.progression.tcoder_start_time %></td>
+          <td><%= @job.progression.tcoder_finish_time %></td>
+          <td><%= @job.progression.merger_start_time %></td>
+          <td><%= @job.progression.merger_finish_time %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <div class="row">
     <div class="twelve columns">
       <ul class="block-grid two-up mobile-one-up">
