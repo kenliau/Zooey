@@ -37,5 +37,4 @@ window.readablizeBytes = (bytes) ->
     return '-'
   s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
   e = Math.floor(Math.log(bytes) / Math.log(1024))
-  console.log((bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e])
   (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e]
