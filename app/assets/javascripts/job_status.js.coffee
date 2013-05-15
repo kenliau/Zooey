@@ -3,8 +3,8 @@ if onJobShow() then $ ->
   vent = _.extend({}, Backbone.Events)
 
   getRatio = (inputSize, outputSize) ->
-    inputSize = Math.round(inputSize / 1000) * 1000
-    outputSize = Math.round(outputSize / 1000) * 1000
+    inputSize = sigFigs(inputSize, 3)
+    outputSize = sigFigs(outputSize, 3)
     a = inputSize
     b = outputSize
     gcd = 1
@@ -18,6 +18,10 @@ if onJobShow() then $ ->
     inputSize = inputSize / gcf
     outputSize = outputSize / gcf
     return inputSize + ' / ' + outputSize
+
+  sigFigs = (n, sig) ->
+    mult = Math.pow(10, sig - Math.floor(Math.log(n) / Math.LN10) - 1)
+    return Math.round(n * mult) / mult
 
   # ChartJS
   renderSizeChart = (originalSize, outputSize) ->
