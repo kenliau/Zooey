@@ -202,11 +202,11 @@
             </tr>
             <tr>
               <td>Video Bitrate :</td>
-              <td><%= @video.audio_bitrate || '-' %></td>
+              <td><%= @video.video_bitrate || '-' %></td>
             </tr>
             <tr>
-              <td>Audio Codec :</td>
-              <td><%= @video.audio_codec || '-' %></td>
+              <td>Video Codec :</td>
+              <td><%= @video.video_codec || '-' %></td>
             </tr>
              <tr>
               <td>Frames/sec :</td>
@@ -265,11 +265,11 @@
             </tr>
             <tr>
               <td>Video Mux Rate :</td>
-              <td><%= @job.mux_rate || '-' %> Kbps </td>
+              <td><%= @job.video_mux_rate || '-' %> Kbps </td>
             </tr>
             <tr>
               <td>Output Size :</td>
-              <td><%= @job.output_size || '-' %></td>
+              <td><%= number_to_human_size(@job.output_size) || '-' %></td>
             </tr>
             <tr>
               <td>Created At :</td>
@@ -313,12 +313,12 @@
     <td><a href="{{= video.location }}"> {{= video.filename }} </a> </td>
   </tr>
   <tr>
-    <td>Audio Bitrate :</td>
-    <td>{{= video.audio_bitrate || '-'}} Kbps</td>
+    <td>Video Bitrate :</td>
+    <td>{{= video.video_bitrate || '-'}} Kbps</td>
   </tr>
   <tr>
-    <td>Audio Codec :</td>
-    <td>{{= video.audio_codec || '-'}} </td>
+    <td>Video Codec :</td>
+    <td>{{= video.video_codec || '-'}} </td>
   </tr>
   <tr>
     <td>Frames/sec :</td>
@@ -370,7 +370,7 @@
   </tr>
   <tr>
     <td>Video Mux Rate :</td>
-    <td>{{= mux_rate }} Kbps</td>
+    <td>{{= video_mux_rate }} Kbps</td>
   </tr>
   <tr>
     <td>Output Size :</td>

@@ -101,7 +101,7 @@ class VideosController < ApplicationController
     @video.save
 
     @job = @video.jobs.new({
-      mux_rate: params[:output_mux_rate],
+      video_mux_rate: params[:output_mux_rate],
       width: params[:output_width],
       height: params[:output_height],
       h264_profile: params[:output_h264_profile],

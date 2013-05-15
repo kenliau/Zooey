@@ -2,9 +2,9 @@ class Job < ActiveRecord::Base
   default_scope order('created_at DESC')
   has_one :progression, :dependent => :destroy
   belongs_to :video
-  attr_accessible :audio_bitrate, :audio_codec, :audio_volume, :finished_at, :h264_profile, :h264_quality, :height, :mux_rate, :width, :pull_speed, :pull_bytes, :transcode_speed, :transcode_bytes, :chunks, :frame_distance, :gop_length 
+  attr_accessible :audio_bitrate, :audio_codec, :audio_volume, :finished_at, :h264_profile, :h264_quality, :height, :video_mux_rate, :width, :pull_speed, :pull_bytes, :transcode_speed, :transcode_bytes, :chunks, :frame_distance, :gop_length 
 
-  validates :audio_bitrate, :audio_codec, :audio_volume, :h264_profile, :h264_quality, :height, :mux_rate, :width,
+  validates :audio_bitrate, :audio_codec, :audio_volume, :h264_profile, :h264_quality, :height, :video_mux_rate, :width,
     :presence => {
       message: "is a required field"
     }
@@ -15,7 +15,7 @@ class Job < ActiveRecord::Base
       :greater_than_or_equal_to => 1
     }
 
-  validates :mux_rate,
+  validates :video_mux_rate,
     :numericality => {
       :only_integer => true,
       :less_than_or_equal_to => 25000,
@@ -92,10 +92,10 @@ class Job < ActiveRecord::Base
         puts 'pull finish'
         @job.progression.pull_finish_time = Time.now
         @video.duration = params[:metrics][:input_duration]
-        @video.audio_codec = params[:metrics][:input_codec]
+        @video.video_codec = params[:metrics][:input_codec]
         @video.width = params[:metrics][:input_width]
         @video.height = params[:metrics][:input_height]
-        @video.audio_bitrate = params[:metrics][:input_bitrate]
+        @video.video_bitrate = params[:metrics][:input_bitrate]
         @video.frames_per_sec = params[:metrics][:input_frames_per_sec]
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]

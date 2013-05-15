@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505222543) do
+ActiveRecord::Schema.define(:version => 20130515201335) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20130505222543) do
     t.string   "audio_codec"
     t.integer  "audio_bitrate"
     t.integer  "audio_volume"
-    t.integer  "mux_rate"
+    t.integer  "video_mux_rate"
     t.datetime "finished_at"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
@@ -94,10 +94,10 @@ ActiveRecord::Schema.define(:version => 20130505222543) do
     t.datetime "updated_at",                    :null => false
     t.integer  "duration",       :default => 0
     t.string   "video_name"
-    t.string   "audio_codec"
+    t.string   "video_codec"
     t.integer  "width"
     t.integer  "height"
-    t.integer  "audio_bitrate"
+    t.integer  "video_bitrate"
     t.float    "frames_per_sec"
   end
 
