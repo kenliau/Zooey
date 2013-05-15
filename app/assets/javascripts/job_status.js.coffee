@@ -31,6 +31,7 @@ if onJobShow() then $ ->
 
     outputSize ||= parseInt(chartElement.data('output-size'), 10)
     originalSize ||= parseInt(chartElement.data('original-size'), 10)
+    console.log(outputSize, originalSize)
     ctx = chartElement.get(0).getContext("2d")
     data = [
       value: outputSize
@@ -39,13 +40,24 @@ if onJobShow() then $ ->
       value: originalSize
       color: "#22c9e3"
     ]
-    ratio = getRatio(originalSize, outputSize)
-
+    ratio = (Math.floor(originalSize/outputSize)).toFixed(2)
     sizeChart = new Chart(ctx).Doughnut(data,
       { onAnimationComplete : ->
+
+
           ctx.font = "bold 28px sans-serif"
-          ctx.fillStyle = "#333"
-          ctx.fillText(ratio, 100, 160)
+          ctx.fillText(ratio, 100, 130)
+          ctx.fillStyle = "#67bf95"
+          ctx.fillText(1, 170, 190)
+          
+          ctx.lineWidth = 4
+          ctx.strokeStyle = "#333"
+          ctx.beginPath()
+          ctx.moveTo(100, 150)
+          ctx.lineTo(200, 150)
+          ctx.stroke()
+
+
       }
     )
 
