@@ -2,6 +2,23 @@ if onJobShow() then $ ->
 
   vent = _.extend({}, Backbone.Events)
 
+  getRatio = (inputSize, outputSize) ->
+    inputSize = Math.round(inputSize / 1000) * 1000
+    outputSize = Math.round(outputSize / 1000) * 1000
+    a = inputSize
+    b = outputSize
+    gcd = 1
+    while (b > 0)
+      temp = b
+      b = a % b
+      a = temp
+    gcf = parseInt(a, 10)
+    inputSize = parseInt(inputSize, 10)
+    outputSize = parseInt(outputSize, 10)
+    inputSize = inputSize / gcf
+    outputSize = outputSize / gcf
+    return inputSize + ' / ' + outputSize
+
   # ChartJS
   renderSizeChart = (originalSize, outputSize) ->
     chartElement = $("#sizeChart")
@@ -18,15 +35,16 @@ if onJobShow() then $ ->
       value: originalSize
       color: "#22c9e3"
     ]
+    ratio = getRatio(originalSize, outputSize)
+
     sizeChart = new Chart(ctx).Doughnut(data,
       { onAnimationComplete : ->
-          ctx.font = "bold 12px sans-serif"
-          ctx.fillStyle = "#22c9e3"
-          ctx.fillText(readablizeBytes(originalSize), 95, 190)
-          ctx.fillStyle = "#67bf95"
-          ctx.fillText(readablizeBytes(outputSize), 130, 110)
+          ctx.font = "bold 28px sans-serif"
+          ctx.fillStyle = "#333"
+          ctx.fillText(ratio, 100, 160)
       }
     )
+
 
   renderSpeedChart = (pullSpeed, transcodeSpeed) ->
     chartElement = $('#speedChart')
@@ -53,7 +71,7 @@ if onJobShow() then $ ->
       { onAnimationComplete : ->
           ctx.font = "bold 12px sans-serif"
           ctx.fillStyle = "#333"
-          ctx.fillText( 'in  MB/sec', 247, 292)
+          ctx.fillText( 'in  MB/sec', 255, 292)
       }
     )
     return
@@ -208,3 +226,8 @@ if onJobShow() then $ ->
     $('#details').slideToggle()
     false
   )
+
+
+
+
+

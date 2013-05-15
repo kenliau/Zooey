@@ -86,8 +86,8 @@
         <div class="right size-legend">
           <fieldset>
             <legend>Legend</legend>
-            <div class="original">Original Size</div>
-            <div class="output">Output Size</div>
+            <div class="original">Original Size: <%= number_to_human_size(@video.size)  %></div>
+            <div class="output">Output Size: <%= number_to_human_size(@job.output_size)  %></div>
           </fieldset>
         </div>
 
@@ -201,7 +201,7 @@
               <td><a href="<%= @video.location %>"> <%= @video.filename %> </a></td>
             </tr>
             <tr>
-              <td>Audio Bitrate :</td>
+              <td>Video Bitrate :</td>
               <td><%= @video.audio_bitrate || '-' %></td>
             </tr>
             <tr>
@@ -264,8 +264,8 @@
               <td><%= @job.audio_volume %></td>
             </tr>
             <tr>
-              <td>Audio Mux Rate :</td>
-              <td><%= @job.mux_rate %></td>
+              <td>Video Mux Rate :</td>
+              <td><%= @job.mux_rate || '-' %> Kbps </td>
             </tr>
             <tr>
               <td>Output Size :</td>
@@ -369,8 +369,8 @@
     <td>{{= audio_volume }}</td>
   </tr>
   <tr>
-    <td>Audio Mux Rate :</td>
-    <td>{{= mux_rate }}</td>
+    <td>Video Mux Rate :</td>
+    <td>{{= mux_rate }} Kbps</td>
   </tr>
   <tr>
     <td>Output Size :</td>
