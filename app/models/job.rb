@@ -22,23 +22,30 @@ class Job < ActiveRecord::Base
       :greater_than_or_equal_to => 1
     }
 
-  after_create :transcode
-
-  # temporarily this only starts the mock backend
   def transcode
     if Rails.env.production?
       puts self.as_json(:include => [:video]).to_json
-      #HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
-      HTTParty.post(
+      #res = HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
+      res = HTTParty.post(
         ENV['CLUSTER_IP'],
         body: self.as_json(:include => [:video]).to_json, 
         headers:  {
           'Content-Type' => 'application/json'
         }
       )
+      if res.code == 404
+        errors.add(:error, "Sorry, transcoding service is currently unavailable. Please try again later.")
+        return false
+      end
     elsif Rails.env.development?
-      HTTParty.post('http://localhost:4000/transcode',
+      res = HTTParty.post('http://localhost:4000/transcode',
+      #res = HTTParty.post('http://kennyliau.com/transcode',
                     body: self.as_json(:include => [:video]))
+      if res.code == 404
+        errors.add(:error, "Sorry, transcoding service is currently unavailable")
+        return false
+      end
+
     end
   end
 

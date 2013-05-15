@@ -115,15 +115,19 @@ class VideosController < ApplicationController
 
 
     respond_to do |format|
-      if @video.save and @job.save  
+      if @video.save and @job.save and @job.transcode
         @progression = @job.create_progression()
-
         format.html { redirect_to @job, notice: 'Video was successfully submitted for processing' }
         format.json { render json: @video, status: :created, location: @video }
-
       else
+        @video.destroy
+        binding.pry
         format.html { render action: "new" }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
+        format.json { render :json => {
+                                :video_errors => @video.errors, 
+                                :job_errors => @job.errors,
+                              }, 
+                              status: :unprocessable_entity }
       end
     end
   end
