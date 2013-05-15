@@ -101,8 +101,8 @@
         <div class="right speed-legend">
           <fieldset>
             <legend>Legend</legend>
-            <div class="pullSpeed">Pull</div>
-            <div class="transcodeSpeed">Transcode</div>
+            <div class="pullSpeed">Pull: <%= @job.status['pull']['speed'] %> MB/sec</div>
+            <div class="transcodeSpeed">Transcode: <%= @job.status['transcode']['speed'] %> MB/sec</div>
           </fieldset>
         </div>
       </div>
@@ -121,10 +121,10 @@
         <div class="right milestone-legend">
           <fieldset>
             <legend>Legend</legend>
-            <div class="pulling">Pulling</div>
-            <div class="chunking">Chunking</div>
-            <div class="transcoding">Transcoding</div>
-            <div class="merging">Merging</div>
+            <div class="pulling">Pulling: <%= number_with_precision(@job.progression.pull_finish_time - @job.progression.pull_start_time, :precision => 2) %> seconds</div>
+            <div class="chunking">Chunking: <%= number_with_precision(@job.progression.chunker_finish_time - @job.progression.chunker_start_time, :precision => 2) %> seconds</div>
+            <div class="transcoding">Transcoding: <%= number_with_precision(@job.progression.tcoder_finish_time - @job.progression.tcoder_start_time, :precision => 2) %> seconds</div>
+            <div class="merging">Merging: <%= number_with_precision(@job.progression.merger_finish_time - @job.progression.merger_start_time, :precision => 2) %> seconds</div>
           </fieldset>
         </div>
       </div>

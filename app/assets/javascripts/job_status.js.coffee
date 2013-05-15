@@ -2,27 +2,6 @@ if onJobShow() then $ ->
 
   vent = _.extend({}, Backbone.Events)
 
-  getRatio = (inputSize, outputSize) ->
-    inputSize = sigFigs(inputSize, 3)
-    outputSize = sigFigs(outputSize, 3)
-    a = inputSize
-    b = outputSize
-    gcd = 1
-    while (b > 0)
-      temp = b
-      b = a % b
-      a = temp
-    gcf = parseInt(a, 10)
-    inputSize = parseInt(inputSize, 10)
-    outputSize = parseInt(outputSize, 10)
-    inputSize = inputSize / gcf
-    outputSize = outputSize / gcf
-    return inputSize + ' / ' + outputSize
-
-  sigFigs = (n, sig) ->
-    mult = Math.pow(10, sig - Math.floor(Math.log(n) / Math.LN10) - 1)
-    return Math.round(n * mult) / mult
-
   # ChartJS
   renderSizeChart = (originalSize, outputSize) ->
     chartElement = $("#sizeChart")
@@ -40,24 +19,22 @@ if onJobShow() then $ ->
       value: originalSize
       color: "#22c9e3"
     ]
-    ratio = (Math.floor(originalSize/outputSize)).toFixed(2)
+    ratio = (originalSize/outputSize).toFixed(2)
     sizeChart = new Chart(ctx).Doughnut(data,
       { onAnimationComplete : ->
-
-
-          ctx.font = "bold 28px sans-serif"
+          # write ratio
+          ctx.font = "bold 27px sans-serif"
           ctx.fillText(ratio, 100, 130)
           ctx.fillStyle = "#67bf95"
           ctx.fillText(1, 170, 190)
           
+          # straight divider line
           ctx.lineWidth = 4
           ctx.strokeStyle = "#333"
           ctx.beginPath()
           ctx.moveTo(100, 150)
           ctx.lineTo(200, 150)
           ctx.stroke()
-
-
       }
     )
 
