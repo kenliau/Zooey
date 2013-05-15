@@ -37,6 +37,7 @@ class Job < ActiveRecord::Base
         errors.add(:error, "Sorry, transcoding service is currently unavailable. Please try again later.")
         return false
       end
+      return true
     elsif Rails.env.development?
       res = HTTParty.post('http://localhost:4000/transcode',
       #res = HTTParty.post('http://kennyliau.com/transcode',
@@ -45,7 +46,7 @@ class Job < ActiveRecord::Base
         errors.add(:error, "Sorry, transcoding service is currently unavailable")
         return false
       end
-
+      return true
     end
   end
 
