@@ -121,7 +121,6 @@ class VideosController < ApplicationController
         format.json { render json: @video, status: :created, location: @video }
       else
         @video.destroy
-        binding.pry
         format.html { render action: "new" }
         format.json { render :json => {
                                 :video_errors => @video.errors, 
