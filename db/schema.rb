@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515201335) do
+ActiveRecord::Schema.define(:version => 20130515210809) do
 
   create_table "documentations", :force => true do |t|
     t.string   "title"
@@ -33,12 +33,14 @@ ActiveRecord::Schema.define(:version => 20130515201335) do
     t.integer  "audio_volume"
     t.integer  "video_mux_rate"
     t.datetime "finished_at"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.string   "output_url"
     t.integer  "output_size"
     t.integer  "frame_distance"
     t.integer  "gop_length"
+    t.integer  "final_pull_speed"
+    t.integer  "final_transcode_speed"
   end
 
   add_index "jobs", ["video_id"], :name => "index_jobs_on_video_id"

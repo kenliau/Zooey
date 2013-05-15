@@ -190,7 +190,7 @@ if onJobShow() then $ ->
       percentage = (data.bytes / size) * 100
       if percentage > 100 then percentage = 100
       percentage = "#{percentage}%"
-      $(this).find('.speed').html("Speed: #{data.speed}mbps")
+      $(this).find('.speed').html("Speed: #{data.speed} MB/s")
       $(this).find('.meter').animate(width: percentage)
 
 

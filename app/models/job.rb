@@ -99,6 +99,7 @@ class Job < ActiveRecord::Base
         @video.frames_per_sec = params[:metrics][:input_frames_per_sec]
         status['pull']['bytes'] = params[:metrics][:bytes]
         status['pull']['speed'] = params[:metrics][:speed]
+        @job.final_pull_speed = params[:metrics][:speed]
       end
     elsif stage == 'chunk'
       case params[:status]
@@ -130,6 +131,7 @@ class Job < ActiveRecord::Base
         @job.progression.tcoder_finish_time = Time.now
         status['transcode']['bytes'] = params[:metrics][:bytes]
         status['transcode']['speed'] = params[:metrics][:speed]
+        @job.final_transcode_speed = params[:metrics][:speed]
       end
     elsif stage == 'merger'
       case params[:status]
