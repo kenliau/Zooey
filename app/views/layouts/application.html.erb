@@ -20,6 +20,9 @@
 
 	<!-- Included JS Files  -->
 	<%= javascript_include_tag "application" %>
+  <!--[if lte IE 8]>
+    <script src="excanvas.js"></script>
+  <![endif]-->
 
   <%= csrf_meta_tags %>
 

@@ -22,20 +22,19 @@
     <div class="radius success transcode-progress-bar progress twelve" >
       <span style="width: 0%" id="{{= id }}-meter" class="meter"></span> 
     </div>
-
   </td>
   <td>{{= readablizeBytes(output_size) }}</td>
   <td>
-    {{% if(output_url == null) { }}
-        {{= '-' }} {{% } else{ }}
-        {{= '<a href=' }} {{= output_url }} {{= '>' }} {{= 'Download Video' }} {{= '</a>' }} {{% } }}
-  </td> 
-  <td>
       {{% if(finished_at != null) { }}
-        {{='Job Complete'}}
+        {{= '<a href=' }} {{= output_url }} {{= '>' }} {{= 'Download Video' }} {{= '</a>' }}
       {{% } else {  }} 
         <%= link_to 'Delete Job', 'jobs/{{=id}}', method: :delete, data: { confirm: 'Are you sure?' }, :style => "color: #c60f13"  %>
       {{% } }}
+  </td>
+  <td>
+    {{= moment(created_at).format('MMMM Do YYYY') }}
+    <br />
+    {{= moment(created_at).format('h:mm:ss a') }}
   </td>
 </script>
 
@@ -53,7 +52,7 @@
               <td>Status</td>
               <td>Output Size</td>
               <td>Output URL</td>
-              <td>*</td>
+              <td>Date Created</td>
             </tr>
           </thead>
         </table>

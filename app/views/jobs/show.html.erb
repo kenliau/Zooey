@@ -63,14 +63,14 @@
   </script>
 
   <script id="progression-template" type="text/template">
-    <td>{{= progression.pull_start_time }}</td>
-    <td>{{= progression.pull_finish_time }}</td>
-    <td>{{= progression.chunker_start_time }}</td>
-    <td>{{= progression.chunker_finish_time }}</td>
-    <td>{{= progression.tcoder_start_time }}</td>
-    <td>{{= progression.tcoder_finish_time }}</td>
-    <td>{{= progression.merger_start_time }}</td>
-    <td>{{= progression.merger_finish_time }}</td>
+    <td>{{= moment(progression.pull_start_time).calendar() }}</td>
+    <td>{{= moment(progression.pull_finish_time).calendar() }}</td>
+    <td>{{= moment(progression.chunker_start_time).calendar() }}</td>
+    <td>{{= moment(progression.chunker_finish_time).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+    <td>{{= moment(progression.tcoder_start_time).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+    <td>{{= moment(progression.tcoder_finish_time).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+    <td>{{= moment(progression.merger_start_time).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+    <td>{{= moment(progression.merger_finish_time).format('MMMM Do YYYY, h:mm:ss a') }}</td>
   </script>
 
   <% @video = Video.find(@job.video_id) %>
@@ -326,7 +326,7 @@
   </tr>
   <tr>
     <td>Created At :</td>
-    <td>{{= created_at }}</td>
+    <td>{{= moment(created_at).calendar() }}</td>
   </tr>
 </script>
 
@@ -378,10 +378,10 @@
   </tr>
   <tr>
     <td>Created At :</td>
-    <td>{{= created_at }}</td>
+    <td>{{=  moment(created_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
   </tr>
   <tr>
     <td>Finished At :</td>
-    <td>{{= finished_at }}</td>
+    <td>{{= moment(finished_at).format('MMMM Do YYYY, h:mm:ss a')}}</td>
   </tr>
 </script>

@@ -3,7 +3,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: zipreel
+  database: zooey
   pool: 5
   host: localhost
 
@@ -14,7 +14,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: ziptest
+  database: zooeytest
   pool: 5
   host: localhost
 
@@ -22,5 +22,5 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: zipreel
+  database: zooey
   pool: 5

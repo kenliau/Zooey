@@ -83,8 +83,3 @@ if onJobsList() then $ ->
       else
         $(":checkbox").each ->
           @checked = ""
-
-  makeLink = (url) ->
-    if not url
-      return '-'
-    '<a href="' + url + '"> ' + url + '</a>'
