@@ -26,7 +26,7 @@
         <div class="progress-bars">
           <div class="row progress-bar pull-progress-bar">
             <div class="twelve columns">
-              <h4>Pull Progress <small class="speed">Speed: <%= @job.finished_at? ? @job.final_pull_speed : 0 %> MB/s</small></h4>
+              <h4>Pull Progress <small class="speed">Speed: <%= @job.finished_at? ? @job.final_pull_speed : 0 %> Mb/s</small></h4>
               <div class="nice radius progress twelve">
                 <span style="width: <%= @job.finished_at? ? '100%' : '0' %>;" class="meter"></span>
               </div>
@@ -34,7 +34,7 @@
           </div>
           <div class="row progress-bar transcode-progress-bar">
             <div class="twelve columns">
-              <h4>Transcode Progress <small class="speed">Speed: <%= @job.finished_at? ? @job.final_transcode_speed : 0 %> MB/s</small></h4>
+              <h4>Transcode Progress <small class="speed">Speed: <%= @job.finished_at? ? @job.final_transcode_speed : 0 %> Mb/s</small></h4>
               <div class="nice radius success progress twelve">
                 <span style="width: <%= @job.finished_at? ? '100%' : '0' %>;" class="meter"></span>
               </div>
@@ -101,8 +101,8 @@
         <div class="right speed-legend">
           <fieldset>
             <legend>Legend</legend>
-            <div class="pullSpeed">Pull: <%= @job.status['pull']['speed'] %> MB/s</div>
-            <div class="transcodeSpeed">Transcode: <%= @job.status['transcode']['speed'] %> MB/s</div>
+            <div class="pullSpeed">Pull: <%= number_with_precision(@job.status['pull']['speed'], :precision => 2) %> Mb/s</div>
+            <div class="transcodeSpeed">Transcode: <%= number_with_precision(@job.status['transcode']['speed'], :precision => 2) %> Mb/s</div>
           </fieldset>
         </div>
       </div>
