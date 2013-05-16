@@ -14,6 +14,7 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+database.yml
 
 # Mac OS X
 .DS_Store
