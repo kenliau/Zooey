@@ -25,28 +25,39 @@ class Job < ActiveRecord::Base
   def transcode
     if Rails.env.production?
       puts self.as_json(:include => [:video]).to_json
-      #res = HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
-      res = HTTParty.post(
-        ENV['CLUSTER_IP'],
-        body: self.as_json(:include => [:video]).to_json, 
-        headers:  {
-          'Content-Type' => 'application/json'
-        }
-      )
-      if res.code == 404
-        errors.add(:error, "Sorry, transcoding service is currently unavailable. Please try again later.")
-        return false
-      end
-      return true
-    elsif Rails.env.development?
-      res = HTTParty.post('http://localhost:4000/transcode',
-      #res = HTTParty.post('http://kennyliau.com/transcode',
-                    body: self.as_json(:include => [:video]))
-      if res.code == 404
+      begin
+        #res = HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
+        res = HTTParty.post(
+          ENV['CLUSTER_IP'],
+          body: self.as_json(:include => [:video]).to_json, 
+          headers:  {
+            'Content-Type' => 'application/json'
+          }
+        )
+        if res.code == 404
+          raise "ERROR404"
+        end
+      rescue
         errors.add(:error, "Sorry, transcoding service is currently unavailable")
         return false
+      else
+        return true
       end
-      return true
+
+    elsif Rails.env.development?
+      begin
+        #res = HTTParty.post('http://kennyliau.com/transcode',
+        res = HTTParty.post('http://localhost:4000/transcode',
+                      body: self.as_json(:include => [:video]))
+        if res.code == 404
+          raise "ERROR404"
+        end
+      rescue
+        errors.add(:error, "Sorry, transcoding service is currently unavailable")
+        return false
+      else
+        return true
+      end
     end
   end
 
