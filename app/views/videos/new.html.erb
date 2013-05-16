@@ -50,21 +50,21 @@
             <!-- output mux rate -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:output_mux_rate, "Output Mux Rate") %></div>
-              <div class="three columns"><%= number_field_tag(:output_mux_rate, 500, :min => 1, :max => 25000) %> </div>
+              <div class="three columns"><%= number_field_tag(:output_mux_rate, 1000, :min => 1, :max => 25000) %> </div>
               <div class="six columns"></div>
             </div>
 
             <!-- output resolution width -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:output_width, "Output Resolution Width") %></div>
-              <div class="three columns"><%= number_field_tag(:output_width, 1920, :min => 1) %> </div>
+              <div class="three columns"><%= number_field_tag(:output_width, 1280, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
            <!-- output resolution height -->
             <div class="row collapse">
               <div class="three columns"><%= label_tag(:output_height, "Output Resolution Height") %></div>
-              <div class="three columns"><%= number_field_tag(:output_height, 1080, :min => 1) %> </div>
+              <div class="three columns"><%= number_field_tag(:output_height, 720, :min => 1) %> </div>
               <div class="six columns"></div>
             </div>
 
@@ -88,9 +88,9 @@
               <div class="three columns"><%= label_tag(:output_h264_profile, "H264 Profile") %></div>
               <div class="three columns">
                 <%= select_tag(:output_h264_profile, options_for_select([
-                                                                 ['BASELINE (66)', "baseline"], 
-                                                                 ['MAIN (77)', "main"],
-                                                                 ['HIGH (100)', "high"]])) %> </div>
+                                                                 ['BASELINE', "baseline"], 
+                                                                 ['MAIN', "main"],
+                                                                 ['HIGH', "high"]])) %> </div>
               <div class="six columns"> </div>
             </div>
 
