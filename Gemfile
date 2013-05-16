@@ -47,6 +47,11 @@ group :assets do
   #gem 'therubyracer', :platforms => :ruby
 end
 
+group :production do
+  gem 'therubyracer', :platforms => :ruby
+  gem 'passenger'
+end
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
