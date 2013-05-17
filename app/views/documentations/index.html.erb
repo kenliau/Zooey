@@ -5,31 +5,38 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="twelve columns">
+    <% if @documentations.empty? %>
+      <h3> There is no documentation. </h3>
+    <% else %>
+      <table>
+        <tr>
+          <th>Title</th>
+          <th>Content</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+
+      <% @documentations.each do |documentation| %>
+        <tr>
+          <td><%= documentation.title %></td>
+          <td><%= documentation.content %></td>
+          <td><%= link_to 'Show', documentation %></td>
+          <td><%= link_to 'Edit', edit_documentation_path(documentation) %></td>
+          <td><%= link_to 'Destroy', documentation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
 
 <div class="row">
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @documentations.each do |documentation| %>
-  <tr>
-    <td><%= documentation.title %></td>
-    <td><%= documentation.content %></td>
-    <td><%= link_to 'Show', documentation %></td>
-    <td><%= link_to 'Edit', edit_documentation_path(documentation) %></td>
-    <td><%= link_to 'Destroy', documentation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Documentation', new_documentation_path %>
-
+  <div class="twelve columns">
+    <%= link_to 'Create New Documentation', new_documentation_path, :class => "small radius button" %>
+  </div>
 </div>
+
+

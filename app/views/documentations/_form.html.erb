@@ -1,40 +1,43 @@
-
-    <div class="row">
-      <%= form_for(@documentation) do |f| %>
-        <% if @documentation.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@documentation.errors.count, "error") %> prohibited this documentation from being saved:</h2>
-
-            <ul>
-              <% @documentation.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <ul>
-          <li>
-            <div class="field">
-              <%= f.label :title %><br />
-              <%= f.text_field :title %>
-            </div>
-          </li>
-          <li>
-            <div class="field">
-              <%= f.label :content %><br />
-              <%= f.text_area :content, :cols => 10, :rows => 10  %>
-            </div>
-          </li>
-          </li>
-            <div class="actions">
-              <%= f.submit %>
-            </div>
-          </li>
-        </ul>
+<%= form_for(@documentation) do |f| %>
+  <% if @documentation.errors.any? %>
+    <div id="error_explanation">
+      <% @documentation.errors.full_messages.each do |msg| %>
+        <div class="alert alert-box">
+          <%= msg %>
+          <a href="" class="close">&times;</a>
+        </div>
       <% end %>
-      <hr>
     </div>
+  <% end %>
+
+  <div class="row field">
+    <div class="twelve columns">
+      <%= f.label :title %><br />
+    </div>
+  </div>
+  <div class="row field">
+    <div class="twelve columns">
+      <%= f.text_field :title %><br />
+    </div>
+  </div>
+
+  <div class="row field">
+    <div class="twelve columns">
+      <%= f.label :content %><br />
+    </div>
+  </div>
+  <div class="row field">
+    <div class="twelve columns">
+      <%= f.text_area :content, :cols => 10, :rows => 10 %><br />
+    </div>
+  </div>
+
+  <div class="row actions">
+    <div class="twelve columns">
+      <%= f.submit  :class => "small radius button"%>
+    </div>
+  </div>
+<% end %>
 
 
 

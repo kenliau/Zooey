@@ -27,7 +27,6 @@ class Job < ActiveRecord::Base
       puts self.as_json(:include => [:video]).to_json
       begin
         puts 'HTTPARTY POST RESPONSE'
-        #res = HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
         p res = HTTParty.post(
           ENV['CLUSTER_IP'],
           body: self.as_json(:include => [:video]).to_json, 
@@ -48,8 +47,8 @@ class Job < ActiveRecord::Base
     elsif Rails.env.development?
       begin
         puts 'HTTPARTY POST RESPONSE'
-        #res = HTTParty.post('http://kennyliau.com/transcode',
-        p res = HTTParty.post('http://localhost:4000/transcode',
+        res = HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
+        #p res = HTTParty.post('http://localhost:4000/transcode',
                       body: self.as_json(:include => [:video]))
         
         if res.code == 404
