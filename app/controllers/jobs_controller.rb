@@ -46,8 +46,22 @@ class JobsController < ApplicationController
   def show
     @status = Job.retrieve_progress(@job.id)
     @job['status'] = JSON.parse(@status)
+    #get error
+    JSON.parse(@status).each do |stage|
+      stage.each do |s|
+        if s['error']
+          @error = 'There is an error. Please delete this job and try again later.'
+          break
+        end
+      end
+    end
     respond_to do |format|
-      format.html # show.html.erb
+      # show.html.erb 
+      if @error
+        format.html { flash[:alert] = @error }
+      else
+        format.html
+      end
       format.json { render json: @job.to_json(:include => [:progression, :video]) }
     end
   end

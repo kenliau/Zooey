@@ -1,9 +1,15 @@
 <!-- header and nav -->
-
 <div class="row">
   <div class="seven columns">
     <h1>Job Description</h1>
   </div>
+  <% if @error %>
+    <div class="five columns centered">
+      <%= link_to 'Delete This Job', @job, method: :delete, :class => "large radius alert button", :style => "margin-top: 15px" %>
+  </div>
+</div>
+<% end %>
+
 </div>
 
 <!-- end header and nav -->

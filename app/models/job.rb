@@ -47,8 +47,8 @@ class Job < ActiveRecord::Base
     elsif Rails.env.development?
       begin
         puts 'HTTPARTY POST RESPONSE'
-        res = HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
-        #p res = HTTParty.post('http://localhost:4000/transcode',
+        #res = HTTParty.post('http://safe-fortress-3978.herokuapp.com/transcode',
+        p res = HTTParty.post('http://localhost:4000/transcode',
                       body: self.as_json(:include => [:video]))
         
         if res.code == 404
@@ -70,15 +70,15 @@ class Job < ActiveRecord::Base
         speed: 0,
       },
       chunk: {
-        chunk_count: 0
+        chunk_count: 0,
       },
       transcode: {
         bytes: 0,
-        speed: 0
+        speed: 0,
       },
       merger: {
         output_size: 0,
-        output_url: ''
+        output_url: '',
       },
       cleanup: {
       }
@@ -97,8 +97,14 @@ class Job < ActiveRecord::Base
     @video = Video.find(@job.video_id)
     status = $redis.get(self.redis_key(jobID))
     status = JSON.parse(status)
+
     stage = params[:stage]
-    if stage === 'pull'
+
+    # Error
+    if params[:error] != ''
+      status[stage]['error'] = params[:error]
+    # No error
+    elsif stage === 'pull'
       case params[:status]
       when 'start'
         puts 'pull start'
@@ -176,13 +182,13 @@ class Job < ActiveRecord::Base
       puts 'cleanup'
       @job.finished_at = Time.now
       @job.save
-
     end
 
     # Assign to REDIS
     status = status.to_json
     $redis.set(self.redis_key(params[:job_id]), status)
-    if (params[:status] === 'start' || params[:status] === 'finish')
+    # Assign to Rails
+    if (params[:status] === 'start' || params[:status] === 'finish' || params[:error] != '')
       @job.progression.save
       @job.save
       @video.save
