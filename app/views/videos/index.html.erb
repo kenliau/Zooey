@@ -18,7 +18,7 @@
         {{= readablizeBytes(size) }}
       </div>
       <div class="three columns">
-        {{= created_at }}
+        {{= moment(created_at).format('MM/DD/YYYY h:mm:ss a') }}
       </div>
       <div class="two columns">
         <%= link_to image_tag("trash.png"), 'videos/{{=id}}', method: :delete, data: { confirm: 'Are you sure you want to destroy this video? All jobs associated with this video will be deleted as well.' } %>
