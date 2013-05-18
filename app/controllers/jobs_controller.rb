@@ -50,7 +50,7 @@ class JobsController < ApplicationController
     JSON.parse(@status).each do |stage|
       stage.each do |s|
         if s['error']
-          @error = 'There is an error. Please delete this job and try again later.'
+          @error = 'Something went wrong...'
           break
         end
       end

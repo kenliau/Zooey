@@ -138,6 +138,20 @@ if onJobShow() then $ ->
         @stopListening
       return this
 
+  class DestroyJobView extends Backbone.View
+    el: '#destroy-button'
+    template: template('destroy-job-template')
+    initialize: ->
+      @listenTo(@model, 'change', @render)
+    render: =>
+      json = @model.toJSON()
+      $.each json.status, (s, val) =>
+        $.each val, (i, val) =>
+          if i == 'error'
+            #error = 'There is an error. Please delete this job and try again later.'
+            $(@el).html(@template(json))
+            return this
+
 
   class ProgressView extends Backbone.View
     el: '#progress-row'
@@ -174,6 +188,7 @@ if onJobShow() then $ ->
   job = new Job id: onJobShow()
   jobView = new JobView model: job
   videoView = new VideoView model: job
+  destroyJobView = new DestroyJobView model: job
   progressView = new ProgressView model: job
   progressBarView = new ProgressBarView model: job
 
