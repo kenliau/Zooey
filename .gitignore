@@ -21,4 +21,5 @@ database.yml
 
 # Mac OS X
 .DS_Store
+secret_token.rb
 

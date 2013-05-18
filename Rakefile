@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Zipreel::Application.load_tasks
+Zooey::Application.load_tasks
