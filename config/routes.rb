@@ -1,4 +1,4 @@
-Zipreel::Application.routes.draw do
+Zooey::Application.routes.draw do
   devise_for :users
 
   resources 'documentations', path: 'docs'
