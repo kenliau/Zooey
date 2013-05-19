@@ -3,9 +3,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: zooey
+  database: exampleDB
   pool: 5
   host: localhost
+  username: exampleUsername
 
 
 # Warning: The database defined as "test" will be erased and
@@ -14,7 +15,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: zooeytest
+  database: exampletestDB
   pool: 5
   host: localhost
 
@@ -22,5 +23,5 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: zooey
+  database: exampleDB
   pool: 5

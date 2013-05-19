@@ -18,8 +18,8 @@ pickle-email-*.html
 # User specific files
 database.yml
 .rvmrc
+secret_token.rb
 
 # Mac OS X
 .DS_Store
-secret_token.rb
 
