@@ -65,7 +65,4 @@ Zooey::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
-  # Redis To Go URL for Heroku
-  ENV["REDISTOGO_URL"] = 'redis://redistogo:67de122c22b0c035a871c5d5853c2062@spinyfin.redistogo.com:9023'
-
 end
