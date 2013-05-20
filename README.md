@@ -5,7 +5,7 @@ A front end for Video transcoding SAAS.
 
 A few things that need to add for it to work. 
 
-### 1. database.yml
+### 1. config/database.yml
 
 In database.yml, set up the environment variables as you need it. 
 For example in .bash_profile OR .bashrc put this:
