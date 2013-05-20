@@ -1,4 +1,4 @@
-Zooey-Deschanel
+Zooey
 ===============
 
 A front end for Video transcoding SAAS.
