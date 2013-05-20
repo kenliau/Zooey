@@ -1,28 +1,24 @@
 Zooey
-===============
+=====
 
 A front end for Video transcoding SAAS.
 
 A few things that need to add for it to work. 
 
-1. database.yml
+### 1. database.yml
 
-  `cp config/database.yml.example config/database.yml`
+In database.yml, set up the environment variables as you need it. 
+For example in .bash_profile OR .bashrc put this:
 
-2. Edit database.yml to match your database credentials
+  `export ZOOEY_DEV_DATABASE=example_database`
 
-3. secret_token.rb
-
-  `cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb`
-
-4. Run this command to get a secret key for rails
-
+### 2. secret_token.rb
+In config/initializers/secret_token.rb, please do the same and set up
+environment variables or else it will use the default one. Run
   `rake secret`
+to generate 32 characters. 
 
-5. Copy the 32 characters generate and replace it with the one in secret_token.rb
+`export ZOOEY_SECRET_TOKEN=asdfadsfasdf`
 
-6. .rvmrc
-  
-  `cp .rvmrc.example .rvmrc`
-
-7. change the version of gemset you wish to use
+### 3. .ruby-version .ruby-gemsets 
+Change the version of ruby and gemset you wish to use.
