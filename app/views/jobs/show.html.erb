@@ -222,7 +222,7 @@
             </tr>
             <tr>
               <td>Created At :</td>
-              <td><%= @video.created_at %></td>
+              <td><%= @video.created_at.localtime.to_s(:date_format) %></td>
             </tr>
             </tbody>
           </table>
@@ -281,7 +281,7 @@
             </tr>
             <tr>
               <td>Created At :</td>
-              <td><%= @job.created_at %></td>
+              <td><%= @job.created_at.localtime.to_s(:date_format) %></td>
             </tr>
             <tr>
               <td>Finished At :</td>
