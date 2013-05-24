@@ -117,14 +117,14 @@
       <div class="four columns">
         <h4 class="subheader">Time Breakdown<h4>
         <canvas id="milestonesChart" width="300" height="300"
-            data-pull-start="<%= @job.progression.pull_start_time %>"
-            data-pull-finish="<%= @job.progression.pull_finish_time %>"
-            data-chunker-start="<%= @job.progression.chunker_start_time %>"
-            data-chunker-finish="<%= @job.progression.chunker_finish_time %>"
-            data-tcoder-start="<%= @job.progression.tcoder_start_time %>"
-            data-tcoder-finish="<%= @job.progression.tcoder_finish_time %>"
-            data-merger-start="<%= @job.progression.merger_start_time %>"
-            data-merger-finish="<%= @job.progression.merger_finish_time %>" >
+            data-pull-start="<%= @job.progression.pull_start_time.localtime.to_s(:date_format) %>"
+            data-pull-finish="<%= @job.progression.pull_finish_time.localtime.to_s(:date_format) %>"
+            data-chunker-start="<%= @job.progression.chunker_start_time.localtime.to_s(:date_format) %>"
+            data-chunker-finish="<%= @job.progression.chunker_finish_time.localtime.to_s(:date_format) %>"
+            data-tcoder-start="<%= @job.progression.tcoder_start_time.localtime.to_s(:date_format) %>"
+            data-tcoder-finish="<%= @job.progression.tcoder_finish_time.localtime.to_s(:date_format) %>"
+            data-merger-start="<%= @job.progression.merger_start_time.localtime.to_s(:date_format) %>"
+            data-merger-finish="<%= @job.progression.merger_finish_time.localtime.to_s(:date_format) %>" >
         </canvas>
         <div class="right milestone-legend">
           <fieldset>
@@ -160,14 +160,14 @@
          </thead>
         <tbody>
         <tr id="progress-row">
-          <td><%= @job.progression.pull_start_time %></td>
-          <td><%= @job.progression.pull_finish_time %></td>
-          <td><%= @job.progression.chunker_start_time %></td>
-          <td><%= @job.progression.chunker_finish_time %></td>
-          <td><%= @job.progression.tcoder_start_time %></td>
-          <td><%= @job.progression.tcoder_finish_time %></td>
-          <td><%= @job.progression.merger_start_time %></td>
-          <td><%= @job.progression.merger_finish_time %></td>
+          <td><%= @job.progression.pull_start_time.localtime.to_s(:date_format) %></td>
+          <td><%= @job.progression.pull_finish_time.localtime.to_s(:date_format) %></td>
+          <td><%= @job.progression.chunker_start_time.localtime.to_s(:date_format) %></td>
+          <td><%= @job.progression.chunker_finish_time.localtime.to_s(:date_format) %></td>
+          <td><%= @job.progression.tcoder_start_time.localtime.to_s(:date_format) %></td>
+          <td><%= @job.progression.tcoder_finish_time.localtime.to_s(:date_format) %></td>
+          <td><%= @job.progression.merger_start_time.localtime.to_s(:date_format) %></td>
+          <td><%= @job.progression.merger_finish_time.localtime.to_s(:date_format) %></td>
         </tr>
         </tbody>
       </table>
@@ -222,7 +222,7 @@
             </tr>
             <tr>
               <td>Created At :</td>
-              <td><%= @video.created_at.localtime.to_s(:date_format) %></td>
+              <td><%= @video.created_at? ? @video.created_at.localtime.to_s(:date_format) : '-' %></td>
             </tr>
             </tbody>
           </table>
@@ -281,11 +281,11 @@
             </tr>
             <tr>
               <td>Created At :</td>
-              <td><%= @job.created_at.localtime.to_s(:date_format) %></td>
+              <td><%= @job.created_at? ? @job.created_at.localtime.to_s(:date_format) : '-' %></td>
             </tr>
             <tr>
               <td>Finished At :</td>
-              <td><%= @job.finished_at || '-' %></td>
+              <td><%= @job.finished_at? ? @job.finished_at.localtime.to_s(:date_format) : '-' %></td>
             </tr>
             </tbody>
           </table>
