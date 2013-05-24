@@ -158,17 +158,17 @@
             <th>Merger Finish Time</th>
           </tr>
          </thead>
-        <tbody>
-        <tr id="progress-row">
-          <td><%= @job.progression.pull_start_time.localtime.to_s(:date_format) %></td>
-          <td><%= @job.progression.pull_finish_time.localtime.to_s(:date_format) %></td>
-          <td><%= @job.progression.chunker_start_time.localtime.to_s(:date_format) %></td>
-          <td><%= @job.progression.chunker_finish_time.localtime.to_s(:date_format) %></td>
-          <td><%= @job.progression.tcoder_start_time.localtime.to_s(:date_format) %></td>
-          <td><%= @job.progression.tcoder_finish_time.localtime.to_s(:date_format) %></td>
-          <td><%= @job.progression.merger_start_time.localtime.to_s(:date_format) %></td>
-          <td><%= @job.progression.merger_finish_time.localtime.to_s(:date_format) %></td>
-        </tr>
+         <tbody>
+         <tr id="progress-row">
+           <td><%= @job.progression.pull_start_time? ? @job.progression.pull_start_time.localtime.to_s(:date_format) : '' %></td>
+           <td><%= @job.progression.pull_finish_time? ? @job.progression.pull_finish_time.localtime.to_s(:date_format) : '' %></td>
+           <td><%= @job.progression.chunker_start_time? ? @job.progression.chunker_start_time.localtime.to_s(:date_format) : '' %></td>
+           <td><%= @job.progression.chunker_finish_time? ? @job.progression.chunker_finish_time.localtime.to_s(:date_format) : '' %></td>
+           <td><%= @job.progression.tcoder_start_time? ? @job.progression.tcoder_start_time.localtime.to_s(:date_format) : '' %></td>
+           <td><%= @job.progression.tcoder_finish_time? ? @job.progression.tcoder_finish_time.localtime.to_s(:date_format) : '' %></td>
+           <td><%= @job.progression.merger_start_time? ? @job.progression.merger_start_time.localtime.to_s(:date_format) : '' %></td>
+           <td><%= @job.progression.merger_finish_time? ? @job.progression.merger_finish_time.localtime.to_s(:date_format) : '' %></td>
+         </tr>
         </tbody>
       </table>
     </div>
@@ -210,7 +210,7 @@
             </tr>
             <tr>
               <td>Video Bitrate :</td>
-              <td><%= @video.video_bitrate || '-' %></td>
+              <td><%= @video.video_bitrate || '-' %> Kbps</td>
             </tr>
             <tr>
               <td>Video Codec :</td>
