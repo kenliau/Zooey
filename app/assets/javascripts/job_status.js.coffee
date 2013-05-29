@@ -63,7 +63,7 @@ if onJobShow() then $ ->
       { onAnimationComplete : ->
           ctx.font = "bold 12px sans-serif"
           ctx.fillStyle = "#333"
-          ctx.fillText( 'in  MB/sec', 255, 292)
+          ctx.fillText( 'in  Mb/sec', 255, 292)
       }
     )
     return
@@ -205,7 +205,7 @@ if onJobShow() then $ ->
       percentage = (data.bytes / size) * 100
       if percentage > 100 then percentage = 100
       percentage = "#{percentage}%"
-      $(this).find('.speed').html("Speed: #{data.speed} MB/s")
+      $(this).find('.speed').html("Speed: #{data.speed} Mb/s")
       $(this).find('.meter').animate(width: percentage)
 
   vent.on 'canvas:drawn', ->
