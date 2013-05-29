@@ -68,6 +68,53 @@
         <div><a href="{{= output_url }}">Link to transcoded video</a></div>
       </div>
     </div>
+    <div
+    <div class="row">
+      <div class="four columns">
+        <h4 class="subheader">Compression Ratio<h4>
+        <canvas id="sizeChart" width="300" height="300"></canvas>
+        <div class="right size-legend">
+          <fieldset>
+            <legend>Legend</legend>
+            <div class="original">Original Size: {{= readablizeBytes(video.size) }}</div>
+            <div class="output">Output Size: {{= readablizeBytes(output_size) }}</div>
+          </fieldset>
+        </div>
+
+      </div>
+      <div class="four columns">
+        <h4 class="subheader">Pull & Transcode Speed<h4>
+        <canvas id="speedChart" width="300" height="300"></canvas>
+        <div class="right speed-legend">
+          <fieldset>
+            <legend>Legend</legend>
+            <div class="pullSpeed">Pull: {{= final_pull_speed }} Mb/s</div>
+            <div class="transcodeSpeed">Transcode: {{= final_transcode_speed }} Mb/s</div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="four columns">
+        <h4 class="subheader">Time Breakdown<h4>
+        <canvas id="milestonesChart" width="300" height="300"></canvas>
+        <div class="right milestone-legend">
+          <fieldset>
+            <legend>Legend</legend>
+            <div class="pulling">Pulling:
+              {{= moment(progression.pull_finish_time).from(moment(progression.pull_start_time), true) }}
+            </div>
+            <div class="chunking">Chunking:
+              {{= moment(progression.chunker_finish_time).from(moment(progression.chunker_pull_start_time), true) }}
+            </div>
+            <div class="transcoding">Transcoding:
+              {{= moment(progression.tcoder_finish_time).from(moment(progression.tcoder_start_time), true) }}
+            </div>
+            <div class="merging">Merging:
+              {{= moment(progression.merger_finish_time).from(moment(progression.merger_start_time), true) }}
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
   </script>
 
   <script id="progression-template" type="text/template">
@@ -88,7 +135,7 @@
       <div class="four columns">
         <h4 class="subheader">Compression Ratio<h4>
         <canvas id="sizeChart" width="300" height="300"
-          data-original-size="<%= @video.size %>" 
+          data-original-size="<%= @video.size %>"
           data-output-size="<%= @job.output_size %>">
         </canvas>
         <div class="right size-legend">
@@ -103,7 +150,7 @@
       <div class="four columns">
         <h4 class="subheader">Pull & Transcode Speed<h4>
         <canvas id="speedChart" width="300" height="300"
-          data-pull-speed="<%= @job.status['pull']['speed'] %>" 
+          data-pull-speed="<%= @job.status['pull']['speed'] %>"
           data-transcode-speed="<%= @job.status['transcode']['speed'] %>">
         </canvas>
         <div class="right speed-legend">
@@ -138,7 +185,7 @@
       </div>
     </div>
   <% end %>
-  
+
   <div class="row">
     <div class="twelve columns"><a id="detail-toggle" href="#">Show Details</a></div>
   </div>

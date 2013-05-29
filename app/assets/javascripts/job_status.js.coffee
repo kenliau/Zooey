@@ -26,7 +26,7 @@ if onJobShow() then $ ->
           ctx.fillText(ratio, 100, 130)
           ctx.fillStyle = "#67bf95"
           ctx.fillText(1, 170, 190)
-          
+
           # straight divider line
           ctx.lineWidth = 4
           ctx.strokeStyle = "#333"
@@ -176,6 +176,7 @@ if onJobShow() then $ ->
         if $('.completed-job').length > 0 then return this
         finished_template = template('finished-job-template')(@model.toJSON())
         $(@el).append(finished_template)
+        vent.trigger 'canvas:drawn'
       else
         vent.trigger(
           'progress:change',
@@ -207,9 +208,7 @@ if onJobShow() then $ ->
       $(this).find('.speed').html("Speed: #{data.speed} MB/s")
       $(this).find('.meter').animate(width: percentage)
 
-
-  vent.on 'job:finish', ->
-    clearInterval(refresher)
+  vent.on 'canvas:drawn', ->
     jobData = job.toJSON()
     progress = jobData.progression
     status = jobData.status
@@ -225,6 +224,9 @@ if onJobShow() then $ ->
       mergerStart: progress.merger_start_time,
       mergerFinish: progress.merger_finish_time
     )
+
+  vent.on 'job:finish', ->
+    clearInterval(refresher)
 
   $('#detail-toggle').on('click', (e) ->
     e.preventDefault()
