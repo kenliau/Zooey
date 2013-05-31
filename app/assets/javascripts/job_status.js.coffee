@@ -195,7 +195,7 @@ if onJobShow() then $ ->
 
   refresher = setInterval ->
     job.fetch()
-  , 2500
+  , 3000
 
   progressBars = $('.progress-bar')
 
