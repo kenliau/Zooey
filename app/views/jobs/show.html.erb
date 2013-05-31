@@ -150,14 +150,14 @@
       <div class="four columns">
         <h4 class="subheader">Pull & Transcode Speed<h4>
         <canvas id="speedChart" width="300" height="300"
-          data-pull-speed="<%= @job.status['pull']['speed'] %>"
-          data-transcode-speed="<%= @job.status['transcode']['speed'] %>">
+          data-pull-speed="<%= @job.final_pull_speed %>"
+          data-transcode-speed="<%= @job.final_transcode_speed %>">
         </canvas>
         <div class="right speed-legend">
           <fieldset>
             <legend>Legend</legend>
-            <div class="pullSpeed">Pull: <%= number_with_precision(@job.status['pull']['speed'], :precision => 2) %> Mb/s</div>
-            <div class="transcodeSpeed">Transcode: <%= number_with_precision(@job.status['transcode']['speed'], :precision => 2) %> Mb/s</div>
+            <div class="pullSpeed">Pull: <%= number_with_precision(@job.final_pull_speed, :precision => 2) %> Mb/s</div>
+            <div class="transcodeSpeed">Transcode: <%= number_with_precision(@job.final_transcode_speed, :precision => 2) %> Mb/s</div>
           </fieldset>
         </div>
       </div>
