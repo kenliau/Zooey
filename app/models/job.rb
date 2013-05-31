@@ -102,6 +102,7 @@ class Job < ActiveRecord::Base
 
     # Error. Halt everything. 
     puts '#####################################################'
+    puts params
     puts params[:error]
     if !params[:error].nil? and params[:error] != ''
       status[stage]['error'] = params[:error]
