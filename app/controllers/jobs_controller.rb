@@ -71,9 +71,6 @@ class JobsController < ApplicationController
   def destroy
     if !@job.finished_at?
       @job.destroy
-      # get redis instance and delete it
-      @redis_key = Job.redis_key(@job.id)
-      $redis.del @redis_key
       respond_to do |format|
         format.html { redirect_to jobs_url }
         format.json { head :no_content  }
@@ -92,9 +89,6 @@ class JobsController < ApplicationController
       @list.each do |j|
         @j = Job.find(j)
         if !@j.finished_at?
-          # get redis instance and delete it
-          @redis_key = Job.redis_key(@j.id)
-          $redis.del @redis_key
           @j.destroy
         end
       end
@@ -116,5 +110,6 @@ class JobsController < ApplicationController
       format.json {render :nothing => true}
     end
   end
+
 
 end

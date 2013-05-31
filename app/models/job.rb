@@ -4,6 +4,8 @@ class Job < ActiveRecord::Base
   belongs_to :video
   attr_accessible :audio_bitrate, :audio_codec, :audio_volume, :finished_at, :h264_profile, :h264_quality, :height, :video_mux_rate, :width, :pull_speed, :pull_bytes, :transcode_speed, :transcode_bytes, :chunks, :frame_distance, :gop_length 
 
+  before_destroy :destroy_redis_instances
+
   validates :audio_bitrate, :audio_codec, :audio_volume, :h264_profile, :h264_quality, :height, :video_mux_rate, :width,
     :presence => {
       message: "is a required field"
@@ -213,6 +215,13 @@ class Job < ActiveRecord::Base
   def self.redis_key(job_id)
     "job_progress:#{job_id}"
   end
+
+  def destroy_redis_instances
+    # get redis instance and delete it
+    @redis_key = Job.redis_key(id)
+    $redis.del @redis_key
+  end
+
 
   scope :by_user, lambda{ |uid| joins(:video).where(:videos => {:user_id => uid} ) }
 
