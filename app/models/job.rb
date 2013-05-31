@@ -101,7 +101,7 @@ class Job < ActiveRecord::Base
     stage = params[:stage]
 
     # Error
-    if params[:error] != ''
+    if !params[:error] and params[:error] != ''
       status[stage]['error'] = params[:error]
     # No error
     elsif stage === 'pull'
