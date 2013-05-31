@@ -222,6 +222,14 @@ class Job < ActiveRecord::Base
     $redis.del @redis_key
   end
 
+  def humanize secs
+    [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
+      if secs > 0
+        secs, n = secs.divmod(count)
+        "#{n.to_i} #{name}"
+      end
+    }.compact.reverse.join(' ')
+  end
 
   scope :by_user, lambda{ |uid| joins(:video).where(:videos => {:user_id => uid} ) }
 

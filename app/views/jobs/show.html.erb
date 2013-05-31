@@ -176,10 +176,10 @@
         <div class="right milestone-legend">
           <fieldset>
             <legend>Legend</legend>
-            <div class="pulling">Pulling: <%= number_with_precision(@job.progression.pull_finish_time - @job.progression.pull_start_time, :precision => 2) %> seconds</div>
-            <div class="chunking">Chunking: <%= number_with_precision(@job.progression.chunker_finish_time - @job.progression.pull_finish_time, :precision => 2) %> seconds</div>
-            <div class="transcoding">Transcoding: <%= number_with_precision(@job.progression.tcoder_finish_time - @job.progression.pull_finish_time, :precision => 2) %> seconds</div>
-            <div class="merging">Merging: <%= number_with_precision(@job.progression.merger_finish_time - @job.progression.merger_start_time, :precision => 2) %> seconds</div>
+            <div class="pulling">Pulling: <%= @job.humanize(@job.progression.pull_finish_time - @job.progression.pull_start_time) %></div>
+            <div class="chunking">Chunking: <%= @job.humanize(@job.progression.chunker_finish_time - @job.progression.pull_finish_time) %> </div>
+            <div class="transcoding">Transcoding: <%= @job.humanize(@job.progression.tcoder_finish_time - @job.progression.pull_finish_time) %> </div>
+            <div class="merging">Merging: <%= @job.humanize(@job.progression.merger_finish_time - @job.progression.merger_start_time) %> </div>
           </fieldset>
         </div>
       </div>

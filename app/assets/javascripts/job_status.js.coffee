@@ -218,7 +218,7 @@ if onJobShow() then $ ->
       pullStart: progress.pull_start_time,
       pullFinish: progress.pull_finish_time,
       chunkerStart: progress.chunker_start_time,
-      chunkerFinish: progress.chunker_start_time,
+      chunkerFinish: progress.chunker_finish_time,
       tcoderStart: progress.tcoder_start_time,
       tcoderFinish: progress.tcoder_finish_time,
       mergerStart: progress.merger_start_time,
