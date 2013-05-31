@@ -172,6 +172,13 @@ if onJobShow() then $ ->
     render: =>
       current_job = @model.toJSON()
       if current_job.finished_at?
+        #Trigger one last time
+        vent.trigger(
+          'progress:change',
+          current_job.status.pull,
+          current_job.status.transcode,
+          current_job.video.size
+        )
         @stopListening()
         if $('.completed-job').length > 0 then return this
         finished_template = template('finished-job-template')(@model.toJSON())
