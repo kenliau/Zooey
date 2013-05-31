@@ -100,8 +100,8 @@ class Job < ActiveRecord::Base
 
     stage = params[:stage]
 
-    # Error
-    if !params[:error] and params[:error] != ''
+    # Error. Halt everything. 
+    if !params[:error].nil? and params[:error] != ''
       status[stage]['error'] = params[:error]
     # No error
     elsif stage === 'pull'
@@ -188,7 +188,7 @@ class Job < ActiveRecord::Base
     status = status.to_json
     $redis.set(self.redis_key(params[:job_id]), status)
     # Assign to Rails
-    if (params[:status] === 'start' || params[:status] === 'finish' || params[:error] != '')
+    if (params[:status] === 'start' || params[:status] === 'finish' || !params[:error].nil? || params[:error] != '')
       @job.progression.save
       @job.save
       @video.save
