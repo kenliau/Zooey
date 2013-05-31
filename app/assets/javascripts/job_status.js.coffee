@@ -233,7 +233,6 @@ if onJobShow() then $ ->
     )
 
   vent.on 'job:finish', ->
-    progressBarView.render()
     clearInterval(refresher)
 
   $('#detail-toggle').on('click', (e) ->
