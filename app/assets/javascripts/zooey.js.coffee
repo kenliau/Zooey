@@ -42,7 +42,8 @@ window.readablizeBytes = (bytes) ->
 window.readablizeTime = (totalSeconds) ->
   hours = parseInt( totalSeconds / 3600 ) % 24
   minutes = parseInt( totalSeconds / 60 ) % 60
-  seconds = parseInt(totalSeconds % 60, 10)
+  seconds = totalSeconds % 60
+  console.log(seconds)
   output = ''
   if hours != 0 then output += hours + ' hours '
   if minutes != 0 then output += minutes + ' minutes '
