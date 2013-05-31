@@ -228,6 +228,7 @@ class Job < ActiveRecord::Base
     puts secs
     if !secs
      return '0.1 seconds'
+    end
     [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
       if secs > 0
         secs, n = secs.divmod(count)
