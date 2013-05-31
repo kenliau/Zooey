@@ -100,16 +100,16 @@
           <fieldset>
             <legend>Legend</legend>
             <div class="pulling">Pulling:
-              {{= moment(progression.pull_finish_time).from(moment(progression.pull_start_time), true) }}
+              {{= readablizeTime((moment(progression.pull_finish_time) - moment(progression.pull_start_time))/1000) }}
             </div>
             <div class="chunking">Chunking:
-              {{= moment(progression.chunker_finish_time).from(moment(progression.chunker_pull_start_time), true) }}
+              {{= readablizeTime((moment(progression.chunker_finish_time) - moment(progression.pull_finish_time))/1000) }}
             </div>
             <div class="transcoding">Transcoding:
-              {{= moment(progression.tcoder_finish_time).from(moment(progression.tcoder_start_time), true) }}
+              {{= readablizeTime((moment(progression.tcoder_finish_time) - moment(progression.pull_finish_time))/1000) }}
             </div>
             <div class="merging">Merging:
-              {{= moment(progression.merger_finish_time).from(moment(progression.merger_start_time), true) }}
+              {{= readablizeTime((moment(progression.merger_finish_time) - moment(progression.merger_start_time))/1000) }}
             </div>
           </fieldset>
         </div>
@@ -177,8 +177,8 @@
           <fieldset>
             <legend>Legend</legend>
             <div class="pulling">Pulling: <%= number_with_precision(@job.progression.pull_finish_time - @job.progression.pull_start_time, :precision => 2) %> seconds</div>
-            <div class="chunking">Chunking: <%= number_with_precision(@job.progression.chunker_finish_time - @job.progression.chunker_start_time, :precision => 2) %> seconds</div>
-            <div class="transcoding">Transcoding: <%= number_with_precision(@job.progression.tcoder_finish_time - @job.progression.tcoder_start_time, :precision => 2) %> seconds</div>
+            <div class="chunking">Chunking: <%= number_with_precision(@job.progression.chunker_finish_time - @job.progression.pull_finish_time, :precision => 2) %> seconds</div>
+            <div class="transcoding">Transcoding: <%= number_with_precision(@job.progression.tcoder_finish_time - @job.progression.pull_finish_time, :precision => 2) %> seconds</div>
             <div class="merging">Merging: <%= number_with_precision(@job.progression.merger_finish_time - @job.progression.merger_start_time, :precision => 2) %> seconds</div>
           </fieldset>
         </div>

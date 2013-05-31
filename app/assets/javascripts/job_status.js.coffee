@@ -87,10 +87,10 @@ if onJobShow() then $ ->
       value: (Date.parse(milestones.pullFinish) - Date.parse(milestones.pullStart)) / 1000
       color: "#F7464A"
     ,
-      value: (Date.parse(milestones.chunkerFinish) - Date.parse(milestones.chunkerStart)) / 1000
+      value: (Date.parse(milestones.chunkerFinish) - Date.parse(milestones.pullFinish)) / 1000
       color: "#D4C739"
     ,
-      value: (Date.parse(milestones.tcoderFinish) - Date.parse(milestones.tcoderStart)) / 1000
+      value: (Date.parse(milestones.tcoderFinish) - Date.parse(milestones.pullFinish)) / 1000
       color: "#B3F2F9"
     ,
       value: (Date.parse(milestones.mergerFinish) - Date.parse(milestones.mergerStart)) / 1000

@@ -38,3 +38,13 @@ window.readablizeBytes = (bytes) ->
   s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
   e = Math.floor(Math.log(bytes) / Math.log(1024))
   (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e]
+
+window.readablizeTime = (totalSeconds) ->
+  hours = parseInt( totalSeconds / 3600 ) % 24
+  minutes = parseInt( totalSeconds / 60 ) % 60
+  seconds = parseInt(totalSeconds % 60, 10)
+  output = ''
+  if hours != 0 then output += hours + ' hour(s) '
+  if minutes != 0 then output += minutes + ' minute(s) '
+  if seconds != 0 then output += seconds + ' seconds '
+  return output
