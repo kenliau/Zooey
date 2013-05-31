@@ -232,7 +232,7 @@ class Job < ActiveRecord::Base
         n = number_with_precision(n, :precision => 1)
         "#{n} #{name}"
       else
-       return 0.1 + ' second'
+       return '0.1 seconds'
       end
     }.compact.reverse.join(' ')
   end
