@@ -225,10 +225,10 @@ class Job < ActiveRecord::Base
 
   def humanize secs
     puts '###################'
-    puts secs
-    if !secs
-     return '0.1 seconds'
+    if secs < 0
+     secs *= -1
     end
+    puts secs
     [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
       if secs > 0
         secs, n = secs.divmod(count)
