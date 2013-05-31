@@ -226,13 +226,13 @@ class Job < ActiveRecord::Base
   def humanize secs
     puts '###################'
     puts secs
+    if !secs
+     return '0.1 seconds'
     [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
       if secs > 0
         secs, n = secs.divmod(count)
         n = number_with_precision(n, :precision => 1)
         "#{n} #{name}"
-      else
-       return '0.1 seconds'
       end
     }.compact.reverse.join(' ')
   end
